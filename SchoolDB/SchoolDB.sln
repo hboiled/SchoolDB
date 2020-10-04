@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDBUI", "SchoolDBUI\Sc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDBAPI", "SchoolDBAPI\SchoolDBAPI.csproj", "{BF76EB89-9F5B-47D6-8A30-FBA6CC117D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDBAPILibrary", "SchoolDBAPILibrary\SchoolDBAPILibrary.csproj", "{9A5C8462-C834-48A6-8938-AB8D63540D3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDBAPI.Library", "SchoolDBAPILibrary\SchoolDBAPI.Library.csproj", "{9A5C8462-C834-48A6-8938-AB8D63540D3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
