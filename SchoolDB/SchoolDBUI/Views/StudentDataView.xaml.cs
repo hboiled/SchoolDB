@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace SchoolDBUI.Views
 {
     /// <summary>
-    /// Interaction logic for SchoolDataView.xaml
+    /// Interaction logic for StudentDataView.xaml
     /// </summary>
-    public partial class SchoolDataView : UserControl
+    public partial class StudentDataView : UserControl
     {
-        public SchoolDataView()
+        public StudentDataView()
         {
             InitializeComponent();
         }

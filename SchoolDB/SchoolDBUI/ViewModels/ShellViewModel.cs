@@ -8,18 +8,18 @@ namespace SchoolDBUI.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private IEventAggregator events;
-        private readonly SchoolDataViewModel schoolDataViewModel;
+        private readonly StudentDataViewModel studentDataViewModel;
 
         //private IAPIHelper _apiHelper;
 
-        public ShellViewModel(IEventAggregator events, SchoolDataViewModel schoolDataViewModel)
+        public ShellViewModel(IEventAggregator events, StudentDataViewModel studentDataViewModel)
         {
             this.events = events;
-            this.schoolDataViewModel = schoolDataViewModel;
+            this.studentDataViewModel = studentDataViewModel;
             this.events.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
-            ActivateItem(IoC.Get<SchoolDataViewModel>());            
+            ActivateItem(IoC.Get<StudentDataViewModel>());            
         }
     }
 }

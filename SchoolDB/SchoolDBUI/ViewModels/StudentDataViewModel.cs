@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SchoolDBUI.ViewModels
 {
-    public class SchoolDataViewModel : Screen
+    public class StudentDataViewModel : Screen
     {
     }
 }
