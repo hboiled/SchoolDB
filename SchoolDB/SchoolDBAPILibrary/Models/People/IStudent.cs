@@ -8,5 +8,6 @@ namespace SchoolDBAPI.Library.Models.People
     {
         int StudentId { get; set; }
         int Grade { get; set; }
+        List<Course> Courses { get; set; }
     }
 }
