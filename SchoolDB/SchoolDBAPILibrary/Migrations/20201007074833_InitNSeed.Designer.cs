@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolDBAPI.Library.DataAccess;
 
 namespace SchoolDBAPI.Library.Migrations
 {
     [DbContext(typeof(SchoolDBContext))]
-    partial class SchoolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201007074833_InitNSeed")]
+    partial class InitNSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,12 +57,6 @@ namespace SchoolDBAPI.Library.Migrations
                             Id = 3,
                             TeacherId = 3,
                             Title = "English 201"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            TeacherId = 4,
-                            Title = "Sports 101"
                         });
                 });
 
@@ -108,25 +104,13 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             EnrollmentId = 4,
                             CourseId = 3,
-                            StudentId = 4
+                            StudentId = 2
                         },
                         new
                         {
                             EnrollmentId = 5,
-                            CourseId = 4,
-                            StudentId = 1
-                        },
-                        new
-                        {
-                            EnrollmentId = 6,
                             CourseId = 2,
-                            StudentId = 5
-                        },
-                        new
-                        {
-                            EnrollmentId = 7,
-                            CourseId = 4,
-                            StudentId = 6
+                            StudentId = 1
                         });
                 });
 
@@ -181,26 +165,18 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 4,
-                            FirstName = "Sue",
-                            Grade = 90,
-                            LastName = "Jordan",
+                            FirstName = "BWPIff",
+                            Grade = 2,
+                            LastName = "kfnae",
                             StudentId = 203941
                         },
                         new
                         {
                             Id = 5,
-                            FirstName = "John",
-                            Grade = 80,
-                            LastName = "Thomas",
+                            FirstName = "ZKXsoi",
+                            Grade = 45,
+                            LastName = "glwiej",
                             StudentId = 920341
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FirstName = "Javier",
-                            Grade = 80,
-                            LastName = "Mcgregor",
-                            StudentId = 763343
                         });
                 });
 
@@ -217,9 +193,6 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
@@ -228,30 +201,20 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 1,
-                            FirstName = "Crowler",
-                            LastName = "Starks",
-                            Salary = 44000m
+                            FirstName = "Aoigjwor",
+                            LastName = "klndcv"
                         },
                         new
                         {
                             Id = 2,
-                            FirstName = "Rima",
-                            LastName = "Irving",
-                            Salary = 42000m
+                            FirstName = "Zzvjsn",
+                            LastName = "woego"
                         },
                         new
                         {
                             Id = 3,
-                            FirstName = "Jack",
-                            LastName = "Bonilla",
-                            Salary = 43000m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Keisha",
-                            LastName = "Higgins",
-                            Salary = 41200m
+                            FirstName = "Pvjep",
+                            LastName = "siweq3r"
                         });
                 });
 

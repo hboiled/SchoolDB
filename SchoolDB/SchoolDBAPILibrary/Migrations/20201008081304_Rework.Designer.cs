@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolDBAPI.Library.DataAccess;
 
 namespace SchoolDBAPI.Library.Migrations
 {
     [DbContext(typeof(SchoolDBContext))]
-    partial class SchoolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201008081304_Rework")]
+    partial class Rework
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,28 +232,28 @@ namespace SchoolDBAPI.Library.Migrations
                             Id = 1,
                             FirstName = "Crowler",
                             LastName = "Starks",
-                            Salary = 44000m
+                            Salary = 0m
                         },
                         new
                         {
                             Id = 2,
                             FirstName = "Rima",
                             LastName = "Irving",
-                            Salary = 42000m
+                            Salary = 0m
                         },
                         new
                         {
                             Id = 3,
                             FirstName = "Jack",
                             LastName = "Bonilla",
-                            Salary = 43000m
+                            Salary = 0m
                         },
                         new
                         {
                             Id = 4,
                             FirstName = "Keisha",
                             LastName = "Higgins",
-                            Salary = 41200m
+                            Salary = 0m
                         });
                 });
 
