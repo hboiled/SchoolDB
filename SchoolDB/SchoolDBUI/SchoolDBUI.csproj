@@ -14,4 +14,8 @@
     <Folder Include="Content\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolDBUI.Library\SchoolDBUI.Library.csproj" />
+  </ItemGroup>
+
 </Project>

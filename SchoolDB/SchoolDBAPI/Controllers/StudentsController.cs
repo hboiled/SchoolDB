@@ -24,14 +24,62 @@ namespace SchoolDBAPI.Controllers
 
         // GET: api/Students
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentReadDTO>>> GetStudents()
         {
-            var students = await context.Students
-                .Include(s => s.Enrollments)
-                .AsNoTracking()
-                .ToListAsync();
+            var students = await context.Students.ToListAsync();
 
-            return students;
+            var studentsData = new List<StudentReadDTO>();
+
+            foreach (var student in students)
+            {
+                StudentReadDTO studentData = new StudentReadDTO
+                {
+                    Id = student.Id,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Grade = student.Grade,
+                    StudentId = student.StudentId
+                };
+
+                var matchingCourses = context.Enrollments
+                    .Where(e => e.StudentId == student.Id)
+                    .Select(e => e.Course.Title).ToList();
+
+                studentData.CoursesEnrolledIn = matchingCourses;
+
+                studentsData.Add(studentData);
+            }
+
+            return studentsData;
+        }
+
+        // GET: api/Students/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<StudentReadDTO>> GetStudent(int id)
+        {
+            var student = await context.Students.FindAsync(id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            StudentReadDTO studentData = new StudentReadDTO
+            {
+                Id = student.Id,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Grade = student.Grade,
+                StudentId = student.StudentId
+            };
+
+            var matchingCourses = context.Enrollments
+                .Where(e => e.StudentId == student.Id)
+                .Select(e => e.Course.Title).ToList();
+
+            studentData.CoursesEnrolledIn = matchingCourses;
+
+            return studentData;
         }
 
         [HttpGet("enroll/{id}")]
@@ -73,35 +121,6 @@ namespace SchoolDBAPI.Controllers
             courseData.Students = matchingStudents;
 
             return courseData;
-        }
-
-        // GET: api/Students/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StudentReadDTO>> GetStudent(int id)
-        {
-            var student = await context.Students.FindAsync(id);
-
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            StudentReadDTO studentData = new StudentReadDTO
-            {
-                Id = student.Id,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                Grade = student.Grade,
-                StudentId = student.StudentId                
-            };
-
-            var matchingCourses = context.Enrollments
-                .Where(e => e.StudentId == student.Id)
-                .Select(e => e.Course.Title).ToList();
-
-            studentData.CoursesEnrolledIn = matchingCourses;
-
-            return studentData;
         }
 
         // GET: api/Students/5

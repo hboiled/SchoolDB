@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SchoolDBUI.Library.API;
 using SchoolDBUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,14 +27,17 @@ namespace SchoolDBUI
         // DI container
         // Sets an instance of itself to itself, passes out this reference to requesting components
         protected override void Configure()
-        {                        
+        {
+            container.Instance(container)
+                .PerRequest<IStudentEndpoint, StudentEndpoint>()
+                ;
 
             // Get from caliburn micro, a singleton of WindowManager and EventAggregator
             container
                 // specify interface, provide implementation
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
-                //.Singleton<IAPIHelper, APIHelper>()
+                .Singleton<IAPIHelper, APIHelper>()
                 ;
 
             // reflection on current application instance

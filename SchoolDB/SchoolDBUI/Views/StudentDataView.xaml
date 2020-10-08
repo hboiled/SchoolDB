@@ -66,6 +66,11 @@
 
         </StackPanel>
 
+        <Button x:Name="TestMethod" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                 Padding="20 5">
+            Log In
+        </Button>
+        
         <!-- Display -->
         <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="2" Margin="40,0,19.667,20">
 
