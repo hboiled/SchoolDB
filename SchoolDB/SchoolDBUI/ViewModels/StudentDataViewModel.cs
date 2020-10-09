@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.API;
+using SchoolDBUI.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,13 +15,40 @@ namespace SchoolDBUI.ViewModels
 
         public StudentDataViewModel(IStudentEndpoint studentEndpoint)
         {
-            this.studentEndpoint = studentEndpoint;                        
+            this.studentEndpoint = studentEndpoint;
+            LoadStudents();
         }
 
-        public async Task TestMethod()
+        private async Task LoadStudents()
         {
-            var x = await this.studentEndpoint.GetAll();
-            Console.WriteLine();
+            var studentList = await this.studentEndpoint.GetAll();
+
+            Students = new BindingList<Student>(studentList);
         }
+
+        private BindingList<Student> students;
+
+        public BindingList<Student> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                NotifyOfPropertyChange(() => Students);
+            }
+        }
+
+        private Student selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get { return selectedStudent; }
+            set
+            {
+                selectedStudent = value;
+                NotifyOfPropertyChange(() => SelectedStudent);
+            }
+        }
+
     }
 }

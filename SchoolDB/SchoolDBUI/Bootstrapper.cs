@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.ViewModels;
 using System;
@@ -16,6 +17,17 @@ namespace SchoolDBUI
         {
             Initialize();
         }
+
+        //private IMapper ConfigureAutomapper()
+        //{
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<ProductModel, ProductDisplayModel>();
+        //        cfg.CreateMap<CartItemModel, CartItemDisplayModel>();
+        //    });
+
+        //    return config.CreateMapper();
+        //}
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {

@@ -11,6 +11,13 @@ namespace SchoolDBUI.Library.Models
         public string LastName { get; set; }
         public int StudentId { get; set; }
         public int Grade { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
         public List<string> CoursesEnrolledIn { get; set; } = new List<string>();
     }
 }
