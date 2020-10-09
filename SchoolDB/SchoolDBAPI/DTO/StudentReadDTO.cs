@@ -13,5 +13,7 @@ namespace SchoolDBAPI.DTO
         public int StudentId { get; set; }
         public int Grade { get; set; }
         public List<string> CoursesEnrolledIn { get; set; } = new List<string>();
+        public List<string> Emails { get; set; } = new List<string>();
+        public List<PhoneNumBasicDetailDTO> PhoneNumbers { get; set; } = new List<PhoneNumBasicDetailDTO>();
     }
 }

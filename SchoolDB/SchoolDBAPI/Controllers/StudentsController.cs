@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolDBAPI.Library.DataAccess;
 using SchoolDBAPI.Library.Models.People;
 using SchoolDBAPI.DTO;
+using SchoolDBAPI.Library.Models;
 
 namespace SchoolDBAPI.Controllers
 {
@@ -75,9 +76,23 @@ namespace SchoolDBAPI.Controllers
 
             var matchingCourses = context.Enrollments
                 .Where(e => e.StudentId == student.Id)
-                .Select(e => e.Course.Title).ToList();
+                .Select(e => e.Course.Title)
+                .ToList();
+
+            var matchingEmails = context.Emails
+                .Where(e => e.PersonId == student.Id)
+                .Select(e => e.EmailAddress)
+                .ToList();
+
+            var enumType = typeof(Owner);
+            var matchingPhoneNums = context.PhoneNumbers
+                .Where(p => p.PersonId == student.Id)
+                .Select(p => new PhoneNumBasicDetailDTO { Number = p.Number, Owner = Enum.GetName(enumType, p.Owner) })
+                .ToList();
 
             studentData.CoursesEnrolledIn = matchingCourses;
+            studentData.Emails = matchingEmails;
+            studentData.PhoneNumbers = matchingPhoneNums;
 
             return studentData;
         }

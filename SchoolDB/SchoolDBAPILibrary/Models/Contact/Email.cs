@@ -5,5 +5,6 @@
         public int Id { get; set; }        
         public int PersonId { get; set; }
         public string EmailAddress { get; set; }
+        public bool IsSchoolEmail { get; set; }
     }
 }

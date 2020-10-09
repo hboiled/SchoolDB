@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolDBAPI.Library.DataAccess;
 
 namespace SchoolDBAPI.Library.Migrations
 {
     [DbContext(typeof(SchoolDBContext))]
-    partial class SchoolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201009131109_AddEmails")]
+    partial class AddEmails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsSchoolEmail")
-                        .HasColumnType("bit");
-
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
@@ -42,57 +41,49 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 1,
-                            EmailAddress = "203948@school.org",
-                            IsSchoolEmail = true,
+                            EmailAddress = "tromp.alexzander@weber.org",
                             PersonId = 1
                         },
                         new
                         {
                             Id = 2,
                             EmailAddress = "keira54@yahoo.com",
-                            IsSchoolEmail = false,
                             PersonId = 2
                         },
                         new
                         {
                             Id = 3,
                             EmailAddress = "wilmer02@hane.com",
-                            IsSchoolEmail = false,
                             PersonId = 3
                         },
                         new
                         {
                             Id = 4,
                             EmailAddress = "vesta.leffler@stracke.info",
-                            IsSchoolEmail = false,
                             PersonId = 4
                         },
                         new
                         {
                             Id = 5,
                             EmailAddress = "kelsie.lueilwitz@gmail.com",
-                            IsSchoolEmail = false,
                             PersonId = 5
                         },
                         new
                         {
                             Id = 6,
                             EmailAddress = "ressie49@bernier.com",
-                            IsSchoolEmail = false,
                             PersonId = 2
                         },
                         new
                         {
                             Id = 7,
                             EmailAddress = "dkuhlman@yahoo.com",
-                            IsSchoolEmail = false,
                             PersonId = 1
                         },
                         new
                         {
                             Id = 8,
                             EmailAddress = "rhoppe@gmail.com",
-                            IsSchoolEmail = false,
                             PersonId = 6
                         });
                 });
@@ -331,96 +322,6 @@ namespace SchoolDBAPI.Library.Migrations
                             FirstName = "Keisha",
                             LastName = "Higgins",
                             Salary = 41200m
-                        });
-                });
-
-            modelBuilder.Entity("SchoolDBAPI.Library.Models.PhoneNum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsMobile")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Owner")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PhoneNumbers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsMobile = true,
-                            Number = "040690660",
-                            Owner = 0,
-                            PersonId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsMobile = false,
-                            Number = "87164280",
-                            Owner = 2,
-                            PersonId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsMobile = true,
-                            Number = "048877120",
-                            Owner = 1,
-                            PersonId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsMobile = true,
-                            Number = "0406938120",
-                            Owner = 0,
-                            PersonId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsMobile = true,
-                            Number = "0406936119",
-                            Owner = 3,
-                            PersonId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsMobile = false,
-                            Number = "94104280",
-                            Owner = 4,
-                            PersonId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsMobile = true,
-                            Number = "0416928190",
-                            Owner = 1,
-                            PersonId = 6
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsMobile = true,
-                            Number = "0466138120",
-                            Owner = 0,
-                            PersonId = 3
                         });
                 });
 
