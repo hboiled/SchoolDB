@@ -9,5 +9,6 @@ namespace SchoolDBAPI.Library.Models.People
         Decimal Salary { get; set; }
         // rework to courses assigned to -> new model courses taught - list of
         List<Course> CoursesTaught { get; set; }
+        
     }
 }
