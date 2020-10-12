@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolDBAPI.Library.DataAccess;
-using SchoolDBAPI.Library.Models.People;
 using SchoolDBAPI.DTO;
 using SchoolDBAPI.Library.Models;
+using SchoolDBAPI.Library.Models.SchoolBusiness;
+using SchoolDBAPI.Library.Models.People;
 
 namespace SchoolDBAPI.Controllers
 {
@@ -119,14 +120,18 @@ namespace SchoolDBAPI.Controllers
         [HttpGet("course/{id}")]
         public async Task<CourseReadDTO> GetCourse(int id)
         {
-            var course = context.Courses.Find(id);
-            //course.Teacher = _context.Teachers.Where(c => c.Id == course.TeacherId).FirstOrDefault();
+            var course = context.Courses
+                .Where(c => c.Id == id)
+                .Include(c => c.Teacher)
+                .FirstOrDefault();
+            //course.Teacher = context.Teachers.Where(c => c.Id == course.TeacherId).FirstOrDefault();
 
             var courseData = new CourseReadDTO
             {
                 Id = course.Id,
                 Title = course.Title,
-                Teacher = course.Teacher.FirstName + " " + course.Teacher.LastName
+                Teacher = course.Teacher.FirstName + " " + course.Teacher.LastName,
+                Subject = course.Subject.ToString()
             };
 
             var matchingStudents = context.Enrollments

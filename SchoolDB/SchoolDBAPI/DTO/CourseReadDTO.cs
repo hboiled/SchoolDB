@@ -8,5 +8,6 @@ namespace SchoolDBAPI.DTO
         public string Title { get; set; }
         public string Teacher { get; set; }
         public List<string> Students { get; set; } = new List<string>();
+        public string Subject { get; set; }
     }
 }

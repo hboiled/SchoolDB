@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolDBAPI.Library.Models.People
+namespace SchoolDBUI.Library.Models
 {
-    public enum QualifiedToTeach
+    public enum Subject
     {
         Maths,
         English,
+        Science,
         Chemistry,
         Physics,
         Biology,

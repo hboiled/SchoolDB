@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
+using SchoolDBAPI.Library.Models.People;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolDBAPI.Library.Models.People
+namespace SchoolDBAPI.Library.Models.SchoolBusiness
 {
     public class Enrollment
     {

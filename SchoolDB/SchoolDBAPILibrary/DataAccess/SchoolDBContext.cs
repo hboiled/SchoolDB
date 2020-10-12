@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolDBAPI.Library.Models;
 using SchoolDBAPI.Library.Models.People;
+using SchoolDBAPI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,10 +50,10 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Course>()
                 .HasData(
-                new Course { Id = 1, TeacherId = 1, Title = "Maths 101" },
-                new Course { Id = 2, TeacherId = 2, Title = "Science 401" },
-                new Course { Id = 3, TeacherId = 3, Title = "English 201" },
-                new Course { Id = 4, TeacherId = 4, Title = "Sports 101" }
+                new Course { Id = 1, TeacherId = 1, Title = "Maths 101", Subject = Subject.Maths },
+                new Course { Id = 2, TeacherId = 2, Title = "Science 401", Subject = Subject.Science },
+                new Course { Id = 3, TeacherId = 3, Title = "English 201", Subject = Subject.English },
+                new Course { Id = 4, TeacherId = 4, Title = "Sports 101", Subject = Subject.Sports }
                 );
 
             modelBuilder.Entity<Enrollment>()
