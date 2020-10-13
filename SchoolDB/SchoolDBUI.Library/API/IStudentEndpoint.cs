@@ -7,5 +7,6 @@ namespace SchoolDBUI.Library.API
     public interface IStudentEndpoint
     {
         Task<List<Student>> GetAll();
+        Task<List<Course>> GetCoursesBySubject(Subject subject);
     }
 }

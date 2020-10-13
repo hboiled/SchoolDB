@@ -50,10 +50,14 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Course>()
                 .HasData(
-                new Course { Id = 1, TeacherId = 1, Title = "Maths 101", Subject = Subject.Maths },
-                new Course { Id = 2, TeacherId = 2, Title = "Science 401", Subject = Subject.Science },
-                new Course { Id = 3, TeacherId = 3, Title = "English 201", Subject = Subject.English },
-                new Course { Id = 4, TeacherId = 4, Title = "Sports 101", Subject = Subject.Sports }
+                new Course { Id = 1, TeacherId = 1, Title = "Maths 101", Subject = Subject.Maths, CourseId = "M108THT" },
+                new Course { Id = 2, TeacherId = 2, Title = "Science 401", Subject = Subject.Science, CourseId = "S238ICE" },
+                new Course { Id = 3, TeacherId = 3, Title = "English 201", Subject = Subject.English, CourseId = "E762LSH" },
+                new Course { Id = 4, TeacherId = 4, Title = "Sports 101", Subject = Subject.Sports, CourseId = "H289OWJ" },
+                new Course { Id = 5, TeacherId = 1, Title = "Algebra 101", Subject = Subject.Maths, CourseId = "N293OAI" },
+                new Course { Id = 6, TeacherId = 2, Title = "Geometry 101", Subject = Subject.Maths, CourseId = "Z918OIQ" },
+                new Course { Id = 7, TeacherId = 3, Title = "Drama 101", Subject = Subject.Theatre, CourseId = "L009JNA" },
+                new Course { Id = 8, TeacherId = 4, Title = "Biology 301", Subject = Subject.Science, CourseId = "O019PKV" }
                 );
 
             modelBuilder.Entity<Enrollment>()

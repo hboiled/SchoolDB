@@ -131,16 +131,51 @@ namespace SchoolDBAPI.Controllers
                 Id = course.Id,
                 Title = course.Title,
                 Teacher = course.Teacher.FirstName + " " + course.Teacher.LastName,
-                Subject = course.Subject.ToString()
+                Subject = course.Subject.ToString(),
+                CourseId = course.CourseId
             };
 
             var matchingStudents = context.Enrollments
                 .Where(e => e.CourseId == course.Id)
-                .Select(e => e.Student.FirstName + " " + e.Student.LastName).ToList();
+                .Select(e => e.Student.FirstName + " " + e.Student.LastName)
+                .ToList();
 
             courseData.Students = matchingStudents;
 
             return courseData;
+        }
+
+        [HttpGet("courses/{subject}")]
+        public async Task<List<CourseReadDTO>> GetCoursesBySubject(Subject subject)
+        {
+            
+            var courses = context.Courses
+                .Where(c => c.Subject == subject)
+                .Include(c => c.Teacher)                
+                .ToList();
+
+            var coursesData = new List<CourseReadDTO>();
+
+            foreach (var course in courses)
+            {
+                CourseReadDTO courseData = new CourseReadDTO
+                {
+                    Id = course.Id,
+                    Title = course.Title,
+                    Teacher = course.Teacher.FullName,
+                    Subject = course.Subject.ToString(),
+                    CourseId = course.CourseId
+                };
+
+                courseData.Students = context.Enrollments
+                .Where(e => e.CourseId == course.Id)
+                .Select(e => e.Student.FirstName + " " + e.Student.LastName)
+                .ToList();
+
+                coursesData.Add(courseData);                    
+            }
+
+            return coursesData;
         }
 
         // GET: api/Students/5

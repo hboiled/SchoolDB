@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace SchoolDBAPI.DTO
+namespace SchoolDBUI.Library.Models
 {
-    public class CourseReadDTO
+    public class Course
     {
         public int Id { get; set; }
         public string Title { get; set; }

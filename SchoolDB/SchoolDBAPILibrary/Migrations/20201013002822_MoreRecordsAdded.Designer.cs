@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolDBAPI.Library.DataAccess;
 
 namespace SchoolDBAPI.Library.Migrations
 {
     [DbContext(typeof(SchoolDBContext))]
-    partial class SchoolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201013002822_MoreRecordsAdded")]
+    partial class MoreRecordsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,9 +321,6 @@ namespace SchoolDBAPI.Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Subject")
                         .HasColumnType("int");
 
@@ -341,7 +340,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 1,
-                            CourseId = "M108THT",
                             Subject = 0,
                             TeacherId = 1,
                             Title = "Maths 101"
@@ -349,7 +347,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 2,
-                            CourseId = "S238ICE",
                             Subject = 2,
                             TeacherId = 2,
                             Title = "Science 401"
@@ -357,7 +354,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 3,
-                            CourseId = "E762LSH",
                             Subject = 1,
                             TeacherId = 3,
                             Title = "English 201"
@@ -365,7 +361,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 4,
-                            CourseId = "H289OWJ",
                             Subject = 11,
                             TeacherId = 4,
                             Title = "Sports 101"
@@ -373,7 +368,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 5,
-                            CourseId = "N293OAI",
                             Subject = 0,
                             TeacherId = 1,
                             Title = "Algebra 101"
@@ -381,7 +375,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 6,
-                            CourseId = "Z918OIQ",
                             Subject = 0,
                             TeacherId = 2,
                             Title = "Geometry 101"
@@ -389,7 +382,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 7,
-                            CourseId = "L009JNA",
                             Subject = 12,
                             TeacherId = 3,
                             Title = "Drama 101"
@@ -397,7 +389,6 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 8,
-                            CourseId = "O019PKV",
                             Subject = 2,
                             TeacherId = 4,
                             Title = "Biology 301"
