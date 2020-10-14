@@ -19,32 +19,47 @@ namespace SchoolDBUI.ViewModels
             this.studentEndpoint = studentEndpoint;
         }
 
-        private Subject selectedSubjectFilter;
-        public Subject SelectedSubjectFilter
+        private string selectedSubjectFilter;
+        public string SelectedSubjectFilter
         {
             get { return selectedSubjectFilter; }
             set
             {
                 selectedSubjectFilter = value;
-                SetCourseFilter();
-                NotifyOfPropertyChange(() => SelectedSubjectFilter);
+                SetCourseFilter();                
+                NotifyOfPropertyChange(() => SelectedSubjectFilter);                
             }
         }
 
         private async Task SetCourseFilter()
         {
-            var courses = await studentEndpoint.GetCoursesBySubject(SelectedSubjectFilter);
-            FilteredCourses = new BindingList<Course>(courses);
+            // TODO: refactor logic to be more readable 
+            if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
+            {
+                var courses = await studentEndpoint.GetCoursesBySubject(subject);
+                FilterNotSelected = courses.Count != 0;
+                FilteredCourses = new BindingList<Course>(courses);
+            }
+            else
+            {
+                // handler error
+            }
             
         }
 
-        public bool FilterNotSelected { 
+        private bool filterNotSelected = false;
+        public bool FilterNotSelected
+        {
             get
             {
-                //NotifyOfPropertyChange(() => FilterNotSelected);
-                return filteredCourses.Count != 0;
+                return filterNotSelected;
             }
-         }
+            set
+            {
+                filterNotSelected = value;
+                NotifyOfPropertyChange(() => FilterNotSelected);
+            }
+        }
 
         public IEnumerable<Subject> Subjects
         {
@@ -75,15 +90,30 @@ namespace SchoolDBUI.ViewModels
             set { coursesEnrolledIn = value; }
         }
 
+        private Course selectedCourse;
+
+        public Course SelectedCourse
+        {
+            get { return selectedCourse; }
+            set { selectedCourse = value; }
+        }
+
+
         public void EnrollInCourse()
         {
-            CoursesEnrolledIn.Add(new Course
+            if (SelectedCourse != null && !AlreadyEnrolledInCourse(SelectedCourse))
             {
-                Id = 1,
-                Subject = Subject.Biology.ToString(),
-                Title = "Test",
-                CourseId = "L905HJK"
-            });
+                CoursesEnrolledIn.Add(SelectedCourse);
+            }
+            else
+            {
+                // handle error
+            }
+        }
+
+        private bool AlreadyEnrolledInCourse(Course course)
+        {
+            return CoursesEnrolledIn.Contains(course);
         }
 
     }
