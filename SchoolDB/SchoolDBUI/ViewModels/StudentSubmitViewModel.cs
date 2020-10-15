@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SchoolDBUI.ViewModels
 {
@@ -18,6 +19,11 @@ namespace SchoolDBUI.ViewModels
         {
             this.studentEndpoint = studentEndpoint;
         }
+
+        public string StreetAddress { get; set; }
+        public string Postcode { get; set; }
+        public string Suburb { get; set; }
+        public string State { get; set; }
 
         private string selectedSubjectFilter;
         public string SelectedSubjectFilter
@@ -98,6 +104,13 @@ namespace SchoolDBUI.ViewModels
             set { selectedCourse = value; }
         }
 
+        private Course enrolledCourseSelection;
+
+        public Course EnrolledCourseSelection
+        {
+            get { return enrolledCourseSelection; }
+            set { enrolledCourseSelection = value; }
+        }
 
         public void EnrollInCourse()
         {
@@ -116,5 +129,32 @@ namespace SchoolDBUI.ViewModels
             return CoursesEnrolledIn.Contains(course);
         }
 
+        public void RemoveSelectedCourse()
+        {
+            CoursesEnrolledIn.Remove(EnrolledCourseSelection);
+        }
+
+        private BindingList<Address> addresses = new BindingList<Address>();
+
+        public BindingList<Address> Addresses
+        {
+            get { return addresses; }
+            set { addresses = value; }
+        }
+
+
+        public void AddAddress()
+        {
+            var address = new Address
+            {
+                StreetAddress = StreetAddress,
+                Suburb = Suburb,
+                State = State,
+                Postcode = Postcode,
+                //PersonId = user id
+            };
+
+            Addresses.Add(address);
+        }
     }
 }

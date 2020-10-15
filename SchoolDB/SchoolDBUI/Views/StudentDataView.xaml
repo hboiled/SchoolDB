@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SchoolDBUI.Views"
              mc:Ignorable="d" 
              Background="WhiteSmoke" FontSize="24"
-             d:DesignHeight="700" d:DesignWidth="950">
+             d:DesignHeight="600" d:DesignWidth="950">
     <Grid>
         <!-- Grid Definitions -->
         <Grid.RowDefinitions>
@@ -41,7 +41,7 @@
             <TextBox x:Name="PersonName" MinWidth="100" Margin="0 0 0 10"/>
             <!--<Button x:Name="AddToCart" Content="Add to Cart" Margin="0 0 0 20" Padding="5"/>-->
 
-            <ListBox x:Name="Students" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" MinHeight="500"
+            <ListBox x:Name="Students" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" MinHeight="420"
                  MinWidth="150" Grid.ColumnSpan="2" Margin="0.333,0,0,0"
                  SelectedItem="{Binding SelectedStudent}">
                 <ListBox.ItemTemplate>

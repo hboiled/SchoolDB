@@ -22,5 +22,6 @@ namespace SchoolDBUI.Views
         {
             InitializeComponent();
         }
+
     }
 }

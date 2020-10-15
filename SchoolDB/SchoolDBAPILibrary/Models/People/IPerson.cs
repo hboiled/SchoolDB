@@ -10,10 +10,10 @@ namespace SchoolDBAPI.Library.Models
         string FirstName { get; set; }
         string LastName { get; set; }
         //DateTime BirthDate { get; set; }
-        // age prop calc
+        //age prop calc -- only needed for front end models
         //int Age { get; }
-        //List<Email> Emails { get; set; }
-        //List<PhoneNum> PhoneNums { get; set; }
-        //List<Address> Addresses { get; set; }
+        List<Email> Emails { get; set; }
+        List<PhoneNum> PhoneNums { get; set; }
+        List<Address> Addresses { get; set; }
     }
 }
