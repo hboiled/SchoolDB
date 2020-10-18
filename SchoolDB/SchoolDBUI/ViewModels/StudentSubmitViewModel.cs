@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
+using SchoolDBUI.Library.Models.Contact;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,10 +21,11 @@ namespace SchoolDBUI.ViewModels
             this.studentEndpoint = studentEndpoint;
         }
 
-        public string StreetAddress { get; set; }
-        public string Postcode { get; set; }
-        public string Suburb { get; set; }
-        public string State { get; set; }
+        // Email
+
+        // Phone
+
+        #region Course and subject filter
 
         private string selectedSubjectFilter;
         public string SelectedSubjectFilter
@@ -134,6 +136,17 @@ namespace SchoolDBUI.ViewModels
             CoursesEnrolledIn.Remove(EnrolledCourseSelection);
         }
 
+        #endregion
+
+        // Add remove address functionality
+        #region Addresses
+        public string StreetAddress { get; set; }
+        public string Postcode { get; set; }
+        public string Suburb { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public bool PrimaryAddressBox { get; set; }
+
         private BindingList<Address> addresses = new BindingList<Address>();
 
         public BindingList<Address> Addresses
@@ -149,12 +162,85 @@ namespace SchoolDBUI.ViewModels
             {
                 StreetAddress = StreetAddress,
                 Suburb = Suburb,
+                City = City,
                 State = State,
                 Postcode = Postcode,
-                //PersonId = user id
+                IsPrimary = PrimaryAddressBox
             };
 
             Addresses.Add(address);
         }
+
+
+        #endregion
+
+        #region Email
+
+        private string emailAddressTextbox;
+        public string EmailAddressTextbox {
+            get { return emailAddressTextbox; }
+            set
+            {
+                emailAddressTextbox = value;
+                // must notify of prop change, using full prop to have UI update to changes
+                NotifyOfPropertyChange(() => EmailAddressTextbox);
+            }
+        }
+        public EmailOwner SelectedEmailOwner { get; set; }
+
+        public IEnumerable<EmailOwner> EmailOwnerTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(EmailOwner))
+                    .Cast<EmailOwner>();
+            }
+        }
+
+        private BindingList<Email> emails = new BindingList<Email>();
+
+        public BindingList<Email> Emails
+        {
+            get { return emails; }
+            set { emails = value; }
+        }
+
+        public void AddEmail()
+        {
+            if (!string.IsNullOrWhiteSpace(EmailAddressTextbox))
+            {
+                Emails.Add(new Email
+                {
+                    EmailAddress = EmailAddressTextbox,
+                    Owner = SelectedEmailOwner
+                });
+            }
+
+            ClearEmailFormFields();
+        }
+
+        private void ClearEmailFormFields()
+        {
+            EmailAddressTextbox = "";
+        }
+
+        public void RemoveEmail()
+        {
+
+        }
+
+        #endregion
+
+        #region Phone
+        public IEnumerable<PhoneNumberOwner> PhoneOwnerTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PhoneNumberOwner))
+                    .Cast<PhoneNumberOwner>();
+            }
+        }
+
+        #endregion
     }
 }

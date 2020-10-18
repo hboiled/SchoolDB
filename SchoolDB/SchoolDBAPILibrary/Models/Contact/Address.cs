@@ -9,12 +9,8 @@
         public string City { get; set; }
         public string State { get; set; }
         public string Postcode { get; set; }
-        // prop for full address format
-        public string FullAddress {
-            get 
-            {
-                return $"{StreetAddress}, {Suburb}, {City}, {State} {Postcode}";
-            }
-        }
+        public bool IsPrimary { get; set; }
+        
+
     }
 }

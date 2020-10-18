@@ -60,7 +60,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Graduation Status:"></Label>
+                <Label Content="Graduation Year:"></Label>
                 <TextBox Width="180" MaxHeight="30"></TextBox>
             </StackPanel>
         </StackPanel>
@@ -73,10 +73,10 @@
                             <ListView Height="150" ItemsSource="{Binding Addresses}">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=FullAddress}">
+                                        <GridViewColumn Width="280" DisplayMemberBinding="{Binding Path=FullAddress}">
                                             <GridViewColumnHeader TextElement.FontSize="18" Content="Full Address" />
                                         </GridViewColumn>
-                                        <GridViewColumn Width="130">
+                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=AddressStatus}">
                                             <GridViewColumnHeader TextElement.FontSize="18" Content="Status"/>
                                         </GridViewColumn>
                                     </GridView>
@@ -85,29 +85,31 @@
                             <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                     <Label Content="Street Address:" HorizontalAlignment="Center"></Label>
-                                    <TextBox x:Name="StreetAddress" Width="280" MaxHeight="30"></TextBox>
+                                    <TextBox x:Name="StreetAddressTextbox" Width="220" MaxHeight="30"></TextBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                                     <Label Content="Postcode:" HorizontalAlignment="Center"></Label>
-                                    <TextBox x:Name="Postcode" Width="105" MaxHeight="30"></TextBox>
+                                    <TextBox x:Name="PostcodeTextbox" Width="85" MaxHeight="30"></TextBox>
                                 </StackPanel>
+
+                            <CheckBox x:Name="PrimaryAddressBox" Content="Primary" Margin="15 35 5 5"></CheckBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,10,0">
                                     <Label Content="Suburb:" HorizontalAlignment="Center"></Label>
-                                    <TextBox x:Name="Suburb" Width="110" MaxHeight="30"></TextBox>
+                                    <TextBox x:Name="SuburbTextbox" Width="110" MaxHeight="30"></TextBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
                                     <Label Content="State:" HorizontalAlignment="Center"></Label>
-                                    <TextBox x:Name="State" Width="130" MaxHeight="30"></TextBox>
+                                    <TextBox x:Name="StateTextbox" Width="130" MaxHeight="30"></TextBox>
                                 </StackPanel>
 
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="10 0 0 0">
                                 <Label Content="City:" HorizontalAlignment="Center"></Label>
-                                <TextBox x:Name="City" Width="135" MaxHeight="30"></TextBox>
+                                <TextBox x:Name="CityTextbox" Width="135" MaxHeight="30"></TextBox>
                             </StackPanel>
 
                         </StackPanel>
@@ -120,13 +122,13 @@
                 </TabItem>
                 <TabItem Header="Email">
                     <StackPanel Orientation="Vertical">
-                            <ListView Height="150" ItemsSource="{Binding Addresses}">
+                            <ListView Height="150" ItemsSource="{Binding Emails}">
                                 <ListView.View>
                                     <GridView>
                                     <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=EmailAddress}">
                                             <GridViewColumnHeader TextElement.FontSize="18" Content="Email Address" />
                                         </GridViewColumn>
-                                        <GridViewColumn Width="130">
+                                    <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=Owner}">
                                             <GridViewColumnHeader TextElement.FontSize="18" Content="Contact Type"/>
                                         </GridViewColumn>
                                     </GridView>
@@ -134,13 +136,15 @@
                             </ListView>
                         <StackPanel Orientation="Horizontal" Margin="10 5 5 5" HorizontalAlignment="Center">
                             <Label Content="Email Address:" HorizontalAlignment="Center"></Label>
-                            <TextBox x:Name="aaszd" Width="300" MaxHeight="30"></TextBox>
+                            <TextBox x:Name="EmailAddressTextbox" Width="300" MaxHeight="30"></TextBox>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="10 10 0 0">
-                            <CheckBox Content="Is School Email"></CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,10,5,10">
+                            <Label Content="Owner:"></Label>
+                            <ComboBox Height="30" Width="160" ItemsSource="{Binding EmailOwnerTypes}" 
+                                      SelectedItem="{Binding SelectedEmailOwner}" SelectedValue="EmailOwnerTypes[0]"></ComboBox>
                         </StackPanel>
-
+                        
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="AddEmail" Content="Add Email" Margin="15,10,30,0" Height="35" Width="180" HorizontalAlignment="Left"></Button>
                             <Button x:Name="RemoveEmail" Content="Remove Email" Margin="0,10,30,0" Height="35" Width="180"></Button>
@@ -152,28 +156,32 @@
                         <ListView Height="150" ItemsSource="{Binding Addresses}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=PhoneNumber}">
+                                    <GridViewColumn Width="145" DisplayMemberBinding="{Binding Path=PhoneNumber}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Phone Number" />
                                     </GridViewColumn>
-                                    <GridViewColumn Width="160">
+                                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Owner}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Owner"/>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="100">
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Emergency}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Emergency"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=Mobile}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Mobile"/>
                                     </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
                         <StackPanel Orientation="Horizontal" Margin="10 5 5 5" HorizontalAlignment="Center">
                             <Label Content="Phone Number:" HorizontalAlignment="Center"></Label>
-                            <TextBox x:Name="aasd" Width="300" MaxHeight="30"></TextBox>
+                            <TextBox x:Name="PhoneNumberTextbox" Width="300" MaxHeight="30"></TextBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,10,5,10">
                             <Label Content="Owner:"></Label>
-                            <ComboBox Height="30" Width="160" ItemsSource="{Binding FilteredCourses}" IsEnabled="{Binding FilterNotSelected}"
-                          SelectedItem="{Binding SelectedCourse}" DisplayMemberPath="Title"></ComboBox>
-                            <CheckBox Content="Is Emergency Contact" Margin="10 5 0 0"></CheckBox>
+                            <ComboBox Height="30" Width="160" ItemsSource="{Binding PhoneOwnerTypes}" 
+                                      SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="PhoneOwnerTypes[0]"></ComboBox>
+                            <CheckBox x:Name="EContactBox" Content="Emergency" Margin="10 5 0 0"></CheckBox>
+                            <CheckBox x:Name="MobileBox" Content="Mobile" Margin="10 5 0 0"></CheckBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
