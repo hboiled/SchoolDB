@@ -10,7 +10,8 @@ namespace SchoolDBUI.Library.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int StudentId { get; set; }
-        public int Grade { get; set; }
+        //public int Grade { get; set; }
+        public Gender Gender { get; set; }
         public string FullName
         {
             get

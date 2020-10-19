@@ -1,25 +1,21 @@
-﻿using System;
+﻿using SchoolDBUI.Library.Models.Contact;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolDBAPI.Library.Models
+namespace SchoolDBUI.Library.Models
 {
-    public abstract class Person : IPerson
+    public class StudentSubmitDTO
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public DateTime BirthDate { get; set; }
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
+        //public int Grade { get; set; }
+        public List<Course> CourseEnrollments { get; set; }
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }
         public List<Address> Addresses { get; set; }
+        // Update db with gender first
         //public Gender Gender { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace SchoolDBUI.Library.Models.Contact
         {
             get
             {
-                return IsMobile ? "M" : "H";
+                return IsMobile ? "M" : "L";
             }
         }
     }

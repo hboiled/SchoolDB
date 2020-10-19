@@ -21,9 +21,9 @@ namespace SchoolDBUI.ViewModels
             this.studentEndpoint = studentEndpoint;
         }
 
-        // Email
-
-        // Phone
+        public string FirstNameTextbox { get; set; }
+        public string LastNameTextbox { get; set; }
+        public string GenderCheckbox { get; set; }
 
         #region Course and subject filter
 
@@ -140,11 +140,11 @@ namespace SchoolDBUI.ViewModels
 
         // Add remove address functionality
         #region Addresses
-        public string StreetAddress { get; set; }
-        public string Postcode { get; set; }
-        public string Suburb { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string StreetAddressTextbox { get; set; }
+        public string PostcodeTextbox { get; set; }
+        public string SuburbTextbox { get; set; }
+        public string CityTextbox { get; set; }
+        public string StateTextbox { get; set; }
         public bool PrimaryAddressBox { get; set; }
 
         private BindingList<Address> addresses = new BindingList<Address>();
@@ -160,11 +160,11 @@ namespace SchoolDBUI.ViewModels
         {
             var address = new Address
             {
-                StreetAddress = StreetAddress,
-                Suburb = Suburb,
-                City = City,
-                State = State,
-                Postcode = Postcode,
+                StreetAddress = StreetAddressTextbox,
+                Suburb = SuburbTextbox,
+                City = CityTextbox,
+                State = StateTextbox,
+                Postcode = PostcodeTextbox,
                 IsPrimary = PrimaryAddressBox
             };
 
@@ -174,6 +174,7 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
+        // Add remove functionality
         #region Email
 
         private string emailAddressTextbox;
@@ -231,7 +232,34 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
+        // Add remove functionality
         #region Phone
+
+        private string phoneNumberTextbox;
+
+        public string PhoneNumberTextbox
+        {
+            get { return phoneNumberTextbox; }
+            set 
+            { 
+                phoneNumberTextbox = value;
+                NotifyOfPropertyChange(() => PhoneNumberTextbox);
+            }
+        }
+
+        public bool EContactBox { get; set; }
+        public bool MobileBox { get; set; }
+
+        public PhoneNumberOwner SelectedPhoneOwner { get; set; }
+
+        private BindingList<PhoneNum> phoneNums = new BindingList<PhoneNum>();
+
+        public BindingList<PhoneNum> PhoneNums
+        {
+            get { return phoneNums; }
+            set { phoneNums = value; }
+        }
+
         public IEnumerable<PhoneNumberOwner> PhoneOwnerTypes
         {
             get
@@ -241,6 +269,48 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        public void AddPhoneNumber()
+        {
+            if (!string.IsNullOrWhiteSpace(PhoneNumberTextbox))
+            {
+                phoneNums.Add(
+                    new PhoneNum
+                    {
+                        Number = PhoneNumberTextbox,
+                        IsMobile = MobileBox,
+                        IsEmergency = EContactBox,
+                        Owner = SelectedPhoneOwner
+                    });
+            }
+        }
+
+        public void RemovePhoneNumber()
+        {
+
+        }
+
+        private void ResetPhoneNumberTextbox()
+        {
+            PhoneNumberTextbox = "";
+        }
+
         #endregion
+
+        public void SubmitStudent()
+        {
+            // CREATE
+            var student = new StudentSubmitDTO
+            {
+                FirstName = FirstNameTextbox,
+                LastName = LastNameTextbox,
+                Emails = Emails.ToList(),
+                PhoneNums = PhoneNums.ToList(),
+                Addresses = Addresses.ToList(),
+                CourseEnrollments = CoursesEnrolledIn.ToList()
+                //Gender = GenderCheckbox
+            };
+
+            var x = 2;
+        }
     }
 }
