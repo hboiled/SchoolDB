@@ -85,7 +85,7 @@ namespace SchoolDBAPI.Controllers
                 .Select(e => e.EmailAddress)
                 .ToList();
 
-            var enumType = typeof(Owner);
+            var enumType = typeof(PhoneNumberOwner);
             var matchingPhoneNums = context.PhoneNumbers
                 .Where(p => p.PersonId == student.Id)
                 .Select(p => new PhoneNumBasicDetailDTO { Number = p.Number, Owner = Enum.GetName(enumType, p.Owner) })
@@ -243,12 +243,61 @@ namespace SchoolDBAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Student>> PostStudent(Student student)
+        public async Task<ActionResult<StudentPostDTO>> PostStudent(StudentPostDTO studentData)
+        //public async Task<ActionResult<Student>> PostStudent(Student studentData)
         {
+            // NOTE: TRANSACTION HERE - REDO TO WORK SAFELY
+            var student = new Student
+            {
+                FirstName = studentData.FirstName,
+                LastName = studentData.LastName,
+                Grade = 75,
+                StudentId = 426894, // change every so often             
+            };
+
             context.Students.Add(student);
             await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStudent", new { id = student.Id }, student);
+            var addresses = studentData.Addresses;
+            var emails = studentData.Emails;
+            var phoneNums = studentData.PhoneNums;
+            var courses = studentData.CourseEnrollments;
+
+            var enrollments = new List<Enrollment>();
+
+            // HACK -- NEEDS TO BE CHANGED AFTER LEARNING MORE ABOUT TRANSACTIONS
+            var studentsId = context.Students.
+                Where(s => s.StudentId == student.StudentId).
+                FirstOrDefault().Id;
+
+            foreach (var course in courses)
+            {
+                enrollments.Add(new Enrollment
+                {
+                    StudentId = studentsId,
+                    CourseId = course.Id
+                });
+            }
+
+            foreach (var email in emails)
+            {
+                email.PersonId = studentsId;
+            }
+
+            foreach (var number in phoneNums)
+            {
+                number.PersonId = studentsId;
+            }
+
+            //context.Addresses
+            context.Emails.AddRange(emails);
+            context.PhoneNumbers.AddRange(phoneNums);
+            context.Enrollments.AddRange(enrollments);
+            //await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
+
+            return CreatedAtAction("GetStudent", new { id = 1 }, student);
+            //return CreatedAtAction("GetStudent", new { id = studentsId }, student);
         }
 
         // DELETE: api/Students/5

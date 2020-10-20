@@ -48,5 +48,21 @@ namespace SchoolDBUI.Library.API
                 }
             }
         }
+
+        public async Task SubmitStudent(StudentSubmitDTO student)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient
+                .PostAsJsonAsync($"api/students", student))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var x = "Working";                    
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

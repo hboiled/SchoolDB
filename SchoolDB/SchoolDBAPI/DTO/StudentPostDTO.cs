@@ -1,13 +1,14 @@
-﻿using SchoolDBUI.Library.Models.Contact;
+﻿using SchoolDBAPI.Library.Models;
+using SchoolDBAPI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SchoolDBUI.Library.Models
+namespace SchoolDBAPI.DTO
 {
-    public class StudentSubmitDTO
+    public class StudentPostDTO
     {
-        // only used with put endpoint
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -16,7 +17,5 @@ namespace SchoolDBUI.Library.Models
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }
         public List<Address> Addresses { get; set; }
-        // Update db with gender first
-        //public Gender Gender { get; set; }
     }
 }

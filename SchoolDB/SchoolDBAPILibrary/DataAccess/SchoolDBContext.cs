@@ -73,26 +73,26 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Email>()
                 .HasData(
-                new Email { Id = 1, EmailAddress = "203948@school.org", PersonId = 1, IsSchoolEmail = true},
-                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", PersonId = 2, IsSchoolEmail = false },
-                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", PersonId = 3, IsSchoolEmail = false },
-                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", PersonId = 4, IsSchoolEmail = false },
-                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", PersonId = 5, IsSchoolEmail = false },
-                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", PersonId = 2, IsSchoolEmail = false },
-                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", PersonId = 1, IsSchoolEmail = false },
-                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", PersonId = 6, IsSchoolEmail = false }
+                new Email { Id = 1, EmailAddress = "203948@school.org", PersonId = 1, IsSchoolEmail = true, Owner = EmailOwner.School},
+                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", PersonId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", PersonId = 3, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", PersonId = 4, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", PersonId = 5, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", PersonId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", PersonId = 1, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", PersonId = 6, IsSchoolEmail = false, Owner = EmailOwner.School }
                 );
 
             modelBuilder.Entity<PhoneNum>()
                 .HasData(
-                new PhoneNum { Id = 1, Owner = Owner.Self, PersonId = 1, IsMobile = true, Number = "040690660"},
-                new PhoneNum { Id = 2, Owner = Owner.Relative, PersonId = 2, IsMobile = false, Number = "87164280" },
-                new PhoneNum { Id = 3, Owner = Owner.Guardian, PersonId = 3, IsMobile = true, Number = "048877120" },
-                new PhoneNum { Id = 4, Owner = Owner.Self, PersonId = 4, IsMobile = true, Number = "0406938120" },
-                new PhoneNum { Id = 5, Owner = Owner.Work, PersonId = 5, IsMobile = true, Number = "0406936119" },
-                new PhoneNum { Id = 6, Owner = Owner.Home, PersonId = 1, IsMobile = false, Number = "94104280" },
-                new PhoneNum { Id = 7, Owner = Owner.Guardian, PersonId = 6, IsMobile = true, Number = "0416928190" },
-                new PhoneNum { Id = 8, Owner = Owner.Self, PersonId = 3, IsMobile = true, Number = "0466138120" }
+                new PhoneNum { Id = 1, Owner = PhoneNumberOwner.Self, PersonId = 1, IsMobile = true, Number = "040690660", IsEmergency = true},
+                new PhoneNum { Id = 2, Owner = PhoneNumberOwner.Relative, PersonId = 2, IsMobile = false, Number = "87164280", IsEmergency = true },
+                new PhoneNum { Id = 3, Owner = PhoneNumberOwner.Guardian, PersonId = 3, IsMobile = true, Number = "048877120", IsEmergency = true },
+                new PhoneNum { Id = 4, Owner = PhoneNumberOwner.Self, PersonId = 4, IsMobile = true, Number = "0406938120", IsEmergency = true },
+                new PhoneNum { Id = 5, Owner = PhoneNumberOwner.Work, PersonId = 5, IsMobile = true, Number = "0406936119", IsEmergency = true },
+                new PhoneNum { Id = 6, Owner = PhoneNumberOwner.Home, PersonId = 1, IsMobile = false, Number = "94104280", IsEmergency = true },
+                new PhoneNum { Id = 7, Owner = PhoneNumberOwner.Guardian, PersonId = 6, IsMobile = true, Number = "0416928190", IsEmergency = true },
+                new PhoneNum { Id = 8, Owner = PhoneNumberOwner.Self, PersonId = 3, IsMobile = true, Number = "0466138120", IsEmergency = true }
                 );
         }
     }

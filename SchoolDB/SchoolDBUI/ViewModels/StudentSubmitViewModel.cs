@@ -310,7 +310,13 @@ namespace SchoolDBUI.ViewModels
                 //Gender = GenderCheckbox
             };
 
-            var x = 2;
+            foreach (var item in student.CourseEnrollments)
+            {
+                item.Students.Clear();
+                item.Teacher = null;
+            }
+
+            studentEndpoint.SubmitStudent(student);
         }
     }
 }
