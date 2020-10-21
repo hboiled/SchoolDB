@@ -252,7 +252,8 @@ namespace SchoolDBAPI.Controllers
                 FirstName = studentData.FirstName,
                 LastName = studentData.LastName,
                 Grade = 75,
-                StudentId = 426894, // change every so often             
+                StudentId = 916894, // change every so often     
+                Gender = Gender.Male
             };
 
             context.Students.Add(student);
@@ -289,11 +290,15 @@ namespace SchoolDBAPI.Controllers
                 number.StudentId = studentsId;
             }
 
-            //context.Addresses
+            foreach (var address in addresses)
+            {
+                address.StudentId = studentsId;
+            }
+
+            context.StudentAddresses.AddRange(addresses);
             context.StudentEmails.AddRange(emails);
             context.StudentPhoneNumbers.AddRange(phoneNums);
-            context.Enrollments.AddRange(enrollments);
-            //await context.SaveChangesAsync();
+            context.Enrollments.AddRange(enrollments);            
             await context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = 1 }, student);

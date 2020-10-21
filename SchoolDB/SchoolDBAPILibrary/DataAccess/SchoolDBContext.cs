@@ -100,15 +100,15 @@ namespace SchoolDBAPI.Library.DataAccess
                 new Address { Id = 1, IsPrimary = true, City = "Perth", StreetAddress = "123 fake st", 
                     Postcode = "5123", Suburb = "Aowweq", State = "Unwepq", StudentId = 1},
                 new Address { Id = 2, IsPrimary = true, City = "Werth", StreetAddress = "128 fake st", 
-                    Postcode = "8123", Suburb = "Mngweq", State = "Wpfepq", StudentId = 1},
+                    Postcode = "8123", Suburb = "Mngweq", State = "Wpfepq", StudentId = 2},
                 new Address { Id = 3, IsPrimary = true, City = "Zerth", StreetAddress = "127 fake st", 
-                    Postcode = "9123", Suburb = "Louweq", State = "Nmeepq", StudentId = 1},
+                    Postcode = "9123", Suburb = "Louweq", State = "Nmeepq", StudentId = 3},
                 new Address { Id = 4, IsPrimary = true, City = "Derth", StreetAddress = "126 fake st", 
-                    Postcode = "0123", Suburb = "Mzuweq", State = "Hjkepq", StudentId = 1},
+                    Postcode = "0123", Suburb = "Mzuweq", State = "Hjkepq", StudentId = 4},
                 new Address { Id = 5, IsPrimary = true, City = "Ferth", StreetAddress = "125 fake st", 
-                    Postcode = "2123", Suburb = "LLwweq", State = "Qrwwepq", StudentId = 1},
+                    Postcode = "2123", Suburb = "LLwweq", State = "Qrwwepq", StudentId = 5},
                 new Address { Id = 6, IsPrimary = true, City = "Merth", StreetAddress = "124 fake st", 
-                    Postcode = "4123", Suburb = "Gweq", State = "FWca", StudentId = 1}
+                    Postcode = "4123", Suburb = "Gweq", State = "FWca", StudentId = 6}
                 );
         }
     }
