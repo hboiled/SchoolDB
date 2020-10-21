@@ -9,10 +9,10 @@
         Home
     }
 
-    public class PhoneNum : IContact
+    public class PhoneNum
     {
         public int Id { get; set; }
-        public int PersonId { get; set; }
+        public int StudentId { get; set; }
         public string Number { get; set; }
         public PhoneNumberOwner Owner { get; set; }
         public bool IsMobile { get; set; }

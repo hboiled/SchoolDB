@@ -5,14 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201007072840_InitDB.cs" />
-    <Compile Remove="Migrations\20201007072840_InitDB.Designer.cs" />
-    <Compile Remove="Migrations\20201007074805_InitNSeed.cs" />
-    <Compile Remove="Migrations\20201007074805_InitNSeed.Designer.cs" />
-    <Compile Remove="Migrations\20201007080907_addjsonignoreToEnrollments.cs" />
-    <Compile Remove="Migrations\20201007080907_addjsonignoreToEnrollments.Designer.cs" />
-    <Compile Remove="Migrations\20201008081052_Rework.cs" />
-    <Compile Remove="Migrations\20201008081052_Rework.Designer.cs" />
+    <Compile Remove="Migrations\20201021051358_MajorRevamp.cs" />
+    <Compile Remove="Migrations\20201021051358_MajorRevamp.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

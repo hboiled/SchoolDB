@@ -22,9 +22,9 @@ namespace SchoolDBAPI.Library.DataAccess
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
-        //public DbSet<Address> Addresses { get; set; }
-        public DbSet<Email> Emails { get; set; }
-        public DbSet<PhoneNum> PhoneNumbers { get; set; }
+        public DbSet<Address> StudentAddresses { get; set; }
+        public DbSet<Email> StudentEmails { get; set; }
+        public DbSet<PhoneNum> StudentPhoneNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,20 +32,20 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Student>()
                 .HasData(
-                new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948 },
-                new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942 },
-                new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481 },
-                new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941 },
-                new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341 },
-                new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343 }
+                new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948, Gender = Gender.Male },
+                new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942, Gender = Gender.Female },
+                new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481, Gender = Gender.Male },
+                new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941, Gender = Gender.Female },
+                new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341, Gender = Gender.Male },
+                new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343, Gender = Gender.Male }
                 );
 
             modelBuilder.Entity<Teacher>()
                 .HasData(
-                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000},
-                new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000 },
-                new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000 },
-                new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200 }
+                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000 , Gender = Gender.Male},
+                new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000, Gender = Gender.Female },
+                new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000, Gender = Gender.Male },
+                new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200, Gender = Gender.Female }
                 );
 
             modelBuilder.Entity<Course>()
@@ -73,26 +73,42 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Email>()
                 .HasData(
-                new Email { Id = 1, EmailAddress = "203948@school.org", PersonId = 1, IsSchoolEmail = true, Owner = EmailOwner.School},
-                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", PersonId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", PersonId = 3, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", PersonId = 4, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", PersonId = 5, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", PersonId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", PersonId = 1, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", PersonId = 6, IsSchoolEmail = false, Owner = EmailOwner.School }
+                new Email { Id = 1, EmailAddress = "203948@school.org", StudentId = 1, IsSchoolEmail = true, Owner = EmailOwner.School},
+                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", StudentId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", StudentId = 3, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", StudentId = 4, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", StudentId = 5, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", StudentId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", StudentId = 1, IsSchoolEmail = false, Owner = EmailOwner.School },
+                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", StudentId = 6, IsSchoolEmail = false, Owner = EmailOwner.School }
                 );
 
             modelBuilder.Entity<PhoneNum>()
                 .HasData(
-                new PhoneNum { Id = 1, Owner = PhoneNumberOwner.Self, PersonId = 1, IsMobile = true, Number = "040690660", IsEmergency = true},
-                new PhoneNum { Id = 2, Owner = PhoneNumberOwner.Relative, PersonId = 2, IsMobile = false, Number = "87164280", IsEmergency = true },
-                new PhoneNum { Id = 3, Owner = PhoneNumberOwner.Guardian, PersonId = 3, IsMobile = true, Number = "048877120", IsEmergency = true },
-                new PhoneNum { Id = 4, Owner = PhoneNumberOwner.Self, PersonId = 4, IsMobile = true, Number = "0406938120", IsEmergency = true },
-                new PhoneNum { Id = 5, Owner = PhoneNumberOwner.Work, PersonId = 5, IsMobile = true, Number = "0406936119", IsEmergency = true },
-                new PhoneNum { Id = 6, Owner = PhoneNumberOwner.Home, PersonId = 1, IsMobile = false, Number = "94104280", IsEmergency = true },
-                new PhoneNum { Id = 7, Owner = PhoneNumberOwner.Guardian, PersonId = 6, IsMobile = true, Number = "0416928190", IsEmergency = true },
-                new PhoneNum { Id = 8, Owner = PhoneNumberOwner.Self, PersonId = 3, IsMobile = true, Number = "0466138120", IsEmergency = true }
+                new PhoneNum { Id = 1, Owner = PhoneNumberOwner.Self, StudentId = 1, IsMobile = true, Number = "040690660", IsEmergency = true},
+                new PhoneNum { Id = 2, Owner = PhoneNumberOwner.Relative, StudentId = 2, IsMobile = false, Number = "87164280", IsEmergency = true },
+                new PhoneNum { Id = 3, Owner = PhoneNumberOwner.Guardian, StudentId = 3, IsMobile = true, Number = "048877120", IsEmergency = true },
+                new PhoneNum { Id = 4, Owner = PhoneNumberOwner.Self, StudentId = 4, IsMobile = true, Number = "0406938120", IsEmergency = true },
+                new PhoneNum { Id = 5, Owner = PhoneNumberOwner.Work, StudentId = 5, IsMobile = true, Number = "0406936119", IsEmergency = true },
+                new PhoneNum { Id = 6, Owner = PhoneNumberOwner.Home, StudentId = 1, IsMobile = false, Number = "94104280", IsEmergency = true },
+                new PhoneNum { Id = 7, Owner = PhoneNumberOwner.Guardian, StudentId = 6, IsMobile = true, Number = "0416928190", IsEmergency = true },
+                new PhoneNum { Id = 8, Owner = PhoneNumberOwner.Self, StudentId = 3, IsMobile = true, Number = "0466138120", IsEmergency = true }
+                );
+
+            modelBuilder.Entity<Address>()
+                .HasData(
+                new Address { Id = 1, IsPrimary = true, City = "Perth", StreetAddress = "123 fake st", 
+                    Postcode = "5123", Suburb = "Aowweq", State = "Unwepq", StudentId = 1},
+                new Address { Id = 2, IsPrimary = true, City = "Werth", StreetAddress = "128 fake st", 
+                    Postcode = "8123", Suburb = "Mngweq", State = "Wpfepq", StudentId = 1},
+                new Address { Id = 3, IsPrimary = true, City = "Zerth", StreetAddress = "127 fake st", 
+                    Postcode = "9123", Suburb = "Louweq", State = "Nmeepq", StudentId = 1},
+                new Address { Id = 4, IsPrimary = true, City = "Derth", StreetAddress = "126 fake st", 
+                    Postcode = "0123", Suburb = "Mzuweq", State = "Hjkepq", StudentId = 1},
+                new Address { Id = 5, IsPrimary = true, City = "Ferth", StreetAddress = "125 fake st", 
+                    Postcode = "2123", Suburb = "LLwweq", State = "Qrwwepq", StudentId = 1},
+                new Address { Id = 6, IsPrimary = true, City = "Merth", StreetAddress = "124 fake st", 
+                    Postcode = "4123", Suburb = "Gweq", State = "FWca", StudentId = 1}
                 );
         }
     }

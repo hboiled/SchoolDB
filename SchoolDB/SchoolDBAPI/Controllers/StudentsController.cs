@@ -80,14 +80,14 @@ namespace SchoolDBAPI.Controllers
                 .Select(e => e.Course.Title)
                 .ToList();
 
-            var matchingEmails = context.Emails
-                .Where(e => e.PersonId == student.Id)
+            var matchingEmails = context.StudentEmails
+                .Where(e => e.StudentId == student.Id)
                 .Select(e => e.EmailAddress)
                 .ToList();
 
             var enumType = typeof(PhoneNumberOwner);
-            var matchingPhoneNums = context.PhoneNumbers
-                .Where(p => p.PersonId == student.Id)
+            var matchingPhoneNums = context.StudentPhoneNumbers
+                .Where(p => p.StudentId == student.Id)
                 .Select(p => new PhoneNumBasicDetailDTO { Number = p.Number, Owner = Enum.GetName(enumType, p.Owner) })
                 .ToList();
 
@@ -281,17 +281,17 @@ namespace SchoolDBAPI.Controllers
 
             foreach (var email in emails)
             {
-                email.PersonId = studentsId;
+                email.StudentId = studentsId;
             }
 
             foreach (var number in phoneNums)
             {
-                number.PersonId = studentsId;
+                number.StudentId = studentsId;
             }
 
             //context.Addresses
-            context.Emails.AddRange(emails);
-            context.PhoneNumbers.AddRange(phoneNums);
+            context.StudentEmails.AddRange(emails);
+            context.StudentPhoneNumbers.AddRange(phoneNums);
             context.Enrollments.AddRange(enrollments);
             //await context.SaveChangesAsync();
             await context.SaveChangesAsync();

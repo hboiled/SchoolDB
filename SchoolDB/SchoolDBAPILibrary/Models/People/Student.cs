@@ -5,8 +5,23 @@ using System.Text;
 
 namespace SchoolDBAPI.Library.Models.People
 {
-    public class Student : Person, IStudent
+    public class Student
     {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        //public DateTime BirthDate { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+        public List<Email> Emails { get; set; }
+        public List<PhoneNum> PhoneNums { get; set; }
+        public List<Address> Addresses { get; set; }
+        public Gender Gender { get; set; }
         public int StudentId { get; set; }
         public int Grade { get; set; }
         public List<Enrollment> Enrollments { get; set; }

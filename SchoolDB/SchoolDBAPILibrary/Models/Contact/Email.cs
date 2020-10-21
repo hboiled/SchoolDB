@@ -6,10 +6,10 @@
         Guardian,
         School
     }
-    public class Email : IContact
+    public class Email
     {
         public int Id { get; set; }        
-        public int PersonId { get; set; }
+        public int StudentId { get; set; }
         public string EmailAddress { get; set; }
         public bool IsSchoolEmail { get; set; }
         public EmailOwner Owner { get; set; }
