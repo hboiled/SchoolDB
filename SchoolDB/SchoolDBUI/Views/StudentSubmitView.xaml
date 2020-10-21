@@ -18,7 +18,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Margin="10,10,10,10">
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="1" Margin="10,10,10,10">
             <TextBlock Text="Student Name" FontSize="24"/>
 
             <!--<Image Source="../Content/placeholder.png" MaxHeight="200px" /> Release path -->

@@ -5,25 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolDBUI.Views"
              mc:Ignorable="d" 
-             Background="WhiteSmoke" FontSize="24"
-             d:DesignHeight="600" d:DesignWidth="950">
+             Background="WhiteSmoke" FontSize="18"
+             d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
         <!-- Grid Definitions -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -31,18 +19,22 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="Student and Staff Data" FontSize="36" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   Margin="0 0 0 20"/>
         
         <!-- TODO: select category: students, staff, class/courses -->
-        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2" Margin="20,0,19.667,20">
-            <TextBlock Text="Enter Name:" HorizontalAlignment="Left" />
-            <TextBox x:Name="PersonName" MinWidth="100" Margin="0 0 0 10"/>
-            <!--<Button x:Name="AddToCart" Content="Add to Cart" Margin="0 0 0 20" Padding="5"/>-->
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20,0,20,20">
 
-            <ListBox x:Name="Students" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" MinHeight="420"
-                 MinWidth="150" Grid.ColumnSpan="2" Margin="0.333,0,0,0"
+            <TextBlock Text="Student Data" FontSize="36" Grid.Column="0" Grid.ColumnSpan="3"
+                   Margin="0 0 0 20"/>
+            <TextBlock Text="Enter Name:" HorizontalAlignment="Left" />
+            <TextBox x:Name="PersonName" MinWidth="100" Margin="0 0 10 20"/>
+            
+            <ListBox x:Name="Students" MinHeight="420"
+                 MinWidth="200" Grid.ColumnSpan="2" Margin="0.333,0,0,0"
                  SelectedItem="{Binding SelectedStudent}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -67,7 +59,7 @@
         </StackPanel>
 
         <!-- Display -->
-        <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="2" Margin="40,0,19.667,20">
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="5,20,80,20">
 
             <StackPanel Orientation="Horizontal" Margin="0,10,20,15">
                 <TextBlock Text="First Name: " FontSize="18" HorizontalAlignment="Center"/>
@@ -101,7 +93,7 @@
         </StackPanel>
 
         <!-- Photo and display courses in listbox -->
-        <StackPanel Orientation="Vertical" Grid.Column="6" Grid.Row="2" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,0">
             <TextBlock Text="Placeholder" FontSize="24"/>
             
             <!--<Image Source="../Content/placeholder.png" MaxHeight="200px" /> Release path -->
@@ -110,6 +102,88 @@
             </Border>
             
         </StackPanel>
-        
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="250 0 0 25" VerticalAlignment="Bottom">
+            <Label Content="Enrollments"></Label>
+            <ListView Height="225" ItemsSource="{Binding CoursesEnrolledIn}" DisplayMemberPath="Title"
+                      SelectedItem="{Binding EnrolledCourseSelection}" MaxWidth="680" HorizontalAlignment="Left">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Title}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Teacher}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="120" DisplayMemberBinding="{Binding Path=PLACEHOLDER}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Grade</GridViewColumnHeader>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="0" Margin="60,0,10,0">
+            <TabControl>
+                <TabItem Header="Address">
+                    <StackPanel Orientation="Vertical">
+                        <ListView Height="225" ItemsSource="{Binding Addresses}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="280" DisplayMemberBinding="{Binding Path=FullAddress}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Full Address" />
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=AddressStatus}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Status"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Email">
+                    <StackPanel Orientation="Vertical">
+                        <ListView Height="225" ItemsSource="{Binding Emails}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="270" DisplayMemberBinding="{Binding Path=EmailAddress}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Email Address" />
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Owner}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Contact Type"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Phone Numbers">
+                    <StackPanel Orientation="Vertical">
+                        <ListView Height="225" ItemsSource="{Binding PhoneNums}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=Number}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Phone Number" />
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Owner}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Owner"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Emergency}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Emergency"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=Mobile}">
+                                        <GridViewColumnHeader TextElement.FontSize="18" Content="Mobile"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </UserControl>
