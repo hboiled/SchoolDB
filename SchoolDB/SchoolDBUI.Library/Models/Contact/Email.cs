@@ -10,7 +10,7 @@ namespace SchoolDBUI.Library.Models.Contact
         public int Id { get; set; }
         public int StudentId { get; set; }
         public string EmailAddress { get; set; }
-        public bool IsSchoolEmail { get; set; } = true;
+        public bool IsSchoolEmail { get; set; } = true; // remove this?
         public EmailOwner Owner { get; set; }
         
     }

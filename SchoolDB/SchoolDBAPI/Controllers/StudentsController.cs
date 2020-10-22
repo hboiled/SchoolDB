@@ -10,6 +10,7 @@ using SchoolDBAPI.DTO;
 using SchoolDBAPI.Library.Models;
 using SchoolDBAPI.Library.Models.SchoolBusiness;
 using SchoolDBAPI.Library.Models.People;
+using SchoolDBAPI.DTO.BasicDetailDTO;
 
 namespace SchoolDBAPI.Controllers
 {
@@ -34,25 +35,80 @@ namespace SchoolDBAPI.Controllers
 
             foreach (var student in students)
             {
-                StudentReadDTO studentData = new StudentReadDTO
-                {
-                    Id = student.Id,
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    Grade = student.Grade,
-                    StudentId = student.StudentId
-                };
-
-                var matchingCourses = context.Enrollments
-                    .Where(e => e.StudentId == student.Id)
-                    .Select(e => e.Course.Title).ToList();
-
-                studentData.CoursesEnrolledIn = matchingCourses;
+                StudentReadDTO studentData = MapStudentToDTO(student);
 
                 studentsData.Add(studentData);
             }
 
+            var x = studentsData.Count;
+
             return studentsData;
+        }
+
+        private StudentReadDTO MapStudentToDTO(Student student)
+        {
+            StudentReadDTO studentData = new StudentReadDTO
+            {
+                Id = student.Id,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Grade = student.Grade,
+                StudentId = student.StudentId,
+                Gender = student.Gender
+            };
+
+            var matchingCourses = context.Enrollments
+            .Where(e => e.StudentId == student.Id)
+            .Select(e => new CourseBasicDetailDTO
+            {
+                CourseId = e.Course.CourseId,
+                Title = e.Course.Title,
+                StudentGrade = "N/A",
+                Subject = e.Course.Subject.ToString(),
+                Teacher = e.Course.Teacher.FullName
+            })
+            .ToList();
+
+            var matchingEmails = context.StudentEmails
+                .Where(e => e.StudentId == student.Id)
+                .Select(e => new EmailBasicDetailDTO
+                {
+                    EmailAddress = e.EmailAddress,
+                    IsSchoolEmail = e.IsSchoolEmail,
+                    Owner = e.Owner
+                })
+                .ToList();
+
+            //var enumType = typeof(PhoneNumberOwner); // alternative way of getting name 
+            var matchingPhoneNums = context.StudentPhoneNumbers
+                .Where(p => p.StudentId == student.Id)
+                .Select(p => new PhoneNumBasicDetailDTO
+                {
+                    Number = p.Number,
+                    Owner = p.Owner,
+                    IsEmergency = p.IsEmergency,
+                    IsMobile = p.IsMobile
+                })
+                .ToList();
+
+            var matchingAddresses = context.StudentAddresses
+                .Where(a => a.StudentId == student.Id)
+                .Select(a => new AddressBasicDetailDTO
+                {
+                    StreetAddress = a.StreetAddress,
+                    Suburb = a.Suburb,
+                    City = a.City,
+                    State = a.State,
+                    Postcode = a.Postcode,
+                    IsPrimary = a.IsPrimary
+                })
+                .ToList();
+
+            studentData.CoursesEnrolledIn = matchingCourses;
+            studentData.Emails = matchingEmails;
+            studentData.PhoneNumbers = matchingPhoneNums;
+            studentData.Addresses = matchingAddresses;
+            return studentData;
         }
 
         // GET: api/Students/5
@@ -66,34 +122,7 @@ namespace SchoolDBAPI.Controllers
                 return NotFound();
             }
 
-            StudentReadDTO studentData = new StudentReadDTO
-            {
-                Id = student.Id,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                Grade = student.Grade,
-                StudentId = student.StudentId
-            };
-
-            var matchingCourses = context.Enrollments
-                .Where(e => e.StudentId == student.Id)
-                .Select(e => e.Course.Title)
-                .ToList();
-
-            var matchingEmails = context.StudentEmails
-                .Where(e => e.StudentId == student.Id)
-                .Select(e => e.EmailAddress)
-                .ToList();
-
-            var enumType = typeof(PhoneNumberOwner);
-            var matchingPhoneNums = context.StudentPhoneNumbers
-                .Where(p => p.StudentId == student.Id)
-                .Select(p => new PhoneNumBasicDetailDTO { Number = p.Number, Owner = Enum.GetName(enumType, p.Owner) })
-                .ToList();
-
-            studentData.CoursesEnrolledIn = matchingCourses;
-            studentData.Emails = matchingEmails;
-            studentData.PhoneNumbers = matchingPhoneNums;
+            StudentReadDTO studentData = MapStudentToDTO(student);
 
             return studentData;
         }
@@ -301,7 +330,7 @@ namespace SchoolDBAPI.Controllers
             context.Enrollments.AddRange(enrollments);            
             await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStudent", new { id = 1 }, student);
+            return CreatedAtAction("GetStudent", new { id = 1 }, student); // fix required
             //return CreatedAtAction("GetStudent", new { id = studentsId }, student);
         }
 

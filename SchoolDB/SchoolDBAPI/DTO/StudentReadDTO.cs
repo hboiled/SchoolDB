@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SchoolDBAPI.DTO.BasicDetailDTO;
+using SchoolDBAPI.Library.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,9 +14,10 @@ namespace SchoolDBAPI.DTO
         public string LastName { get; set; }
         public int StudentId { get; set; }
         public int Grade { get; set; }
-        public List<string> CoursesEnrolledIn { get; set; } = new List<string>();
-        public List<string> Emails { get; set; } = new List<string>();
-        public List<string> Addresses { get; set; } = new List<string>();
-        public List<PhoneNumBasicDetailDTO> PhoneNumbers { get; set; } = new List<PhoneNumBasicDetailDTO>();
+        public Gender Gender { get; set; }
+        public List<CourseBasicDetailDTO> CoursesEnrolledIn { get; set; }
+        public List<EmailBasicDetailDTO> Emails { get; set; }
+        public List<AddressBasicDetailDTO> Addresses { get; set; }
+        public List<PhoneNumBasicDetailDTO> PhoneNumbers { get; set; }
     }
 }

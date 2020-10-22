@@ -23,6 +23,7 @@ namespace SchoolDBUI.Library.API
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<List<Student>>();
+                    var x = result.Count;
                     return result;
                 }
                 else

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolDBUI.Library.Models.Contact;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace SchoolDBUI.Library.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int StudentId { get; set; }
-        //public int Grade { get; set; }
+        public int Grade { get; set; }
         public Gender Gender { get; set; }
         public string FullName
         {
@@ -19,6 +20,9 @@ namespace SchoolDBUI.Library.Models
                 return $"{FirstName} {LastName}";
             }
         }
-        public List<string> CoursesEnrolledIn { get; set; } = new List<string>();
+        public List<Course> CoursesEnrolledIn { get; set; }
+        public List<Email> Emails { get; set; }
+        public List<Address> Addresses { get; set; }
+        public List<PhoneNum> PhoneNumbers { get; set; }
     }
 }
