@@ -32,12 +32,18 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Student>()
                 .HasData(
-                new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948, Gender = Gender.Male },
-                new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942, Gender = Gender.Female },
-                new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481, Gender = Gender.Male },
-                new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941, Gender = Gender.Female },
-                new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341, Gender = Gender.Male },
-                new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343, Gender = Gender.Male }
+                new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948, 
+                    Gender = Gender.Male, BirthDate = new DateTime(1995, 5, 26) },
+                new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942, 
+                    Gender = Gender.Female, BirthDate = new DateTime(1996, 2, 7) },
+                new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481,
+                    Gender = Gender.Male, BirthDate = new DateTime(2019, 1, 4) },
+                new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941, 
+                    Gender = Gender.Female, BirthDate = new DateTime(1925, 8, 12) },
+                new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341, 
+                    Gender = Gender.Male, BirthDate = new DateTime(1962, 12, 18) },
+                new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343, 
+                    Gender = Gender.Male, BirthDate = new DateTime(1988, 10, 7) }
                 );
 
             modelBuilder.Entity<Teacher>()

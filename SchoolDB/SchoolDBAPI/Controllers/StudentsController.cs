@@ -54,7 +54,8 @@ namespace SchoolDBAPI.Controllers
                 LastName = student.LastName,
                 Grade = student.Grade,
                 StudentId = student.StudentId,
-                Gender = student.Gender
+                Gender = student.Gender,
+                BirthDate = student.BirthDate
             };
 
             var matchingCourses = context.Enrollments

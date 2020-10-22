@@ -71,11 +71,11 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,0,20,15">
                 <TextBlock Text="D.O.B: " FontSize="12" HorizontalAlignment="Left"/>
-                <TextBlock Text="{Binding PersonName}" FontSize="14"/>
+                <TextBlock Text="{Binding SelectedStudent.BirthDateString}" FontSize="14"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,0,20,15">
                 <TextBlock Text="Age: " FontSize="12" HorizontalAlignment="Left"/>
-                <TextBlock Text="{Binding PersonName}" FontSize="14"/>
+                <TextBlock Text="{Binding SelectedStudent.Age}" FontSize="14"/>
             </StackPanel>
             
             <!--Student attributes-->

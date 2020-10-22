@@ -13,6 +13,30 @@ namespace SchoolDBUI.Library.Models
         public int StudentId { get; set; }
         public int Grade { get; set; }
         public Gender Gender { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string BirthDateString 
+        { 
+            get
+            {
+                return BirthDate.ToShortDateString();
+            }
+        }
+        public int Age
+        {
+            get
+            {
+                DateTime today = DateTime.Today;
+                int age = today.Year - BirthDate.Year;
+
+                if (today.Month < BirthDate.Month ||
+                   ((today.Month == BirthDate.Month) && (today.Day < BirthDate.Day)))
+                {
+                    age--;
+                }
+
+                return age;
+            }
+        }
         public string FullName
         {
             get
