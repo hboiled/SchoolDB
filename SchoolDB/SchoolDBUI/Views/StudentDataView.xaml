@@ -59,36 +59,34 @@
         </StackPanel>
 
         <!-- Display -->
-        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="5,20,80,20">
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="5,20,110,20" >
 
-            <StackPanel Orientation="Horizontal" Margin="0,10,20,15">
-                <TextBlock Text="First Name: " FontSize="18" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding SelectedStudent.FirstName}" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="0,10,20,15">
+                <TextBlock Text="First Name: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding SelectedStudent.FirstName}" FontSize="14"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,20,15">
-                <TextBlock Text="Last Name: " FontSize="18" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding SelectedStudent.LastName}" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,15">
+                <TextBlock Text="Last Name: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding SelectedStudent.LastName}" FontSize="14"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,20,15">
-                <TextBlock Text="D.O.B: " FontSize="18" HorizontalAlignment="Center"/>
-                <TextBlock Text="Placeholder" FontSize="18"/>
-                <TextBlock Text="{Binding PersonName}" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,15">
+                <TextBlock Text="D.O.B: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding PersonName}" FontSize="14"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,20,15">
-                <TextBlock Text="Age: " FontSize="18" HorizontalAlignment="Right"/>
-                <TextBlock Text="Placeholder" FontSize="18"/>
-                <TextBlock Text="{Binding PersonName}" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,15">
+                <TextBlock Text="Age: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding PersonName}" FontSize="14"/>
             </StackPanel>
             
             <!--Student attributes-->
-            
-            <StackPanel Orientation="Horizontal" Margin="0,0,20,15">
-                <TextBlock Text="Grade: " FontSize="18" HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding SelectedStudent.Grade}" FontSize="18"/>
+
+            <StackPanel Orientation="Vertical" Margin="0,0,20,15">
+                <TextBlock Text="Grade: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding SelectedStudent.Grade}" FontSize="14"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,20,15">
-                <TextBlock Text="Student Id: " FontSize="18" HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding SelectedStudent.StudentId}" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,15">
+                <TextBlock Text="Student Id: " FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding SelectedStudent.StudentId}" FontSize="14"/>
             </StackPanel>
         </StackPanel>
 
@@ -103,23 +101,26 @@
             
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="250 0 0 25" VerticalAlignment="Bottom">
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,25" VerticalAlignment="Bottom">
             <Label Content="Enrollments"></Label>
             <ListView Height="225" ItemsSource="{Binding CoursesEnrolledIn}" DisplayMemberPath="Title"
-                      SelectedItem="{Binding EnrolledCourseSelection}" MaxWidth="680" HorizontalAlignment="Left">
+                      SelectedItem="{Binding EnrolledCourseSelection}" MaxWidth="720" HorizontalAlignment="Left">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
+                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=CourseId}">
                             <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Title}">
+                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
                             <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
                         </GridViewColumn>
                         <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Teacher}">
                             <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="120" DisplayMemberBinding="{Binding Path=PLACEHOLDER}">
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=PLACEHOLDER}">
                             <GridViewColumnHeader TextElement.FontSize="18">Grade</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=PLACEHOLDER}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Subject</GridViewColumnHeader>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -133,7 +134,7 @@
                         <ListView Height="225" ItemsSource="{Binding Addresses}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="280" DisplayMemberBinding="{Binding Path=FullAddress}">
+                                    <GridViewColumn Width="320" DisplayMemberBinding="{Binding Path=FullAddress}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Full Address" />
                                     </GridViewColumn>
                                     <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=AddressStatus}">
@@ -149,10 +150,10 @@
                         <ListView Height="225" ItemsSource="{Binding Emails}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="270" DisplayMemberBinding="{Binding Path=EmailAddress}">
+                                    <GridViewColumn Width="290" DisplayMemberBinding="{Binding Path=EmailAddress}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Email Address" />
                                     </GridViewColumn>
-                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Owner}">
+                                    <GridViewColumn Width="170" DisplayMemberBinding="{Binding Path=Owner}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Contact Type"/>
                                     </GridViewColumn>
                                 </GridView>
@@ -165,16 +166,16 @@
                         <ListView Height="225" ItemsSource="{Binding PhoneNums}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=Number}">
+                                    <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=Number}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Phone Number" />
                                     </GridViewColumn>
                                     <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Owner}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Owner"/>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Emergency}">
+                                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Emergency}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Emergency"/>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=Mobile}">
+                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Path=Mobile}">
                                         <GridViewColumnHeader TextElement.FontSize="18" Content="Mobile"/>
                                     </GridViewColumn>
                                 </GridView>
