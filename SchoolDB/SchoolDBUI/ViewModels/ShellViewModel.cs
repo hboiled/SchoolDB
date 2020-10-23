@@ -25,5 +25,20 @@ namespace SchoolDBUI.ViewModels
             ActivateItem(IoC.Get<StudentSubmitViewModel>());            
             //ActivateItem(IoC.Get<StudentDataViewModel>());
         }
+
+        public void ViewStudentData()
+        {
+            ActivateItem(IoC.Get<StudentDataViewModel>());
+        }
+
+        public void AddStudentData()
+        {
+            ActivateItem(IoC.Get<StudentSubmitViewModel>());
+        }
+
+        public void ExitApplication()
+        {
+            TryClose();
+        }
     }
 }

@@ -12,6 +12,10 @@
             <MenuItem Header="_File">
                 <MenuItem x:Name="ExitApplication" Header="E_xit"/>
             </MenuItem>
+            <MenuItem Header="_Students">
+                <MenuItem x:Name="ViewStudentData" Header="V_iew Student"/>
+                <MenuItem x:Name="AddStudentData" Header="A_dd Student"/>
+            </MenuItem>
         </Menu>
 
         <Grid>

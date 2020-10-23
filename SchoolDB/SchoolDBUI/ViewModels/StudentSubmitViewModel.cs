@@ -21,9 +21,7 @@ namespace SchoolDBUI.ViewModels
 
         public StudentSubmitViewModel(IStudentEndpoint studentEndpoint)
         {
-            this.studentEndpoint = studentEndpoint;
-            FirstNameTextbox = "Student";
-            LastNameTextbox = "Name";
+            this.studentEndpoint = studentEndpoint;            
             StudentPhoto = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
         }
 
