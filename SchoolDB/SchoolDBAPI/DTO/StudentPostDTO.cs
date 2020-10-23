@@ -13,6 +13,8 @@ namespace SchoolDBAPI.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Grade { get; set; }
+        public DateTime BirthDate { get; set; }
+        //public Gender Gender { get; set; }
         public List<Course> CourseEnrollments { get; set; }
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }

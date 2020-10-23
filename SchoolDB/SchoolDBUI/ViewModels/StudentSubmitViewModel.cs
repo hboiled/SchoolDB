@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
 using SchoolDBUI.Library.Models.Contact;
@@ -8,7 +9,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace SchoolDBUI.ViewModels
 {
@@ -19,10 +22,41 @@ namespace SchoolDBUI.ViewModels
         public StudentSubmitViewModel(IStudentEndpoint studentEndpoint)
         {
             this.studentEndpoint = studentEndpoint;
+            FirstNameTextbox = "Student";
+            LastNameTextbox = "Name";
+            StudentPhoto = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
         }
 
-        public string FirstNameTextbox { get; set; }
-        public string LastNameTextbox { get; set; }
+        public string FullName 
+        { 
+            get
+            {
+                return $"{FirstNameTextbox} {LastNameTextbox}";
+            }
+        }
+
+        private string firstName;
+        public string FirstNameTextbox 
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+                NotifyOfPropertyChange(() => FullName);
+            }
+        }
+
+        private string lastName;
+        public string LastNameTextbox
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                NotifyOfPropertyChange(() => FullName);
+            }
+        }
+
         public string GenderCheckbox { get; set; }
 
         #region Course and subject filter
@@ -295,6 +329,38 @@ namespace SchoolDBUI.ViewModels
         }
 
         #endregion
+
+        private string studentPhoto;
+
+        public string StudentPhoto
+        {
+            get { return studentPhoto; }
+            set
+            {
+                studentPhoto = value;
+                NotifyOfPropertyChange(() => StudentPhoto);
+            }
+        }
+
+        public void UploadPhoto()
+        {
+            // TODO: put restrictions on photo size or crop image
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a photo";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.InitialDirectory = "C:\\Users\\61406\\Pictures\\posters"; // default value set for testing
+            
+            if (openFileDialog.ShowDialog() == true) // cleaner, more logical way of doing this?
+            {
+                StudentPhoto = openFileDialog.FileName;                
+            }
+
+        }
+        
 
         public void SubmitStudent()
         {

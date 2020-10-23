@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SchoolDBUI.Views"
              mc:Ignorable="d" 
              Background="WhiteSmoke" FontSize="16"
-             d:DesignHeight="600" d:DesignWidth="1100">
+             d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,14 +19,15 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="1" Margin="10,10,10,10">
-            <TextBlock Text="Student Name" FontSize="24"/>
+            <TextBlock x:Name="FullName" Text="Student Name" FontSize="24"/>
 
             <!--<Image Source="../Content/placeholder.png" MaxHeight="200px" /> Release path -->
+            <!-- http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png -->
             <Border BorderThickness="2" BorderBrush="Black">
-                <Image Source="http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png" MaxHeight="200px" />
+                <Image Source="{Binding StudentPhoto}" MaxHeight="200px" />
             </Border>
 
-            <Button Content="Upload Photo" Margin="0,10,0,10" ></Button>
+            <Button x:Name="UploadPhoto" Content="Upload Photo" Margin="0,10,0,10" ></Button>
 
             <Button x:Name="SubmitStudent"  Content="Submit" Margin="0 20 0 20"></Button>
             <Button Content="Go Back" Margin="0 20 0 20"></Button>
@@ -205,8 +206,11 @@
                         <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
                             <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Title}">
+                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
                             <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Teacher}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -227,8 +231,8 @@
                           SelectedItem="{Binding SelectedCourse}" DisplayMemberPath="Title"></ComboBox>
             </StackPanel>
 
-            <Button x:Name="EnrollInCourse" Content="Add Enrollment" Margin="5,5,5,5"></Button>
-            <Button x:Name="RemoveSelectedCourse" Content="Remove Enrollment" Margin="5,5,5,5"></Button>
+            <Button x:Name="EnrollInCourse" MaxWidth="330" Content="Add Enrollment" Margin="5,5,5,5"></Button>
+            <Button x:Name="RemoveSelectedCourse" MaxWidth="330" Content="Remove Enrollment" Margin="5,5,5,5"></Button>
 
         </StackPanel>
 

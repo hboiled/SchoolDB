@@ -20,9 +20,23 @@ namespace SchoolDBAPI.Validators.PersonValidators
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .Length(2, 30);
-            // Validate? RuleFor(s => s.BirthDate)
+            RuleFor(s => s.BirthDate)
+                .Must(BeValidAge);
             RuleFor(s => s.Grade)
                 .InclusiveBetween(7, 12);
+        }
+
+        private bool BeValidAge(DateTime date)
+        {
+            int currentYear = DateTime.Now.Year;
+            int dobYear = date.Year;
+
+            if (dobYear <= currentYear && dobYear > (currentYear - 120))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
