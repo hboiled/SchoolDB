@@ -25,6 +25,19 @@ namespace SchoolDBAPI.Controllers
             this.context = context;
         }
 
+        // Test methods for postman
+        //[HttpGet("test/{id}")]
+        //public Student TestStudent(int id)
+        //{
+        //    return context.Students.Find(id);
+        //}
+
+        //[HttpPost("test")]
+        //public async Task<IActionResult> TestStudentPost(StudentPostDTO s)
+        //{
+        //    return Ok();
+        //}
+
         // GET: api/Students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentReadDTO>>> GetStudents()

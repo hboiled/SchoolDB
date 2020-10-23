@@ -1,6 +1,7 @@
 ﻿using SchoolDBAPI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace SchoolDBAPI.Library.Models.People
@@ -11,7 +12,7 @@ namespace SchoolDBAPI.Library.Models.People
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public Gender Gender { get; set; }
+        public Gender Gender { get; set; }        
         public int StudentId { get; set; }
         public int Grade { get; set; }        
         public string FullName

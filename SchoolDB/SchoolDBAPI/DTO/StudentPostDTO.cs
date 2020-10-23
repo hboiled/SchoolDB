@@ -12,7 +12,7 @@ namespace SchoolDBAPI.DTO
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public int Grade { get; set; }
+        public int Grade { get; set; }
         public List<Course> CourseEnrollments { get; set; }
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }

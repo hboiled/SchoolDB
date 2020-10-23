@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201021051358_MajorRevamp.cs" />
     <Compile Remove="Migrations\20201021051358_MajorRevamp.Designer.cs" />
+    <Compile Remove="Migrations\20201023013403_PersonValidatio.cs" />
+    <Compile Remove="Migrations\20201023013403_PersonValidatio.Designer.cs" />
+    <Compile Remove="Migrations\20201023022209_PersonValidation.cs" />
+    <Compile Remove="Migrations\20201023022209_PersonValidation.Designer.cs" />
+    <Compile Remove="Migrations\20201023022310_PersonValidation.cs" />
+    <Compile Remove="Migrations\20201023022310_PersonValidation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
