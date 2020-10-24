@@ -49,25 +49,26 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="D.O.B:"></Label>
-                <TextBox x:Name="BirthDateTextbox" Width="180" MaxHeight="30"></TextBox>
+                <DatePicker Width="180" MaxHeight="30" x:Name="StudentDOB"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="Gender:"></Label>
-                <ComboBox x:Name="GenderCheckbox" Width="180" MaxHeight="30">
-                    <ComboBoxItem Content="Male"></ComboBoxItem>
-                    <ComboBoxItem Content="Female"></ComboBoxItem>
+                <ComboBox SelectedItem="{Binding SelectedGender}" Width="180" MaxHeight="30"
+                          ItemsSource="{Binding Genders}" >
                 </ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Year:"></Label>
-                <TextBox x:Name="YearTextbox" Width="180" MaxHeight="30"></TextBox>
+                <Label Content="Grade:"></Label>
+                <ComboBox SelectedItem="{Binding SelectedGrade}" Width="180" MaxHeight="30"
+                          ItemsSource="{Binding Grades}" >
+                </ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Graduation Year:"></Label>
-                <TextBox x:Name="GraduationYearTextbox" Width="180" MaxHeight="30"></TextBox>
+                <Label Content="Student Photo:"></Label>
+                <TextBox x:Name="StudentPhoto" Width="180" MaxHeight="30"></TextBox>
             </StackPanel>
         </StackPanel>
 

@@ -53,8 +53,6 @@ namespace SchoolDBAPI.Controllers
                 studentsData.Add(studentData);
             }
 
-            var x = studentsData.Count;
-
             return studentsData;
         }
 
@@ -68,7 +66,8 @@ namespace SchoolDBAPI.Controllers
                 Grade = student.Grade,
                 StudentId = student.StudentId,
                 Gender = student.Gender,
-                BirthDate = student.BirthDate
+                BirthDate = student.BirthDate,
+                PhotoImgPath = student.PhotoImgPath
             };
 
             var matchingCourses = context.Enrollments
@@ -294,9 +293,11 @@ namespace SchoolDBAPI.Controllers
             {
                 FirstName = studentData.FirstName,
                 LastName = studentData.LastName,
-                Grade = 75,
-                StudentId = 916894, // change every so often     
-                Gender = Gender.Male
+                Grade = studentData.Grade,
+                StudentId = 436894, // change every so often     
+                Gender = studentData.Gender,
+                PhotoImgPath = studentData.PhotoImgPath,
+                BirthDate = studentData.BirthDate, // date only? is it saving date and time?                
             };
 
             context.Students.Add(student);

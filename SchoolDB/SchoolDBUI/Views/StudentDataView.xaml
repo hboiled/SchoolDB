@@ -96,7 +96,7 @@
             
             <!--<Image Source="../Content/placeholder.png" MaxHeight="200px" /> Release path -->
             <Border BorderThickness="2" BorderBrush="Black">
-                <Image Source="http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png" MaxHeight="200px" />
+                <Image Source="{Binding SelectedStudent.PhotoImgPath}" MaxHeight="200px" />
             </Border>
             
         </StackPanel>

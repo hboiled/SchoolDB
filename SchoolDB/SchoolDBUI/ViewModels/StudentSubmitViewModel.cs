@@ -55,7 +55,62 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        public string GenderCheckbox { get; set; }
+        public DateTime StudentDOB { get; set; }
+
+        public Gender SelectedGender { get; set; }
+
+        public IEnumerable<Gender> Genders
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Gender))
+                    .Cast<Gender>();
+            }
+        }
+
+        private string studentPhoto;
+
+        public string StudentPhoto
+        {
+            get { return studentPhoto; }
+            set
+            {
+                studentPhoto = value;
+                NotifyOfPropertyChange(() => StudentPhoto);
+            }
+        }
+
+        public void UploadPhoto()
+        {
+            // TODO: put restrictions on photo size or crop image
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a photo";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.InitialDirectory = "C:\\Users\\61406\\Pictures\\posters"; // default value set for testing
+
+            if (openFileDialog.ShowDialog() == true) // cleaner, more logical way of doing this?
+            {
+                StudentPhoto = openFileDialog.FileName;
+            }
+
+        }
+
+        public int SelectedGrade { get; set; }
+
+        public IEnumerable<int> Grades
+        {
+            get
+            {
+                return new List<int>()
+                {
+                    7, 8, 9, 10, 11, 12
+                };
+            }
+        }
 
         #region Course and subject filter
 
@@ -328,38 +383,6 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        private string studentPhoto;
-
-        public string StudentPhoto
-        {
-            get { return studentPhoto; }
-            set
-            {
-                studentPhoto = value;
-                NotifyOfPropertyChange(() => StudentPhoto);
-            }
-        }
-
-        public void UploadPhoto()
-        {
-            // TODO: put restrictions on photo size or crop image
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select a photo";
-            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.InitialDirectory = "C:\\Users\\61406\\Pictures\\posters"; // default value set for testing
-            
-            if (openFileDialog.ShowDialog() == true) // cleaner, more logical way of doing this?
-            {
-                StudentPhoto = openFileDialog.FileName;                
-            }
-
-        }
-        
-
         public void SubmitStudent()
         {
             // CREATE
@@ -367,13 +390,17 @@ namespace SchoolDBUI.ViewModels
             {
                 FirstName = FirstNameTextbox,
                 LastName = LastNameTextbox,
+                Gender = SelectedGender,
+                PhotoImgPath = StudentPhoto, // casing??
+                Grade = SelectedGrade,
+                BirthDate = StudentDOB,
                 Emails = Emails.ToList(),
                 PhoneNums = PhoneNums.ToList(),
                 Addresses = Addresses.ToList(),
-                CourseEnrollments = CoursesEnrolledIn.ToList()
-                //Gender = GenderCheckbox
+                CourseEnrollments = CoursesEnrolledIn.ToList(),                
             };
 
+            // hack to remove circular references, must be reworked
             foreach (var item in student.CourseEnrollments)
             {
                 item.Students.Clear();

@@ -14,6 +14,7 @@ namespace SchoolDBUI.Library.Models
         public int Grade { get; set; }
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
+        public string PhotoImgPath { get; set; }
         public string BirthDateString 
         { 
             get

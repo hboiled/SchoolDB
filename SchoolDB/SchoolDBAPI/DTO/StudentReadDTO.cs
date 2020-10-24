@@ -16,6 +16,7 @@ namespace SchoolDBAPI.DTO
         public int StudentId { get; set; }
         public int Grade { get; set; }
         public Gender Gender { get; set; }
+        public string PhotoImgPath { get; set; }
         public List<CourseBasicDetailDTO> CoursesEnrolledIn { get; set; }
         public List<EmailBasicDetailDTO> Emails { get; set; }
         public List<AddressBasicDetailDTO> Addresses { get; set; }
