@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolDBUI.Views"
              mc:Ignorable="d" 
-             Background="WhiteSmoke" FontSize="16"
+             Background="WhiteSmoke" FontSize="14"
              d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,45 +35,60 @@
             <Button Content="Go Back" Margin="0 20 0 20"></Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,40,5,0" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" HorizontalAlignment="Left">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="First Name:"></Label>
-                <TextBox x:Name="FirstNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                    <Label Content="First Name:"></Label>
+                    <TextBox x:Name="FirstNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                    <Label Content="Last Name:"></Label>
+                    <TextBox x:Name="LastNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Last Name:"></Label>
-                <TextBox x:Name="LastNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="D.O.B:"></Label>
-                <DatePicker Width="180" MaxHeight="30" x:Name="StudentDOB"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Gender:"></Label>
-                <ComboBox SelectedItem="{Binding SelectedGender}" Width="180" MaxHeight="30"
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                    <Label Content="D.O.B:"></Label>
+                    <DatePicker Width="180" MaxHeight="30" x:Name="StudentDOB"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="25,0,0,0">
+                    <Label Content="Gender:"></Label>
+                    <ComboBox SelectedItem="{Binding SelectedGender}" Width="180" MaxHeight="30"
                           ItemsSource="{Binding Genders}" >
-                </ComboBox>
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Grade:"></Label>
-                <ComboBox SelectedItem="{Binding SelectedGrade}" Width="180" MaxHeight="30"
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                    <Label Content="Grade:"></Label>
+                    <ComboBox SelectedItem="{Binding SelectedGrade}" Width="180" MaxHeight="30"
                           ItemsSource="{Binding Grades}" >
-                </ComboBox>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                    <Label Content="Student Photo:"></Label>
+                    <TextBox x:Name="StudentPhoto" Width="180" MaxHeight="30"></TextBox>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Student Photo:"></Label>
-                <TextBox x:Name="StudentPhoto" Width="180" MaxHeight="30"></TextBox>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                    <Label Content="Student Id:"></Label>
+                    <TextBox x:Name="StudentId" Width="180" MaxHeight="30"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                    
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-
-
-        <StackPanel Grid.Column="1" Margin="20,255,10,0">
+        
+        
+        
+        <StackPanel Grid.Column="1" Margin="20,250,10,0">
             <TabControl>
                 <TabItem Header="Address">
                     <StackPanel Orientation="Vertical">
@@ -200,24 +215,7 @@
             </TabControl>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="2" Margin="20,0,10,0">
-            <Label Content="Enrollments"></Label>
-            <ListView Height="275" ItemsSource="{Binding CoursesEnrolledIn}" DisplayMemberPath="Title"
-                      SelectedItem="{Binding EnrolledCourseSelection}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Teacher}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <StackPanel Grid.Row="0" Grid.Column="2" Margin="20,0,5,0">
 
             <TextBlock Text="Course Selection" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0"></TextBlock>
 
@@ -235,8 +233,26 @@
             </StackPanel>
 
             <Button x:Name="EnrollInCourse" MaxWidth="330" Content="Add Enrollment" Margin="5,5,5,5"></Button>
-            <Button x:Name="RemoveSelectedCourse" MaxWidth="330" Content="Remove Enrollment" Margin="5,5,5,5"></Button>
+            <Button x:Name="RemoveSelectedCourse" MaxWidth="330" Content="Remove Enrollment" Margin="5,5,5,20"></Button>
 
+
+            <Label Content="Enrollments"></Label>
+            <ListView Height="275" ItemsSource="{Binding CoursesEnrolledIn}" DisplayMemberPath="Title"
+                      SelectedItem="{Binding EnrolledCourseSelection}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Teacher}">
+                            <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
 
     </Grid>

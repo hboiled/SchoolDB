@@ -112,6 +112,8 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        public int StudentId { get; set; }
+
         #region Course and subject filter
 
         private string selectedSubjectFilter;
