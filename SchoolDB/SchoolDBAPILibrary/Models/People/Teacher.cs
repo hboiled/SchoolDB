@@ -25,7 +25,7 @@ namespace SchoolDBAPI.Library.Models.People
         //public List<PhoneNum> PhoneNums { get; set; }
         //public List<Address> Addresses { get; set; }
         public Gender Gender { get; set; }
-        public List<Course> CoursesTaught { get; set; }
+        public List<Course> CoursesTaught { get; set; }        
         [Column(TypeName = "money")]
         public decimal Salary { get; set; }
     }

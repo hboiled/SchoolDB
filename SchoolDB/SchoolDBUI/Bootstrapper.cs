@@ -42,6 +42,7 @@ namespace SchoolDBUI
         {
             container.Instance(container)
                 .PerRequest<IStudentEndpoint, StudentEndpoint>()
+                .PerRequest<ITeacherEndpoint, TeacherEndpoint>()
                 ;
 
             // Get from caliburn micro, a singleton of WindowManager and EventAggregator

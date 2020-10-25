@@ -26,6 +26,8 @@ namespace SchoolDBAPI.Library.DataAccess
         public DbSet<Email> StudentEmails { get; set; }
         public DbSet<PhoneNum> StudentPhoneNumbers { get; set; }
 
+        public DbSet<SubjectsTeachersCanTeach> SubjectTeachers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // seed data
@@ -33,17 +35,27 @@ namespace SchoolDBAPI.Library.DataAccess
             modelBuilder.Entity<Student>()
                 .HasData(
                 new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1995, 5, 26) },
+                    Gender = Gender.Male, BirthDate = new DateTime(1995, 5, 26), PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
                 new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942, 
-                    Gender = Gender.Female, BirthDate = new DateTime(1996, 2, 7) },
+                    Gender = Gender.Female, BirthDate = new DateTime(1996, 2, 7), PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
                 new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481,
-                    Gender = Gender.Male, BirthDate = new DateTime(2019, 1, 4) },
+                    Gender = Gender.Male, BirthDate = new DateTime(2019, 1, 4),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
                 new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941, 
-                    Gender = Gender.Female, BirthDate = new DateTime(1925, 8, 12) },
+                    Gender = Gender.Female, BirthDate = new DateTime(1925, 8, 12),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
                 new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1962, 12, 18) },
+                    Gender = Gender.Male, BirthDate = new DateTime(1962, 12, 18),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
                 new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1988, 10, 7) }
+                    Gender = Gender.Male, BirthDate = new DateTime(1988, 10, 7),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                }
                 );
 
             modelBuilder.Entity<Teacher>()
@@ -52,6 +64,17 @@ namespace SchoolDBAPI.Library.DataAccess
                 new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000, Gender = Gender.Female },
                 new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000, Gender = Gender.Male },
                 new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200, Gender = Gender.Female }
+                );
+
+            modelBuilder.Entity<SubjectsTeachersCanTeach>()
+                .HasData(
+                new SubjectsTeachersCanTeach { Id = 1, TeacherId = 1, Subject = Subject.Maths},
+                new SubjectsTeachersCanTeach { Id = 2, TeacherId = 2, Subject = Subject.Maths },
+                new SubjectsTeachersCanTeach { Id = 3, TeacherId = 2, Subject = Subject.Science },
+                new SubjectsTeachersCanTeach { Id = 4, TeacherId = 3, Subject = Subject.English },
+                new SubjectsTeachersCanTeach { Id = 5, TeacherId = 3, Subject = Subject.Theatre },
+                new SubjectsTeachersCanTeach { Id = 6, TeacherId = 4, Subject = Subject.Sports },
+                new SubjectsTeachersCanTeach { Id = 7, TeacherId = 4, Subject = Subject.Science }
                 );
 
             modelBuilder.Entity<Course>()
@@ -116,6 +139,8 @@ namespace SchoolDBAPI.Library.DataAccess
                 new Address { Id = 6, IsPrimary = true, City = "Merth", StreetAddress = "124 fake st", 
                     Postcode = "4123", Suburb = "Gweq", State = "FWca", StudentId = 6}
                 );
+
+            
         }
     }
 }

@@ -23,7 +23,6 @@ namespace SchoolDBUI.Library.API
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<List<Student>>();
-                    var x = result.Count;
                     return result;
                 }
                 else
@@ -36,7 +35,7 @@ namespace SchoolDBUI.Library.API
         public async Task<List<Course>> GetCoursesBySubject(Subject subject)
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient
-                .GetAsync($"api/students/courses/{subject.ToString()}"))
+                .GetAsync($"api/students/courses/{subject.ToString()}")) // rework required
             {
                 if (response.IsSuccessStatusCode)
                 {

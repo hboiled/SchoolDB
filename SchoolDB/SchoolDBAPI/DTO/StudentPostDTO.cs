@@ -16,6 +16,7 @@ namespace SchoolDBAPI.DTO
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string PhotoImgPath { get; set; }
+        public int StudentId { get; set; }
         public List<Course> CourseEnrollments { get; set; }
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }

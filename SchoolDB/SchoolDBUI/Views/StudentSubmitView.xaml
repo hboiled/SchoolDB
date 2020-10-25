@@ -78,7 +78,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
                     <Label Content="Student Id:"></Label>
-                    <TextBox x:Name="StudentId" Width="180" MaxHeight="30"></TextBox>
+                    <TextBox x:Name="StudentIdTextbox" Width="180" MaxHeight="30"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
                     

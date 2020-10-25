@@ -10,15 +10,19 @@ namespace SchoolDBUI.ViewModels
         private IEventAggregator events;
         private readonly StudentDataViewModel studentDataViewModel;
         private readonly StudentSubmitViewModel studentSubmitViewModel;
+        private readonly CourseManagementViewModel courseManagementViewModel;
 
         //private IAPIHelper _apiHelper;
 
-        public ShellViewModel(IEventAggregator events, StudentDataViewModel studentDataViewModel, 
-            StudentSubmitViewModel studentSubmitViewModel)
+        public ShellViewModel(IEventAggregator events, 
+            StudentDataViewModel studentDataViewModel, 
+            StudentSubmitViewModel studentSubmitViewModel,
+            CourseManagementViewModel courseManagementViewModel)
         {
             this.events = events;
             this.studentDataViewModel = studentDataViewModel;
             this.studentSubmitViewModel = studentSubmitViewModel;
+            this.courseManagementViewModel = courseManagementViewModel;
             this.events.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
@@ -34,6 +38,11 @@ namespace SchoolDBUI.ViewModels
         public void AddStudentData()
         {
             ActivateItem(IoC.Get<StudentSubmitViewModel>());
+        }
+
+        public void CourseManagementView()
+        {
+            ActivateItem(IoC.Get<CourseManagementViewModel>());
         }
 
         public void ExitApplication()

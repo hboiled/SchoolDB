@@ -112,7 +112,7 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        public int StudentId { get; set; }
+        public int StudentIdTextbox { get; set; }
 
         #region Course and subject filter
 
@@ -393,9 +393,10 @@ namespace SchoolDBUI.ViewModels
                 FirstName = FirstNameTextbox,
                 LastName = LastNameTextbox,
                 Gender = SelectedGender,
-                PhotoImgPath = StudentPhoto, // casing??
+                PhotoImgPath = StudentPhoto, 
                 Grade = SelectedGrade,
                 BirthDate = StudentDOB,
+                StudentId = StudentIdTextbox,
                 Emails = Emails.ToList(),
                 PhoneNums = PhoneNums.ToList(),
                 Addresses = Addresses.ToList(),
