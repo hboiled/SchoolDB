@@ -12,10 +12,16 @@ namespace SchoolDBUI.ViewModels
 {
     public class CourseManagementViewModel : Screen
     {
+        private readonly ICourseEndpoint courseEndpoint;
         private readonly ITeacherEndpoint teacherEndpoint;
-        public CourseManagementViewModel(ITeacherEndpoint teacherEndpoint)
+
+        public CourseManagementViewModel(
+            ICourseEndpoint courseEndpoint,
+            ITeacherEndpoint teacherEndpoint)
         {
+            this.courseEndpoint = courseEndpoint;
             this.teacherEndpoint = teacherEndpoint;
+            LoadCourses();
         }
 
         #region Teacher Assignment
@@ -39,13 +45,23 @@ namespace SchoolDBUI.ViewModels
             // TODO: refactor logic to be more readable 
             if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
             {
-                var courses = await teacherEndpoint.GetTeachersBySubject(subject);
-                FilterNotSelected = courses.Count != 0;
-                FilteredTeachers = new BindingList<Teacher>(courses);
+                try
+                {
+                    var teachers = await teacherEndpoint.GetTeachersBySubject(subject);
+
+                    FilterNotSelected = teachers.Count != 0;
+                    FilteredTeachers = new BindingList<Teacher>(teachers);
+                }
+                catch (Exception e)
+                {
+                    ErrorMessage = e.Message;
+                }
+                
+                
             }
             else
             {
-                // handler error
+                ErrorMessage = "Valid subject was not chosen";
             }
 
         }
@@ -84,6 +100,60 @@ namespace SchoolDBUI.ViewModels
                 NotifyOfPropertyChange(() => FilteredTeachers);
             }
         }
+        #endregion
+
+        #region Display error
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+
+        }
+
+        private string errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);
+            }
+        }
+        #endregion
+
+        #region Courses list
+
+        async Task LoadCourses()
+        {
+            var courseList = await this.courseEndpoint.GetAll();
+
+            Courses = new BindingList<Course>(courseList);
+        }
+
+        private BindingList<Course> courses;
+
+        public BindingList<Course> Courses
+        {
+            get { return courses; }
+            set
+            {
+                courses = value;
+                NotifyOfPropertyChange(() => Courses);
+            }
+        }
+
         #endregion
     }
 }

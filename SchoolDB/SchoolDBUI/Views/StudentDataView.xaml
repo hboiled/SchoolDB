@@ -48,8 +48,6 @@
                                     <TextBlock Text="{Binding StudentId}" FontSize="14"/>
                                 </StackPanel>
 
-                                <!-- Photo thumbnail? -->
-
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

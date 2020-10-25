@@ -20,9 +20,32 @@
             <Label Content="Name"/>
             <TextBox x:Name="CourseNameTextbox" Width="200" HorizontalAlignment="Left" Margin="5,0,0,20" />
 
-            <ListBox ItemsSource="{Binding placeholder}" Height="400" MaxWidth="200" Width="200"
-                     HorizontalAlignment="Left" Margin="5,0,0,0"/>
+            <ListBox ItemsSource="{Binding Courses}" Height="400" MaxWidth="200" Width="200"
+                     HorizontalAlignment="Left" Margin="5,0,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Title}"/>
+                            <StackPanel Orientation="Horizontal">
 
+                                <!-- Display student/graduate/teacher/principal/other staff, colour-code role -->
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Id: " FontSize="14"/>
+                                    <TextBlock Text="{Binding CourseId}" FontSize="14"/>
+                                </StackPanel>
+
+                                <!-- Photo thumbnail? -->
+
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock x:Name="ErrorMessage" Grid.ColumnSpan="2" 
+                   Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
+                   Margin="0 0 0 20" Foreground="Red" MaxWidth="300" TextWrapping="Wrap" HorizontalAlignment="Center">
+            </TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,10,0">

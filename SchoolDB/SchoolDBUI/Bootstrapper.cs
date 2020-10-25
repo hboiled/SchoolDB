@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
 using SchoolDBUI.Library.API;
+using SchoolDBUI.Library.Models;
 using SchoolDBUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace SchoolDBUI
             container.Instance(container)
                 .PerRequest<IStudentEndpoint, StudentEndpoint>()
                 .PerRequest<ITeacherEndpoint, TeacherEndpoint>()
+                .PerRequest<ICourseEndpoint, CourseEndpoint>()
                 ;
 
             // Get from caliburn micro, a singleton of WindowManager and EventAggregator
