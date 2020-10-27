@@ -50,5 +50,25 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        private string studentNameTextBox;
+
+        public string StudentNameTextbox
+        {
+            get { return studentNameTextBox; }
+            set 
+            { 
+                studentNameTextBox = value;
+                SearchStudents();
+            }
+        }
+
+        private async Task SearchStudents()
+        {
+            var filteredStudents = await studentEndpoint.SearchStudent(StudentNameTextbox);
+
+            Students = new BindingList<Student>(filteredStudents);
+        }
+
+
     }
 }

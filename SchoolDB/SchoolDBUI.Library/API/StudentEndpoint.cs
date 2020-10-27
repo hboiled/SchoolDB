@@ -49,6 +49,22 @@ namespace SchoolDBUI.Library.API
             }
         }
 
+        public async Task<List<Student>> SearchStudent(string query)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"api/students/search/{query}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<Student>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
         public async Task SubmitStudent(StudentSubmitDTO student)
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient

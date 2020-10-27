@@ -31,7 +31,7 @@
             <TextBlock Text="Student Data" FontSize="36" Grid.Column="0" Grid.ColumnSpan="3"
                    Margin="0 0 0 20"/>
             <TextBlock Text="Enter Name:" HorizontalAlignment="Left" />
-            <TextBox x:Name="PersonName" MinWidth="100" Margin="0 0 10 20"/>
+            <TextBox x:Name="StudentNameTextbox" MinWidth="100" Margin="0 0 10 20"/>
             
             <ListBox x:Name="Students" MinHeight="420"
                  MinWidth="200" Grid.ColumnSpan="2" Margin="0.333,0,0,0"

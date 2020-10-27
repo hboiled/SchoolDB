@@ -39,7 +39,28 @@ namespace SchoolDBAPI.Controllers
         //}
 
         // GET: api/Students
+        [HttpGet("search/{query}")]
+        public async Task<ActionResult<IEnumerable<StudentReadDTO>>> SearchStudents(string query)
+        {            
+            var students = await context.Students
+                .Where(s => (s.FirstName + " " + s.LastName).Contains(query))
+                .ToListAsync();
+
+            var studentsData = new List<StudentReadDTO>();
+
+            foreach (var student in students)
+            {
+                StudentReadDTO studentData = MapStudentToDTO(student);
+
+                studentsData.Add(studentData);
+            }
+
+            return studentsData;
+        }
+
+        // GET: api/Students        
         [HttpGet]
+        [HttpGet("search/")]
         public async Task<ActionResult<IEnumerable<StudentReadDTO>>> GetStudents()
         {
             var students = await context.Students.ToListAsync();
