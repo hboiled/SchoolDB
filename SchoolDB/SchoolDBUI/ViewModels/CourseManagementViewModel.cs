@@ -154,6 +154,25 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        private string courseNameTextbox;
+
+        public string CourseNameTextbox
+        {
+            get { return courseNameTextbox; }
+            set
+            {
+                courseNameTextbox = value;
+                SearchCourses();
+            }
+        }
+
+        private async Task SearchCourses()
+        {
+            var filteredCourses = await courseEndpoint.SearchCoursesByTitle(CourseNameTextbox);
+
+            Courses = new BindingList<Course>(filteredCourses);
+        }
+
         #endregion
     }
 }

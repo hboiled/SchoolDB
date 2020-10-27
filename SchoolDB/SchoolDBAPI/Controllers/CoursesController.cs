@@ -23,9 +23,20 @@ namespace SchoolDBAPI.Controllers
 
         // GET: api/Courses
         [HttpGet]
+        [HttpGet("search/title")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
             return await context.Courses.ToListAsync();
+        }
+
+        [HttpGet("search/title/{query}")]
+        public async Task<ActionResult<IEnumerable<Course>>> SearchCourses(string query)
+        {
+            var courses = await context.Courses
+                .Where(c => c.Title.Contains(query))
+                .ToListAsync();
+
+            return courses;
         }
 
         // GET: api/Courses/5
