@@ -14,15 +14,20 @@ namespace SchoolDBUI.ViewModels
     {
         private readonly ICourseEndpoint courseEndpoint;
         private readonly ITeacherEndpoint teacherEndpoint;
+        private readonly IStudentEndpoint studentEndpoint;
 
         public CourseManagementViewModel(
             ICourseEndpoint courseEndpoint,
-            ITeacherEndpoint teacherEndpoint)
+            ITeacherEndpoint teacherEndpoint,
+            IStudentEndpoint studentEndpoint)
         {
             this.courseEndpoint = courseEndpoint;
             this.teacherEndpoint = teacherEndpoint;
+            this.studentEndpoint = studentEndpoint;
             LoadCourses();
         }
+
+        public Course SelectedCourse { get; set; }
 
         #region Teacher Assignment
 
@@ -171,6 +176,78 @@ namespace SchoolDBUI.ViewModels
             var filteredCourses = await courseEndpoint.SearchCoursesByTitle(CourseNameTextbox);
 
             Courses = new BindingList<Course>(filteredCourses);
+        }
+
+        #endregion
+
+        #region Add Students
+
+        private async Task LoadStudents()
+        {
+            var studentList = await this.studentEndpoint.GetAll();
+
+            Students = new BindingList<Student>(studentList);
+        }
+
+        private BindingList<Student> students;
+
+        public BindingList<Student> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                NotifyOfPropertyChange(() => Students);
+            }
+        }
+
+        private Student selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get { return selectedStudent; }
+            set
+            {
+                selectedStudent = value;
+                NotifyOfPropertyChange(() => SelectedStudent);
+            }
+        }
+
+        private string studentNameTextBox;
+
+        public string StudentNameTextbox
+        {
+            get { return studentNameTextBox; }
+            set
+            {
+                studentNameTextBox = value;
+                SearchStudents();
+            }
+        }
+
+        private async Task SearchStudents()
+        {
+            var filteredStudents = await studentEndpoint.SearchStudent(StudentNameTextbox);
+
+            Students = new BindingList<Student>(filteredStudents);
+        }
+
+        private BindingList<Student> enrolledStudents = new BindingList<Student>();
+
+        public BindingList<Student> EnrolledStudents
+        {
+            get { return enrolledStudents; }
+            set 
+            {
+                enrolledStudents = value;
+                NotifyOfPropertyChange(() => EnrolledStudents);
+            }
+        }
+
+        public void EnrollStudent()
+        {
+            EnrolledStudents.Add(SelectedStudent);
+            NotifyOfPropertyChange(() => EnrolledStudents);
         }
 
         #endregion
