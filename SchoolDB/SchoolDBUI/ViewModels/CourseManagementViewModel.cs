@@ -36,6 +36,7 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedCourse = value;
+                SelectedTeacher = null; // setting this to null helps trigger the combo box to change
                 SelectedTeacher = selectedCourse.Teacher;
                 NotifyOfPropertyChange(() => SelectedCourse);                
             }
@@ -50,7 +51,6 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedTeacher = value;
-                NotifyOfPropertyChange(() => FilteredTeachers);
                 NotifyOfPropertyChange(() => SelectedTeacher);                
             }
         }
