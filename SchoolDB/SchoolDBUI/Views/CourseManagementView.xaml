@@ -14,7 +14,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Column="0">
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20,0,0,0">
             <TextBlock Text="Course Management" FontSize="28"></TextBlock>
 
             <Label Content="Name"/>
@@ -58,11 +58,11 @@
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="0,0,0,10">
                     <Label Content="Title"/>
-                    <TextBox x:Name="CourseTitleTextbox" Width="150" />
+                    <TextBox x:Name="CourseTitleTextbox" Text="{Binding SelectedCourse.Title}" Width="150" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="10,0,0,10">
                     <Label Content="Course Id"/>
-                    <TextBox x:Name="CoursaeTitleTextbox" Width="150" />
+                    <TextBox x:Name="CoursaeTitleTextbox" Text="{Binding SelectedCourse.CourseId}" Width="150" />
                 </StackPanel>
             </StackPanel>
 
@@ -71,15 +71,16 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,15">
                     <Label Content="Department:"></Label>
-                    <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="Subjects[0]" 
+                    <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="{Binding SelectedCourse.Subject}" 
                           ItemsSource="{Binding Subjects}">
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,20">
                     <Label Content="Available Teachers:" HorizontalAlignment="Center"></Label>
-                    <ComboBox Height="30" Width="220" ItemsSource="{Binding FilteredTeachers}" IsEnabled="{Binding FilterNotSelected}"
-                          SelectedItem="{Binding SelectedTeacher}" DisplayMemberPath="FullName"></ComboBox>
+                    <ComboBox Height="30" Width="220" x:Name="FilteredTeachers" IsEnabled="{Binding FilterNotSelected}" DisplayMemberPath="FullName"
+                          SelectedItem="{Binding SelectedTeacher}" SelectedValue="{Binding SelectedCourse.Teacher}" >
+                    </ComboBox>
                 </StackPanel>
 
                 <Label Content="Add Student:" HorizontalAlignment="Center"></Label>
@@ -96,8 +97,8 @@
 
                     
                     
-                    <ListBox ItemsSource="{Binding Students}" Height="200" MaxWidth="200" Width="200"
-                     HorizontalAlignment="Left" Margin="5,0,0,0" SelectedItem="{Binding SelectedStudent}">
+                    <ListBox ItemsSource="{Binding Students}" Height="200" MaxWidth="200" Width="200" 
+                     HorizontalAlignment="Left" Margin="20,0,0,0" SelectedItem="{Binding SelectedStudent}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
@@ -130,6 +131,7 @@
                     <GridView>
                         <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=FullName}">
                             <GridViewColumnHeader TextElement.FontSize="18">Student</GridViewColumnHeader>
+                            
                         </GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=StudentGrade}">
                             <GridViewColumnHeader TextElement.FontSize="18">Result</GridViewColumnHeader>

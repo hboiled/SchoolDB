@@ -26,7 +26,9 @@ namespace SchoolDBAPI.Controllers
         [HttpGet("search/title")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            return await context.Courses.ToListAsync();
+            return await context.Courses
+                .Include(c => c.Teacher)
+                .ToListAsync();
         }
 
         [HttpGet("search/title/{query}")]
@@ -34,6 +36,7 @@ namespace SchoolDBAPI.Controllers
         {
             var courses = await context.Courses
                 .Where(c => c.Title.Contains(query))
+                .Include(c => c.Teacher)
                 .ToListAsync();
 
             return courses;

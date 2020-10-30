@@ -8,8 +8,22 @@ namespace SchoolDBUI.Library.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Teacher { get; set; }        
-        public string Subject { get; set; }
+        public Teacher Teacher { get; set; }        
+        public Subject Subject { get; set; }
+        public string Department
+        {
+            get
+            {
+                return Subject.ToString();
+            }
+        }
+        public string AssignedTeacher
+        {
+            get
+            {
+                return Teacher.FullName;
+            }
+        }
         public string CourseId { get; set; }
         public string StudentGrade { get; set; }
         public List<string> Students { get; set; } = new List<string>();

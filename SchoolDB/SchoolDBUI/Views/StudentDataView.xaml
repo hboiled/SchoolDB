@@ -111,13 +111,13 @@
                         <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
                             <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Teacher}">
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=AssignedTeacher}">
                             <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
                         </GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=StudentGrade}">
                             <GridViewColumnHeader TextElement.FontSize="18">Grade</GridViewColumnHeader>
                         </GridViewColumn>
-                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=Subject}">
+                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=Department}">
                             <GridViewColumnHeader TextElement.FontSize="18">Subject</GridViewColumnHeader>
                         </GridViewColumn>
                     </GridView>

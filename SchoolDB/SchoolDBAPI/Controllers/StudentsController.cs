@@ -99,7 +99,11 @@ namespace SchoolDBAPI.Controllers
                 Title = e.Course.Title,
                 StudentGrade = "N/A",
                 Subject = e.Course.Subject.ToString(),
-                Teacher = e.Course.Teacher.FullName
+                Teacher = new TeacherBasicDetailDTO
+                {
+                    Id = e.Course.Teacher.Id,
+                    FullName = e.Course.Teacher.FullName
+                }
             })
             .ToList();
 

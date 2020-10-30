@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SchoolDBUI.ViewModels
 {
@@ -27,11 +28,32 @@ namespace SchoolDBUI.ViewModels
             LoadCourses();
         }
 
-        public Course SelectedCourse { get; set; }
+        private Course selectedCourse;
+
+        public Course SelectedCourse
+        {
+            get { return selectedCourse; }
+            set
+            {
+                selectedCourse = value;
+                SelectedTeacher = selectedCourse.Teacher;
+                NotifyOfPropertyChange(() => SelectedCourse);                
+            }
+        }
 
         #region Teacher Assignment
 
-        public Teacher SelectedTeacher { get; set; }
+        private Teacher selectedTeacher;
+        public Teacher SelectedTeacher 
+        {
+            get { return selectedTeacher; }
+            set
+            {
+                selectedTeacher = value;
+                NotifyOfPropertyChange(() => FilteredTeachers);
+                NotifyOfPropertyChange(() => SelectedTeacher);                
+            }
+        }
 
         private string selectedSubjectFilter;
         public string SelectedSubjectFilter
@@ -52,7 +74,7 @@ namespace SchoolDBUI.ViewModels
             {
                 try
                 {
-                    var teachers = await teacherEndpoint.GetTeachersBySubject(subject);
+                    var teachers = await teacherEndpoint.GetTeachersBySubject(subject);                    
 
                     FilterNotSelected = teachers.Count != 0;
                     FilteredTeachers = new BindingList<Teacher>(teachers);
@@ -180,7 +202,7 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        #region Add Students
+        #region Enroll Students
 
         private async Task LoadStudents()
         {
@@ -246,9 +268,33 @@ namespace SchoolDBUI.ViewModels
 
         public void EnrollStudent()
         {
-            EnrolledStudents.Add(SelectedStudent);
-            NotifyOfPropertyChange(() => EnrolledStudents);
+            if (!IsStudentAlreadyEnrolled())
+            {
+                EnrolledStudents.Add(SelectedStudent);
+            }
         }
+
+        public void UnenrollStudent()
+        {
+            EnrolledStudents.Remove(SelectedStudent);
+        }
+
+        public bool IsStudentAlreadyEnrolled()
+        {
+            bool output = false;
+
+            if (EnrolledStudents.Contains(SelectedStudent))
+            {
+                output = true;
+            }
+
+            return output;
+        }
+        #endregion
+
+        #region Switch modes
+
+
 
         #endregion
     }

@@ -8,7 +8,7 @@ namespace SchoolDBAPI.DTO.BasicDetailDTO
     public class CourseBasicDetailDTO
     {
         public string Title { get; set; }
-        public string Teacher { get; set; }
+        public TeacherBasicDetailDTO Teacher { get; set; }
         public string Subject { get; set; }
         public string CourseId { get; set; }
         public string StudentGrade { get; set; }
