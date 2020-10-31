@@ -184,27 +184,32 @@ namespace SchoolDBAPI.Controllers
             return enrollmentData;
         }
 
+        /// MARKED FOR MOVING TO ANOTHER CONTROLLER
         [HttpGet("course/{id}")]
         public async Task<CourseReadDTO> GetCourse(int id)
         {
             var course = context.Courses
                 .Where(c => c.Id == id)
                 .Include(c => c.Teacher)
-                .FirstOrDefault();
-            //course.Teacher = context.Teachers.Where(c => c.Id == course.TeacherId).FirstOrDefault();
+                .FirstOrDefault();            
 
             var courseData = new CourseReadDTO
             {
                 Id = course.Id,
                 Title = course.Title,
-                Teacher = course.Teacher.FirstName + " " + course.Teacher.LastName,
+                Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
                 Subject = course.Subject.ToString(),
                 CourseId = course.CourseId
             };
 
             var matchingStudents = context.Enrollments
                 .Where(e => e.CourseId == course.Id)
-                .Select(e => e.Student.FirstName + " " + e.Student.LastName)
+                .Select(e => new StudentBasicDetailDTO
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
                 .ToList();
 
             courseData.Students = matchingStudents;
@@ -229,14 +234,19 @@ namespace SchoolDBAPI.Controllers
                 {
                     Id = course.Id,
                     Title = course.Title,
-                    Teacher = course.Teacher.FullName,
+                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
                     Subject = course.Subject.ToString(),
                     CourseId = course.CourseId
                 };
 
                 courseData.Students = context.Enrollments
                 .Where(e => e.CourseId == course.Id)
-                .Select(e => e.Student.FirstName + " " + e.Student.LastName)
+                .Select(e => new StudentBasicDetailDTO 
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
                 .ToList();
 
                 coursesData.Add(courseData);                    

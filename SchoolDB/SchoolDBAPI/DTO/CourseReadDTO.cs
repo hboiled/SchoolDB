@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SchoolDBAPI.DTO.BasicDetailDTO;
+using System.Collections.Generic;
 
 namespace SchoolDBAPI.DTO
 {
@@ -6,8 +7,8 @@ namespace SchoolDBAPI.DTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Teacher { get; set; }
-        public List<string> Students { get; set; } = new List<string>();
+        public TeacherBasicDetailDTO Teacher { get; set; }
+        public List<StudentBasicDetailDTO> Students { get; set; } = new List<StudentBasicDetailDTO>();
         public string Subject { get; set; }
         public string CourseId { get; set; }
     }

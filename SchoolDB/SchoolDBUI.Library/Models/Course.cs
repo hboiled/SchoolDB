@@ -26,7 +26,7 @@ namespace SchoolDBUI.Library.Models
         }
         public string CourseId { get; set; }
         public string StudentGrade { get; set; }
-        public List<string> Students { get; set; } = new List<string>();
+        public List<Student> Students { get; set; } = new List<Student>();
     }    
     
 }

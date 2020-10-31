@@ -38,6 +38,8 @@ namespace SchoolDBUI.ViewModels
                 selectedCourse = value;
                 SelectedTeacher = null; // setting this to null helps trigger the combo box to change
                 SelectedTeacher = selectedCourse.Teacher;
+                EnrolledStudents = null;
+                EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
                 NotifyOfPropertyChange(() => SelectedCourse);                
             }
         }

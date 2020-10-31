@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SchoolDBAPI.DTO;
+using SchoolDBAPI.DTO.BasicDetailDTO;
 using SchoolDBAPI.Library.DataAccess;
 using SchoolDBAPI.Library.Models.SchoolBusiness;
 
@@ -24,36 +26,109 @@ namespace SchoolDBAPI.Controllers
         // GET: api/Courses
         [HttpGet]
         [HttpGet("search/title")]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseReadDTO>>> GetCourses()
         {
-            return await context.Courses
+            var courses = context.Courses
                 .Include(c => c.Teacher)
-                .ToListAsync();
+                .ToList();
+
+            var coursesData = new List<CourseReadDTO>();
+
+            foreach (var course in courses)
+            {
+                CourseReadDTO courseData = new CourseReadDTO
+                {
+                    Id = course.Id,
+                    Title = course.Title,
+                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Subject = course.Subject.ToString(),
+                    CourseId = course.CourseId
+                };
+
+                courseData.Students = context.Enrollments
+                .Where(e => e.CourseId == course.Id)
+                .Select(e => new StudentBasicDetailDTO
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
+                .ToList();
+
+                coursesData.Add(courseData);
+            }
+
+            return coursesData;
         }
 
         [HttpGet("search/title/{query}")]
-        public async Task<ActionResult<IEnumerable<Course>>> SearchCourses(string query)
+        public async Task<ActionResult<IEnumerable<CourseReadDTO>>> SearchCourses(string query)
         {
             var courses = await context.Courses
                 .Where(c => c.Title.Contains(query))
                 .Include(c => c.Teacher)
                 .ToListAsync();
 
-            return courses;
+            var coursesData = new List<CourseReadDTO>();
+
+            foreach (var course in courses)
+            {
+                CourseReadDTO courseData = new CourseReadDTO
+                {
+                    Id = course.Id,
+                    Title = course.Title,
+                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Subject = course.Subject.ToString(),
+                    CourseId = course.CourseId
+                };
+
+                courseData.Students = context.Enrollments
+                .Where(e => e.CourseId == course.Id)
+                .Select(e => new StudentBasicDetailDTO
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
+                .ToList();
+
+                coursesData.Add(courseData);
+            }
+
+            return coursesData;
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<CourseReadDTO>> GetCourse(int id)
         {
-            var course = await context.Courses.FindAsync(id);
+            var course = context.Courses
+                .Where(c => c.Id == id)
+                .Include(c => c.Teacher)
+                .FirstOrDefault();
 
-            if (course == null)
+            var courseData = new CourseReadDTO
             {
-                return NotFound();
-            }
+                Id = course.Id,
+                Title = course.Title,
+                Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                Subject = course.Subject.ToString(),
+                CourseId = course.CourseId
+            };
 
-            return course;
+            var matchingStudents = context.Enrollments
+                .Where(e => e.CourseId == course.Id)
+                .Select(e => new StudentBasicDetailDTO
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
+                .ToList();
+
+            courseData.Students = matchingStudents;
+
+            return courseData;
         }
 
         // PUT: api/Courses/5
