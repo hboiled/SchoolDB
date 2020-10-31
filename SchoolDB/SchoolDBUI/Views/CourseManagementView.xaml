@@ -54,7 +54,8 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,10,0">
-
+            <TextBlock x:Name="AddModeMsg" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+            
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="0,0,0,10">
                     <Label Content="Title"/>

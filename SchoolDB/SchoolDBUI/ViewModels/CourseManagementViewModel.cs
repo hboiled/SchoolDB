@@ -11,21 +11,46 @@ using System.Windows;
 
 namespace SchoolDBUI.ViewModels
 {
-    public class CourseManagementViewModel : Screen
+    public class CourseManagementViewModel : Screen, IHandle<string>
     {
         private readonly ICourseEndpoint courseEndpoint;
         private readonly ITeacherEndpoint teacherEndpoint;
         private readonly IStudentEndpoint studentEndpoint;
+        private readonly IEventAggregator events;
 
         public CourseManagementViewModel(
             ICourseEndpoint courseEndpoint,
             ITeacherEndpoint teacherEndpoint,
-            IStudentEndpoint studentEndpoint)
+            IStudentEndpoint studentEndpoint,
+            IEventAggregator events)
         {
             this.courseEndpoint = courseEndpoint;
             this.teacherEndpoint = teacherEndpoint;
             this.studentEndpoint = studentEndpoint;
+            this.events = events;
+            events.Subscribe(this);
             LoadCourses();
+        }
+
+        private string addModeMsg;
+
+        public string AddModeMsg // upon submit, clear msg
+        {
+            get { return addModeMsg; }
+            set 
+            { 
+                addModeMsg = value;
+                NotifyOfPropertyChange(() => AddModeMsg);
+            }
+        }
+
+
+        public void Handle(string message)
+        {
+            if (message.Equals("New"))
+            {
+                AddModeMsg = "Add New Course";
+            }
         }
 
         private Course selectedCourse;
@@ -292,6 +317,7 @@ namespace SchoolDBUI.ViewModels
 
             return output;
         }
+
         #endregion
 
         #region Switch modes

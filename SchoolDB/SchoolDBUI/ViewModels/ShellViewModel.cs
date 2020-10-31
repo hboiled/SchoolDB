@@ -79,7 +79,7 @@ namespace SchoolDBUI.ViewModels
         {
             SetAllFlagsFalse();
             IsCourseManagement = true;
-            ActivateItem(IoC.Get<CourseManagementViewModel>());
+            ActivateItem(IoC.Get<CourseManagementViewModel>());            
         }
 
         private void SetAllFlagsFalse()
@@ -91,7 +91,9 @@ namespace SchoolDBUI.ViewModels
 
         public void AddNewCourse()
         {
+            // order matters, otherwise event will be handled first then a new instance of the view will be created
             CourseManagementView();
+            events.PublishOnUIThread("New");            
         }
 
         public void ExitApplication()
