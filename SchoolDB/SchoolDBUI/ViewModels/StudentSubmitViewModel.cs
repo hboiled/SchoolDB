@@ -227,7 +227,7 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        // Add remove address functionality
+        // Add reset text boxes functionality
         #region Addresses
         public string StreetAddressTextbox { get; set; }
         public string PostcodeTextbox { get; set; }
@@ -235,6 +235,8 @@ namespace SchoolDBUI.ViewModels
         public string CityTextbox { get; set; }
         public string StateTextbox { get; set; }
         public bool PrimaryAddressBox { get; set; }
+
+        public Address SelectedAddress { get; set; }
 
         private BindingList<Address> addresses = new BindingList<Address>();
 
@@ -260,10 +262,18 @@ namespace SchoolDBUI.ViewModels
             Addresses.Add(address);
         }
 
+        public void RemoveAddress()
+        {
+            if (SelectedAddress != null)
+            {
+                Addresses.Remove(SelectedAddress);
+            }
+        }
+
 
         #endregion
 
-        // Add remove functionality
+        // 
         #region Email
 
         private string emailAddressTextbox;
@@ -314,14 +324,19 @@ namespace SchoolDBUI.ViewModels
             EmailAddressTextbox = "";
         }
 
+        public Email SelectedEmail { get; set; }
+
         public void RemoveEmail()
         {
-
+            if (SelectedEmail != null)
+            {
+                Emails.Remove(SelectedEmail);
+            }
         }
 
         #endregion
 
-        // Add remove functionality
+        // Add reset text boxes functionality
         #region Phone
 
         private string phoneNumberTextbox;
@@ -373,9 +388,14 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        public PhoneNum SelectedPhoneNumber { get; set; }
+
         public void RemovePhoneNumber()
         {
-
+            if (SelectedPhoneNumber != null)
+            {
+                PhoneNums.Remove(SelectedPhoneNumber);
+            }
         }
 
         private void ResetPhoneNumberTextbox()

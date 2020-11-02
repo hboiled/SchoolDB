@@ -92,7 +92,7 @@
             <TabControl>
                 <TabItem Header="Address">
                     <StackPanel Orientation="Vertical">
-                            <ListView Height="150" ItemsSource="{Binding Addresses}">
+                        <ListView Height="150" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Width="280" DisplayMemberBinding="{Binding Path=FullAddress}">
@@ -144,7 +144,7 @@
                 </TabItem>
                 <TabItem Header="Email">
                     <StackPanel Orientation="Vertical">
-                            <ListView Height="150" ItemsSource="{Binding Emails}">
+                        <ListView Height="150" ItemsSource="{Binding Emails}" SelectedItem="{Binding SelectedEmail}">
                                 <ListView.View>
                                     <GridView>
                                     <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=EmailAddress}">
@@ -175,7 +175,7 @@
                 </TabItem>
                 <TabItem Header="Phone Numbers">
                     <StackPanel Orientation="Vertical">
-                        <ListView Height="150" ItemsSource="{Binding PhoneNums}">
+                        <ListView Height="150" ItemsSource="{Binding PhoneNums}" SelectedItem="{Binding SelectedPhoneNumber}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="145" DisplayMemberBinding="{Binding Path=Number}">
