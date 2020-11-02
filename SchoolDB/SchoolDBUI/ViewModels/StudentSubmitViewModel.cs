@@ -227,14 +227,79 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        // Add reset text boxes functionality
+        // 
         #region Addresses
-        public string StreetAddressTextbox { get; set; }
-        public string PostcodeTextbox { get; set; }
-        public string SuburbTextbox { get; set; }
-        public string CityTextbox { get; set; }
-        public string StateTextbox { get; set; }
-        public bool PrimaryAddressBox { get; set; }
+        private string streetAddressTextbox;
+
+        public string StreetAddressTextbox
+        {
+            get { return streetAddressTextbox; }
+            set 
+            { 
+                streetAddressTextbox = value;
+                NotifyOfPropertyChange(() => StreetAddressTextbox);
+            }
+        }
+
+        private string postcodeTextbox;
+
+        public string PostcodeTextbox
+        {
+            get { return postcodeTextbox; }
+            set 
+            { 
+                postcodeTextbox = value;
+                NotifyOfPropertyChange(() => PostcodeTextbox);
+            }
+        }
+
+        private string suburbTextbox;
+
+        public string SuburbTextbox
+        {
+            get { return suburbTextbox; }
+            set 
+            { 
+                suburbTextbox = value;
+                NotifyOfPropertyChange(() => SuburbTextbox);
+            }
+        }
+
+        private string cityTextbox;
+
+        public string CityTextbox
+        {
+            get { return cityTextbox; }
+            set 
+            { 
+                cityTextbox = value;
+                NotifyOfPropertyChange(() => CityTextbox);
+            }
+        }
+
+        private string stateTextbox;
+
+        public string StateTextbox
+        {
+            get { return stateTextbox; }
+            set 
+            { 
+                stateTextbox = value;
+                NotifyOfPropertyChange(() => StateTextbox);
+            }
+        }
+
+        private bool primaryAddressBox;
+
+        public bool PrimaryAddressBox
+        {
+            get { return primaryAddressBox; }
+            set 
+            { 
+                primaryAddressBox = value;
+                NotifyOfPropertyChange(() => PrimaryAddressBox);
+            }
+        }
 
         public Address SelectedAddress { get; set; }
 
@@ -245,7 +310,6 @@ namespace SchoolDBUI.ViewModels
             get { return addresses; }
             set { addresses = value; }
         }
-
 
         public void AddAddress()
         {
@@ -260,6 +324,7 @@ namespace SchoolDBUI.ViewModels
             };
 
             Addresses.Add(address);
+            ResetAddressTextFields();
         }
 
         public void RemoveAddress()
@@ -268,8 +333,18 @@ namespace SchoolDBUI.ViewModels
             {
                 Addresses.Remove(SelectedAddress);
             }
+            ResetAddressTextFields();
         }
 
+        private void ResetAddressTextFields()
+        {
+            StreetAddressTextbox = "";
+            SuburbTextbox = "";
+            CityTextbox = "";
+            StateTextbox = "";
+            PostcodeTextbox = "";
+            PrimaryAddressBox = false;
+        }
 
         #endregion
 
@@ -336,11 +411,10 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        // Add reset text boxes functionality
+        // 
         #region Phone
 
         private string phoneNumberTextbox;
-
         public string PhoneNumberTextbox
         {
             get { return phoneNumberTextbox; }
@@ -351,8 +425,27 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        public bool EContactBox { get; set; }
-        public bool MobileBox { get; set; }
+        private bool eContactBox;
+        public bool EContactBox
+        {
+            get { return eContactBox; }
+            set
+            {
+                eContactBox = value;
+                NotifyOfPropertyChange(() => EContactBox);
+            }
+        }
+
+        private bool mobileBox;
+        public bool MobileBox 
+        {
+            get { return mobileBox; }
+            set
+            {
+                mobileBox = value;
+                NotifyOfPropertyChange(() => MobileBox);
+            }
+        }
 
         public PhoneNumberOwner SelectedPhoneOwner { get; set; }
 
@@ -386,6 +479,7 @@ namespace SchoolDBUI.ViewModels
                         Owner = SelectedPhoneOwner
                     });
             }
+            ResetPhoneNumberTextbox();
         }
 
         public PhoneNum SelectedPhoneNumber { get; set; }
@@ -396,11 +490,14 @@ namespace SchoolDBUI.ViewModels
             {
                 PhoneNums.Remove(SelectedPhoneNumber);
             }
+            ResetPhoneNumberTextbox();
         }
 
         private void ResetPhoneNumberTextbox()
         {
             PhoneNumberTextbox = "";
+            EContactBox = false;
+            MobileBox = false;
         }
 
         #endregion
