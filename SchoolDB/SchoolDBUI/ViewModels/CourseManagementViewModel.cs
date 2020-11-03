@@ -61,6 +61,7 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedCourse = value;
+                AddModeMsg = "Edit Course";
                 SelectedTeacher = null; // setting this to null helps trigger the combo box to change
                 SelectedTeacher = selectedCourse.Teacher;
                 EnrolledStudents = null;

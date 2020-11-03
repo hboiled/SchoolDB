@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using System.Windows;
 
 namespace SchoolDBUI.ViewModels
 {
@@ -89,6 +91,19 @@ namespace SchoolDBUI.ViewModels
             IsCourseManagement = false;
         }
 
+
+        public void NewCourseKeyEvent(KeyEventArgs keyArgs)
+        {
+            if (IsCourseManagement == false)
+            {
+                return;
+            }
+            
+            if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.N)
+            {
+                AddNewCourse();
+            }
+        }
         public void AddNewCourse()
         {
             // order matters, otherwise event will be handled first then a new instance of the view will be created
