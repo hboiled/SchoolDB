@@ -44,8 +44,8 @@
 
             <StackPanel HorizontalAlignment="Left" Margin="45,5,0,0">
                 <!-- Disable in default edit mode -->
-                <Button Content="Add Course" Width="120" Margin="0,0,0,10" />
-                <Button Content="Delete Course" Width="120" />
+                <Button x:Name="CreateCourse" Content="Add Course" Width="120" Margin="0,0,0,10" />
+                <Button x:Name="DeleteCourse" Content="Delete Course" Width="120" />
             </StackPanel>
             <TextBlock x:Name="ErrorMessage" Grid.ColumnSpan="2" 
                    Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
@@ -59,11 +59,11 @@
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="0,0,0,10">
                     <Label Content="Title"/>
-                    <TextBox x:Name="CourseTitleTextbox" Text="{Binding SelectedCourse.Title}" Width="150" />
+                    <TextBox x:Name="CourseTitleTextbox" Width="150" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="10,0,0,10">
                     <Label Content="Course Id"/>
-                    <TextBox x:Name="CoursaeTitleTextbox" Text="{Binding SelectedCourse.CourseId}" Width="150" />
+                    <TextBox x:Name="CourseIdTextbox" Width="150" />
                 </StackPanel>
             </StackPanel>
 

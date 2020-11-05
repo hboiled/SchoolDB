@@ -61,14 +61,46 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedCourse = value;
-                AddModeMsg = "Edit Course";
-                SelectedTeacher = null; // setting this to null helps trigger the combo box to change
-                SelectedTeacher = selectedCourse.Teacher;
-                EnrolledStudents = null;
-                EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
+                SetUpEditMode();
                 NotifyOfPropertyChange(() => SelectedCourse);                
             }
         }
+
+        private void SetUpEditMode()
+        {
+            AddModeMsg = "Edit Course";
+            CourseTitleTextbox = selectedCourse.Title;
+            CourseIdTextbox = selectedCourse.CourseId;
+            SelectedTeacher = null; // setting this to null helps trigger the combo box to change
+            SelectedTeacher = selectedCourse.Teacher;
+            EnrolledStudents = null;
+            EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
+        }
+
+        private string courseTitleTextbox;
+
+        public string CourseTitleTextbox
+        {
+            get { return courseTitleTextbox; }
+            set 
+            {
+                courseTitleTextbox = value;
+                NotifyOfPropertyChange(() => CourseTitleTextbox);
+            }
+        }
+
+        private string courseIdTextbox;
+
+        public string CourseIdTextbox
+        {
+            get { return courseIdTextbox; }
+            set 
+            {
+                courseIdTextbox = value;
+                NotifyOfPropertyChange(() => CourseIdTextbox);
+            }
+        }
+
 
         #region Teacher Assignment
 
@@ -321,10 +353,25 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        #region Switch modes
+        public void CreateCourse()
+        {
+            Enum.TryParse(SelectedSubjectFilter, out Subject subject);
 
+            var course = new CourseSubmitDTO
+            {
+                Title = CourseTitleTextbox,
+                CourseId = CourseIdTextbox,
+                Department = subject,
+                TeacherAssigned = SelectedTeacher,
+                // use a different student class to avoid unnecessary references?
+                EnrolledStudents = EnrolledStudents.ToList() 
+            };
+            var x = 1;
+        }
 
+        public void DeleteCourse()
+        {
 
-        #endregion
+        }
     }
 }

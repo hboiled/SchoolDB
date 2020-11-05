@@ -48,5 +48,21 @@ namespace SchoolDBUI.Library.API
                 }
             }
         }
+
+        public async Task SubmitCourse(CourseSubmitDTO course)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient
+                .PostAsJsonAsync($"api/courses", course))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var x = "Working";
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }
