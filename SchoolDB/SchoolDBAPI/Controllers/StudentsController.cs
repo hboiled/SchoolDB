@@ -25,19 +25,6 @@ namespace SchoolDBAPI.Controllers
             this.context = context;
         }
 
-        // Test methods for postman
-        //[HttpGet("test/{id}")]
-        //public Student TestStudent(int id)
-        //{
-        //    return context.Students.Find(id);
-        //}
-
-        //[HttpPost("test")]
-        //public async Task<IActionResult> TestStudentPost(StudentPostDTO s)
-        //{
-        //    return Ok();
-        //}
-
         // GET: api/Students
         [HttpGet("search/{query}")]
         public async Task<ActionResult<IEnumerable<StudentReadDTO>>> SearchStudents(string query)
@@ -165,6 +152,7 @@ namespace SchoolDBAPI.Controllers
             return studentData;
         }
 
+        // Where to place this? Undecided
         [HttpGet("enroll/{id}")]
         public async Task<EnrollmentReadDTO> GetEnrollment(int id)
         {
@@ -182,77 +170,6 @@ namespace SchoolDBAPI.Controllers
             };
 
             return enrollmentData;
-        }
-
-        /// MARKED FOR MOVING TO ANOTHER CONTROLLER
-        [HttpGet("course/{id}")]
-        public async Task<CourseReadDTO> GetCourse(int id)
-        {
-            var course = context.Courses
-                .Where(c => c.Id == id)
-                .Include(c => c.Teacher)
-                .FirstOrDefault();            
-
-            var courseData = new CourseReadDTO
-            {
-                Id = course.Id,
-                Title = course.Title,
-                Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
-                Subject = course.Subject.ToString(),
-                CourseId = course.CourseId
-            };
-
-            var matchingStudents = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
-
-            courseData.Students = matchingStudents;
-
-            return courseData;
-        }
-
-        [HttpGet("courses/{subject}")]
-        public async Task<List<CourseReadDTO>> GetCoursesBySubject(Subject subject)
-        {
-            
-            var courses = context.Courses
-                .Where(c => c.Subject == subject)
-                .Include(c => c.Teacher)                
-                .ToList();
-
-            var coursesData = new List<CourseReadDTO>();
-
-            foreach (var course in courses)
-            {
-                CourseReadDTO courseData = new CourseReadDTO
-                {
-                    Id = course.Id,
-                    Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
-                    Subject = course.Subject.ToString(),
-                    CourseId = course.CourseId
-                };
-
-                courseData.Students = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO 
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
-
-                coursesData.Add(courseData);                    
-            }
-
-            return coursesData;
         }
 
         // GET: api/Students/5

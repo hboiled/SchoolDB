@@ -8,6 +8,7 @@ namespace SchoolDBUI.Library.API
     {
         Task<List<Course>> GetAll();
         Task<List<Course>> SearchCoursesByTitle(string title);
+        Task<List<Course>> GetCoursesBySubject(Subject subject);
         Task SubmitCourse(CourseSubmitDTO course);
     }
 }

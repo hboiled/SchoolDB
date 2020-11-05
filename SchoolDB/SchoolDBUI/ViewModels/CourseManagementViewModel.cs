@@ -62,7 +62,8 @@ namespace SchoolDBUI.ViewModels
             {
                 selectedCourse = value;
                 SetUpEditMode();
-                NotifyOfPropertyChange(() => SelectedCourse);                
+                NotifyOfPropertyChange(() => SelectedCourse);
+                NotifyOfPropertyChange(() => CourseNotSelected);
             }
         }
 
@@ -151,6 +152,14 @@ namespace SchoolDBUI.ViewModels
                 ErrorMessage = "Valid subject was not chosen";
             }
 
+        }
+
+        public bool CourseNotSelected
+        {
+            get
+            {
+                return SelectedCourse != null;                
+            }
         }
 
         private bool filterNotSelected = false;

@@ -6,8 +6,7 @@ namespace SchoolDBUI.Library.API
 {
     public interface IStudentEndpoint
     {
-        Task<List<Student>> GetAll();
-        Task<List<Course>> GetCoursesBySubject(Subject subject);
+        Task<List<Student>> GetAll();        
         Task SubmitStudent(StudentSubmitDTO student);
         Task<List<Student>> SearchStudent(string query);
     }

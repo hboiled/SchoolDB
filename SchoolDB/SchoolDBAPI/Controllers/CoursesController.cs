@@ -210,6 +210,44 @@ namespace SchoolDBAPI.Controllers
             return course;
         }
 
+        [HttpGet("subjects/{subject}")]
+        public async Task<List<CourseReadDTO>> GetCoursesBySubject(Subject subject)
+        {
+
+            var courses = context.Courses
+                .Where(c => c.Subject == subject)
+                .Include(c => c.Teacher)
+                .ToList();
+
+            var coursesData = new List<CourseReadDTO>();
+
+            foreach (var course in courses)
+            {
+                CourseReadDTO courseData = new CourseReadDTO
+                {
+                    Id = course.Id,
+                    Title = course.Title,
+                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Subject = course.Subject.ToString(),
+                    CourseId = course.CourseId
+                };
+
+                courseData.Students = context.Enrollments
+                .Where(e => e.CourseId == course.Id)
+                .Select(e => new StudentBasicDetailDTO
+                {
+                    Id = e.Student.Id,
+                    FirstName = e.Student.FirstName,
+                    LastName = e.Student.LastName
+                })
+                .ToList();
+
+                coursesData.Add(courseData);
+            }
+
+            return coursesData;
+        }
+
         private bool CourseExists(int id)
         {
             return context.Courses.Any(e => e.Id == id);

@@ -18,10 +18,14 @@ namespace SchoolDBUI.ViewModels
     public class StudentSubmitViewModel : Screen
     {
         private readonly IStudentEndpoint studentEndpoint;
+        private readonly ICourseEndpoint courseEndpoint;
 
-        public StudentSubmitViewModel(IStudentEndpoint studentEndpoint)
+        public StudentSubmitViewModel(
+            IStudentEndpoint studentEndpoint,
+            ICourseEndpoint courseEndpoint)
         {
-            this.studentEndpoint = studentEndpoint;            
+            this.studentEndpoint = studentEndpoint;
+            this.courseEndpoint = courseEndpoint;
             StudentPhoto = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
         }
 
@@ -133,7 +137,7 @@ namespace SchoolDBUI.ViewModels
             // TODO: refactor logic to be more readable 
             if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
             {
-                var courses = await studentEndpoint.GetCoursesBySubject(subject);
+                var courses = await courseEndpoint.GetCoursesBySubject(subject);
                 FilterNotSelected = courses.Count != 0;
                 FilteredCourses = new BindingList<Course>(courses);
             }

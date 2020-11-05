@@ -32,23 +32,6 @@ namespace SchoolDBUI.Library.API
             }
         }
 
-        public async Task<List<Course>> GetCoursesBySubject(Subject subject)
-        {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient
-                .GetAsync($"api/students/courses/{subject.ToString()}")) // rework required
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<List<Course>>();
-                    return result;
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-            }
-        }
-
         public async Task<List<Student>> SearchStudent(string query)
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"api/students/search/{query}"))
