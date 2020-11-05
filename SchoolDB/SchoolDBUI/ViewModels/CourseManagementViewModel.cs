@@ -366,7 +366,8 @@ namespace SchoolDBUI.ViewModels
                 // use a different student class to avoid unnecessary references?
                 EnrolledStudents = EnrolledStudents.ToList() 
             };
-            var x = 1;
+
+            courseEndpoint.SubmitCourse(course);
         }
 
         public void DeleteCourse()

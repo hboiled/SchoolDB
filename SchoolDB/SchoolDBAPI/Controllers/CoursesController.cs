@@ -167,12 +167,31 @@ namespace SchoolDBAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Course>> PostCourse(CoursePostDTO course)
         {
-            context.Courses.Add(course);
+            var enrollments = new List<Enrollment>();
+            var newCourse = new Course
+            {
+                Title = course.Title,
+                CourseId = course.CourseId,
+                Subject = course.Department,
+                TeacherId = course.TeacherAssigned.Id
+            };
+
+            foreach (var student in course.EnrolledStudents)
+            {
+                enrollments.Add(new Enrollment
+                {
+                    StudentId = student.Id,
+                    CourseId = newCourse.Id // id is currently not available
+                });
+            }
+
+            context.Courses.Add(newCourse);
             await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            // TODO: fix this
+            return CreatedAtAction("GetCourse", new { id = 0 }, course);
         }
 
         // DELETE: api/Courses/5
