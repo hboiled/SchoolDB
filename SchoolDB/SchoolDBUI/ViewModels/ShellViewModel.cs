@@ -92,7 +92,7 @@ namespace SchoolDBUI.ViewModels
         }
 
 
-        public void NewCourseKeyEvent(KeyEventArgs keyArgs)
+        public void CourseKeyEvent(KeyEventArgs keyArgs)
         {
             if (IsCourseManagement == false)
             {
@@ -103,7 +103,18 @@ namespace SchoolDBUI.ViewModels
             {
                 AddNewCourse();
             }
+
+            if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.S)
+            {
+                SaveCourse();
+            }
         }
+
+        private void SaveCourse()
+        {
+            events.PublishOnUIThread("Save");
+        }
+
         public void AddNewCourse()
         {
             // order matters, otherwise event will be handled first then a new instance of the view will be created

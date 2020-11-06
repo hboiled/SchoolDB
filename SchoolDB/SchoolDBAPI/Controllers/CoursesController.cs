@@ -178,20 +178,22 @@ namespace SchoolDBAPI.Controllers
                 TeacherId = course.TeacherAssigned.Id
             };
 
+            context.Courses.Add(newCourse);
+            await context.SaveChangesAsync();
+
             foreach (var student in course.EnrolledStudents)
             {
                 enrollments.Add(new Enrollment
                 {
                     StudentId = student.Id,
-                    CourseId = newCourse.Id // id is currently not available
+                    CourseId = newCourse.Id
                 });
             }
 
-            context.Courses.Add(newCourse);
+            context.Enrollments.AddRange(enrollments);
             await context.SaveChangesAsync();
-
-            // TODO: fix this
-            return CreatedAtAction("GetCourse", new { id = 0 }, course);
+            
+            return CreatedAtAction("GetCourse", new { id = newCourse.Id }, course);
         }
 
         // DELETE: api/Courses/5

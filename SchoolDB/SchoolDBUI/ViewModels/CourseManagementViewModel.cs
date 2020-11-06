@@ -51,6 +51,11 @@ namespace SchoolDBUI.ViewModels
             {
                 AddModeMsg = "Add New Course";
             }
+
+            if (message.Equals("Save"))
+            {
+                CreateCourse();
+            }
         }
 
         private Course selectedCourse;
@@ -69,13 +74,16 @@ namespace SchoolDBUI.ViewModels
 
         private void SetUpEditMode()
         {
-            AddModeMsg = "Edit Course";
-            CourseTitleTextbox = selectedCourse.Title;
-            CourseIdTextbox = selectedCourse.CourseId;
-            SelectedTeacher = null; // setting this to null helps trigger the combo box to change
-            SelectedTeacher = selectedCourse.Teacher;
-            EnrolledStudents = null;
-            EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
+            if (selectedCourse != null)
+            {
+                AddModeMsg = "Edit Course";
+                CourseTitleTextbox = selectedCourse.Title;
+                CourseIdTextbox = selectedCourse.CourseId;
+                SelectedTeacher = null; // setting this to null helps trigger the combo box to change
+                SelectedTeacher = selectedCourse.Teacher;
+                EnrolledStudents = null;
+                EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
+            }            
         }
 
         private string courseTitleTextbox;
@@ -123,7 +131,10 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedSubjectFilter = value;
-                SetTeacherFilter();
+                if (selectedSubjectFilter != null)
+                {
+                    SetTeacherFilter();
+                }
                 NotifyOfPropertyChange(() => SelectedSubjectFilter);
             }
         }
@@ -143,8 +154,7 @@ namespace SchoolDBUI.ViewModels
                 catch (Exception e)
                 {
                     ErrorMessage = e.Message;
-                }
-                
+                }                
                 
             }
             else
@@ -264,7 +274,7 @@ namespace SchoolDBUI.ViewModels
 
         private async Task SearchCourses()
         {
-            var filteredCourses = await courseEndpoint.SearchCoursesByTitle(CourseNameTextbox);
+            var filteredCourses = await courseEndpoint.SearchCoursesByTitle(CourseNameTextbox.Trim());
 
             Courses = new BindingList<Course>(filteredCourses);
         }

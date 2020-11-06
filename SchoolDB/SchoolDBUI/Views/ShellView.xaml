@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolDBUI.Views"        
         xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             cal:Message.Attach="[Event KeyDown] = [Action NewCourseKeyEvent($eventArgs)]"
+             cal:Message.Attach="[Event KeyDown] = [Action CourseKeyEvent($eventArgs)]"
         mc:Ignorable="d"
         Title="ShellView" Height="800" Width="1200"
         WindowState="Maximized">
