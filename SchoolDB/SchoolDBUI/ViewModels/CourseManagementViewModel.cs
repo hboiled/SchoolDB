@@ -244,7 +244,7 @@ namespace SchoolDBUI.ViewModels
         async Task LoadCourses()
         {
             var courseList = await this.courseEndpoint.GetAll();
-
+            Courses = null;
             Courses = new BindingList<Course>(courseList);
         }
 
@@ -372,7 +372,7 @@ namespace SchoolDBUI.ViewModels
 
         #endregion
 
-        public void CreateCourse()
+        public async Task CreateCourse()
         {
             Enum.TryParse(SelectedSubjectFilter, out Subject subject);
 
@@ -386,7 +386,9 @@ namespace SchoolDBUI.ViewModels
                 EnrolledStudents = EnrolledStudents.ToList() 
             };
 
-            courseEndpoint.SubmitCourse(course);
+            await courseEndpoint.SubmitCourse(course);
+
+            LoadCourses();            
         }
 
         public void DeleteCourse()
