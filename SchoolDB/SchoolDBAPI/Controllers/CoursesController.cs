@@ -134,18 +134,59 @@ namespace SchoolDBAPI.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // NO concurrency protections
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, CoursePostDTO course)
         {
-            if (id != course.Id)
+
+            if (!CourseExists(id))
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            context.Entry(course).State = EntityState.Modified;
+            // get course by id and update values
+            var existingCourse = context.Courses.Find(id);
+            existingCourse.Title = course.Title;
+            existingCourse.CourseId = course.CourseId;
+            existingCourse.Subject = course.Department;
+            existingCourse.Teacher = course.TeacherAssigned;
+
+            // get all enrollments for this course in db 
+            var enrollments = await context.Enrollments
+                .Where(e => e.CourseId == id)
+                .ToListAsync();
+
+            var previousStudentIds = enrollments.Select(e => e.StudentId).ToList();
+            var currentStudentIds = course.EnrolledStudents.Select(s => s.Id).ToList();            
+
+            // remove all enrollments that aren't in new list
+            var enrollmentsToRemove = enrollments
+                .Where(e => !currentStudentIds.Contains(e.StudentId))
+                .ToList();
+
+            context.Enrollments.RemoveRange(enrollmentsToRemove);
+
+            // add new enrollments that did not exist
+            var studentsToEnroll = course.EnrolledStudents
+                .Where(s => !previousStudentIds.Contains(s.Id))
+                .ToList();
+
+            var newEnrollments = new List<Enrollment>();
+
+            foreach (var student in studentsToEnroll)
+            {
+                newEnrollments.Add(
+                    new Enrollment
+                    {
+                        StudentId = student.Id,
+                        CourseId = existingCourse.Id
+                    });
+            }
+
+            context.Enrollments.AddRange(newEnrollments);
 
             try
-            {
+            {                
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

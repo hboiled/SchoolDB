@@ -88,7 +88,22 @@ namespace SchoolDBUI.Library.API
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var x = "Working";
+                    
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task UpdateCourse(int id, CourseSubmitDTO course)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient
+                .PutAsJsonAsync($"api/courses/" + id, course))
+            {
+                if (response.IsSuccessStatusCode)
+                {
                 }
                 else
                 {

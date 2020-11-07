@@ -314,6 +314,18 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        private Student selectedEnrolledStudent;
+
+        public Student SelectedEnrolledStudent
+        {
+            get { return selectedEnrolledStudent; }
+            set
+            {
+                selectedEnrolledStudent = value;
+                NotifyOfPropertyChange(() => SelectedEnrolledStudent);
+            }
+        }
+
         private string studentNameTextBox;
 
         public string StudentNameTextbox
@@ -355,7 +367,12 @@ namespace SchoolDBUI.ViewModels
 
         public void UnenrollStudent()
         {
-            EnrolledStudents.Remove(SelectedStudent);
+            if (SelectedEnrolledStudent != null)
+            {
+                EnrolledStudents.Remove(SelectedEnrolledStudent);
+            }
+
+            NotifyOfPropertyChange(() => EnrolledStudents);
         }
 
         public bool IsStudentAlreadyEnrolled()
@@ -381,12 +398,13 @@ namespace SchoolDBUI.ViewModels
                 Title = CourseTitleTextbox,
                 CourseId = CourseIdTextbox,
                 Department = subject,
-                TeacherAssigned = SelectedTeacher,
+                TeacherAssigned = SelectedTeacher, // BUG: teacher sent over has several null vals which override data!!!
                 // use a different student class to avoid unnecessary references?
                 EnrolledStudents = EnrolledStudents.ToList() 
             };
 
-            await courseEndpoint.SubmitCourse(course);
+            await courseEndpoint.UpdateCourse(SelectedCourse.Id, course);
+            //await courseEndpoint.SubmitCourse(course);
 
             LoadCourses();            
         }
