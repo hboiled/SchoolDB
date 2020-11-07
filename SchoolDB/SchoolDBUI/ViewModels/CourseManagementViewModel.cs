@@ -391,9 +391,12 @@ namespace SchoolDBUI.ViewModels
             LoadCourses();            
         }
 
-        public void DeleteCourse()
+        public async Task DeleteCourse()
         {
-
+            // TODO: add warning
+            await courseEndpoint.DeleteCourse(selectedCourse.Id);
+            
+            LoadCourses();
         }
     }
 }

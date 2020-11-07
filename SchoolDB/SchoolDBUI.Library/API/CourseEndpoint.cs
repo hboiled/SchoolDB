@@ -16,6 +16,21 @@ namespace SchoolDBUI.Library.API
             _apiHelper = apiHelper;
         }
 
+        public async Task DeleteCourse(int id)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.DeleteAsync("api/courses/" + id))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
         public async Task<List<Course>> GetAll()
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("api/courses"))

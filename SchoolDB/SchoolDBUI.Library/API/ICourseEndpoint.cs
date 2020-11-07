@@ -10,5 +10,6 @@ namespace SchoolDBUI.Library.API
         Task<List<Course>> SearchCoursesByTitle(string title);
         Task<List<Course>> GetCoursesBySubject(Subject subject);
         Task SubmitCourse(CourseSubmitDTO course);
+        Task DeleteCourse(int id);
     }
 }

@@ -30,37 +30,85 @@ namespace SchoolDBAPI.Library.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // seed data
+            
+            SeedData(modelBuilder);   
+        }
 
+        private void SeedData(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Student>()
                 .HasData(
-                new Student { Id = 1, FirstName = "Sam", LastName = "Lee", Grade = 100, StudentId = 203948, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1995, 5, 26), PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
-                },
-                new Student { Id = 2, FirstName = "Jacey", LastName = "Feng", Grade = 80, StudentId = 102942, 
-                    Gender = Gender.Female, BirthDate = new DateTime(1996, 2, 7), PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
-                },
-                new Student { Id = 3, FirstName = "Brandon", LastName = "Lee", Grade = 100, StudentId = 293481,
-                    Gender = Gender.Male, BirthDate = new DateTime(2019, 1, 4),
+                new Student
+                {
+                    Id = 1,
+                    FirstName = "Sam",
+                    LastName = "Lee",
+                    Grade = 100,
+                    StudentId = 203948,
+                    Gender = Gender.Male,
+                    BirthDate = new DateTime(1995, 5, 26),
                     PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
                 },
-                new Student { Id = 4, FirstName = "Sue", LastName = "Jordan", Grade = 90, StudentId = 203941, 
-                    Gender = Gender.Female, BirthDate = new DateTime(1925, 8, 12),
+                new Student
+                {
+                    Id = 2,
+                    FirstName = "Jacey",
+                    LastName = "Feng",
+                    Grade = 80,
+                    StudentId = 102942,
+                    Gender = Gender.Female,
+                    BirthDate = new DateTime(1996, 2, 7),
                     PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
                 },
-                new Student { Id = 5, FirstName = "John", LastName = "Thomas", Grade = 80, StudentId = 920341, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1962, 12, 18),
+                new Student
+                {
+                    Id = 3,
+                    FirstName = "Brandon",
+                    LastName = "Lee",
+                    Grade = 100,
+                    StudentId = 293481,
+                    Gender = Gender.Male,
+                    BirthDate = new DateTime(2019, 1, 4),
                     PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
                 },
-                new Student { Id = 6, FirstName = "Javier", LastName = "Mcgregor", Grade = 80, StudentId = 763343, 
-                    Gender = Gender.Male, BirthDate = new DateTime(1988, 10, 7),
+                new Student
+                {
+                    Id = 4,
+                    FirstName = "Sue",
+                    LastName = "Jordan",
+                    Grade = 90,
+                    StudentId = 203941,
+                    Gender = Gender.Female,
+                    BirthDate = new DateTime(1925, 8, 12),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
+                new Student
+                {
+                    Id = 5,
+                    FirstName = "John",
+                    LastName = "Thomas",
+                    Grade = 80,
+                    StudentId = 920341,
+                    Gender = Gender.Male,
+                    BirthDate = new DateTime(1962, 12, 18),
+                    PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
+                },
+                new Student
+                {
+                    Id = 6,
+                    FirstName = "Javier",
+                    LastName = "Mcgregor",
+                    Grade = 80,
+                    StudentId = 763343,
+                    Gender = Gender.Male,
+                    BirthDate = new DateTime(1988, 10, 7),
                     PhotoImgPath = @"https://th.bing.com/th/id/OIP.SfAt4LpgCsJGCSD6AZffigHaHa?pid=Api&rs=1"
                 }
                 );
 
             modelBuilder.Entity<Teacher>()
                 .HasData(
-                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000 , Gender = Gender.Male},
+                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000, Gender = Gender.Male },
                 new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000, Gender = Gender.Female },
                 new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000, Gender = Gender.Male },
                 new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200, Gender = Gender.Female }
@@ -68,7 +116,7 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<SubjectsTeachersCanTeach>()
                 .HasData(
-                new SubjectsTeachersCanTeach { Id = 1, TeacherId = 1, Subject = Subject.Maths},
+                new SubjectsTeachersCanTeach { Id = 1, TeacherId = 1, Subject = Subject.Maths },
                 new SubjectsTeachersCanTeach { Id = 2, TeacherId = 2, Subject = Subject.Maths },
                 new SubjectsTeachersCanTeach { Id = 3, TeacherId = 2, Subject = Subject.Science },
                 new SubjectsTeachersCanTeach { Id = 4, TeacherId = 3, Subject = Subject.English },
@@ -91,7 +139,7 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Enrollment>()
                 .HasData(
-                new Enrollment { EnrollmentId = 1, CourseId = 1, StudentId = 1},
+                new Enrollment { EnrollmentId = 1, CourseId = 1, StudentId = 1 },
                 new Enrollment { EnrollmentId = 2, CourseId = 1, StudentId = 2 },
                 new Enrollment { EnrollmentId = 3, CourseId = 2, StudentId = 3 },
                 new Enrollment { EnrollmentId = 4, CourseId = 3, StudentId = 4 },
@@ -102,7 +150,7 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Email>()
                 .HasData(
-                new Email { Id = 1, EmailAddress = "203948@school.org", StudentId = 1, IsSchoolEmail = true, Owner = EmailOwner.School},
+                new Email { Id = 1, EmailAddress = "203948@school.org", StudentId = 1, IsSchoolEmail = true, Owner = EmailOwner.School },
                 new Email { Id = 2, EmailAddress = "keira54@yahoo.com", StudentId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
                 new Email { Id = 3, EmailAddress = "wilmer02@hane.com", StudentId = 3, IsSchoolEmail = false, Owner = EmailOwner.School },
                 new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", StudentId = 4, IsSchoolEmail = false, Owner = EmailOwner.School },
@@ -114,7 +162,7 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<PhoneNum>()
                 .HasData(
-                new PhoneNum { Id = 1, Owner = PhoneNumberOwner.Self, StudentId = 1, IsMobile = true, Number = "040690660", IsEmergency = true},
+                new PhoneNum { Id = 1, Owner = PhoneNumberOwner.Self, StudentId = 1, IsMobile = true, Number = "040690660", IsEmergency = true },
                 new PhoneNum { Id = 2, Owner = PhoneNumberOwner.Relative, StudentId = 2, IsMobile = false, Number = "87164280", IsEmergency = true },
                 new PhoneNum { Id = 3, Owner = PhoneNumberOwner.Guardian, StudentId = 3, IsMobile = true, Number = "048877120", IsEmergency = true },
                 new PhoneNum { Id = 4, Owner = PhoneNumberOwner.Self, StudentId = 4, IsMobile = true, Number = "0406938120", IsEmergency = true },
@@ -126,21 +174,73 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Address>()
                 .HasData(
-                new Address { Id = 1, IsPrimary = true, City = "Perth", StreetAddress = "123 fake st", 
-                    Postcode = "5123", Suburb = "Aowweq", State = "Unwepq", StudentId = 1},
-                new Address { Id = 2, IsPrimary = true, City = "Werth", StreetAddress = "128 fake st", 
-                    Postcode = "8123", Suburb = "Mngweq", State = "Wpfepq", StudentId = 2},
-                new Address { Id = 3, IsPrimary = true, City = "Zerth", StreetAddress = "127 fake st", 
-                    Postcode = "9123", Suburb = "Louweq", State = "Nmeepq", StudentId = 3},
-                new Address { Id = 4, IsPrimary = true, City = "Derth", StreetAddress = "126 fake st", 
-                    Postcode = "0123", Suburb = "Mzuweq", State = "Hjkepq", StudentId = 4},
-                new Address { Id = 5, IsPrimary = true, City = "Ferth", StreetAddress = "125 fake st", 
-                    Postcode = "2123", Suburb = "LLwweq", State = "Qrwwepq", StudentId = 5},
-                new Address { Id = 6, IsPrimary = true, City = "Merth", StreetAddress = "124 fake st", 
-                    Postcode = "4123", Suburb = "Gweq", State = "FWca", StudentId = 6}
+                new Address
+                {
+                    Id = 1,
+                    IsPrimary = true,
+                    City = "Perth",
+                    StreetAddress = "123 fake st",
+                    Postcode = "5123",
+                    Suburb = "Aowweq",
+                    State = "Unwepq",
+                    StudentId = 1
+                },
+                new Address
+                {
+                    Id = 2,
+                    IsPrimary = true,
+                    City = "Werth",
+                    StreetAddress = "128 fake st",
+                    Postcode = "8123",
+                    Suburb = "Mngweq",
+                    State = "Wpfepq",
+                    StudentId = 2
+                },
+                new Address
+                {
+                    Id = 3,
+                    IsPrimary = true,
+                    City = "Zerth",
+                    StreetAddress = "127 fake st",
+                    Postcode = "9123",
+                    Suburb = "Louweq",
+                    State = "Nmeepq",
+                    StudentId = 3
+                },
+                new Address
+                {
+                    Id = 4,
+                    IsPrimary = true,
+                    City = "Derth",
+                    StreetAddress = "126 fake st",
+                    Postcode = "0123",
+                    Suburb = "Mzuweq",
+                    State = "Hjkepq",
+                    StudentId = 4
+                },
+                new Address
+                {
+                    Id = 5,
+                    IsPrimary = true,
+                    City = "Ferth",
+                    StreetAddress = "125 fake st",
+                    Postcode = "2123",
+                    Suburb = "LLwweq",
+                    State = "Qrwwepq",
+                    StudentId = 5
+                },
+                new Address
+                {
+                    Id = 6,
+                    IsPrimary = true,
+                    City = "Merth",
+                    StreetAddress = "124 fake st",
+                    Postcode = "4123",
+                    Suburb = "Gweq",
+                    State = "FWca",
+                    StudentId = 6
+                }
                 );
-
-            
         }
     }
 }

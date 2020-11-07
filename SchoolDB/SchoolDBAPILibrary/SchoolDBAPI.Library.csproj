@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20201025071508_test.Designer.cs" />
     <Compile Remove="Migrations\20201025071700_test.cs" />
     <Compile Remove="Migrations\20201025071700_test.Designer.cs" />
+    <Compile Remove="Migrations\20201107002635_StudentCasecadeDelete.cs" />
+    <Compile Remove="Migrations\20201107002635_StudentCasecadeDelete.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
