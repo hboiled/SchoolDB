@@ -40,7 +40,14 @@ namespace SchoolDBAPI.Controllers
                 {
                     Id = course.Id,
                     Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Teacher = new TeacherBasicDetailDTO 
+                    {
+                        Id = course.Teacher.Id, 
+                        FirstName = course.Teacher.FirstName,
+                        LastName = course.Teacher.LastName,
+                        Gender = course.Teacher.Gender,
+                        Salary = course.Teacher.Salary
+                    },
                     Subject = course.Subject.ToString(),
                     CourseId = course.CourseId
                 };
@@ -77,7 +84,14 @@ namespace SchoolDBAPI.Controllers
                 {
                     Id = course.Id,
                     Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Teacher = new TeacherBasicDetailDTO
+                    {
+                        Id = course.Teacher.Id,
+                        FirstName = course.Teacher.FirstName,
+                        LastName = course.Teacher.LastName,
+                        Gender = course.Teacher.Gender,
+                        Salary = course.Teacher.Salary
+                    },
                     Subject = course.Subject.ToString(),
                     CourseId = course.CourseId
                 };
@@ -111,7 +125,14 @@ namespace SchoolDBAPI.Controllers
             {
                 Id = course.Id,
                 Title = course.Title,
-                Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                Teacher = new TeacherBasicDetailDTO
+                {
+                    Id = course.Teacher.Id,
+                    FirstName = course.Teacher.FirstName,
+                    LastName = course.Teacher.LastName,
+                    Gender = course.Teacher.Gender,
+                    Salary = course.Teacher.Salary
+                },
                 Subject = course.Subject.ToString(),
                 CourseId = course.CourseId
             };
@@ -270,7 +291,14 @@ namespace SchoolDBAPI.Controllers
                 {
                     Id = course.Id,
                     Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO { Id = course.Teacher.Id, FullName = course.Teacher.FullName },
+                    Teacher = new TeacherBasicDetailDTO
+                    {
+                        Id = course.Teacher.Id,
+                        FirstName = course.Teacher.FirstName,
+                        LastName = course.Teacher.LastName,
+                        Gender = course.Teacher.Gender,
+                        Salary = course.Teacher.Salary
+                    },
                     Subject = course.Subject.ToString(),
                     CourseId = course.CourseId
                 };
