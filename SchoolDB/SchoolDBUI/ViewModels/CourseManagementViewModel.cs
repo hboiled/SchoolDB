@@ -18,6 +18,8 @@ namespace SchoolDBUI.ViewModels
         private readonly IStudentEndpoint studentEndpoint;
         private readonly IEventAggregator events;
 
+        private bool IsEditMode = false;
+
         public CourseManagementViewModel(
             ICourseEndpoint courseEndpoint,
             ITeacherEndpoint teacherEndpoint,
@@ -32,15 +34,15 @@ namespace SchoolDBUI.ViewModels
             LoadCourses();
         }
 
-        private string addModeMsg;
+        private string modeMsg;
 
-        public string AddModeMsg // upon submit, clear msg
+        public string ModeMsg // upon submit, clear msg
         {
-            get { return addModeMsg; }
+            get { return modeMsg; }
             set 
             { 
-                addModeMsg = value;
-                NotifyOfPropertyChange(() => AddModeMsg);
+                modeMsg = value;
+                NotifyOfPropertyChange(() => ModeMsg);
             }
         }
 
@@ -49,7 +51,8 @@ namespace SchoolDBUI.ViewModels
         {
             if (message.Equals("New"))
             {
-                AddModeMsg = "Add New Course";
+                ModeMsg = "Add New Course";
+                IsEditMode = false;
             }
 
             if (message.Equals("Save"))
@@ -76,14 +79,20 @@ namespace SchoolDBUI.ViewModels
         {
             if (selectedCourse != null)
             {
-                AddModeMsg = "Edit Course";
+                EnableEditMode();
                 CourseTitleTextbox = selectedCourse.Title;
                 CourseIdTextbox = selectedCourse.CourseId;
                 SelectedTeacher = null; // setting this to null helps trigger the combo box to change
                 SelectedTeacher = selectedCourse.Teacher;
                 EnrolledStudents = null;
                 EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
-            }            
+            }
+        }
+
+        private void EnableEditMode()
+        {
+            ModeMsg = "Edit Course";
+            IsEditMode = true;
         }
 
         private string courseTitleTextbox;
@@ -359,6 +368,11 @@ namespace SchoolDBUI.ViewModels
 
         public void EnrollStudent()
         {
+            if (SelectedStudent == null || SelectedCourse == null)
+            {
+                return;
+            }
+
             if (!IsStudentAlreadyEnrolled())
             {
                 EnrolledStudents.Add(SelectedStudent);
@@ -367,12 +381,12 @@ namespace SchoolDBUI.ViewModels
 
         public void UnenrollStudent()
         {
-            if (SelectedEnrolledStudent != null)
+            if (SelectedCourse != null && SelectedEnrolledStudent != null)
             {
                 EnrolledStudents.Remove(SelectedEnrolledStudent);
+                NotifyOfPropertyChange(() => EnrolledStudents);
             }
 
-            NotifyOfPropertyChange(() => EnrolledStudents);
         }
 
         public bool IsStudentAlreadyEnrolled()
@@ -398,13 +412,19 @@ namespace SchoolDBUI.ViewModels
                 Title = CourseTitleTextbox,
                 CourseId = CourseIdTextbox,
                 Department = subject,
-                TeacherAssigned = SelectedTeacher, // BUG: teacher sent over has several null vals which override data!!!
-                // use a different student class to avoid unnecessary references?
+                TeacherAssigned = SelectedTeacher,
+                // use a different student class to avoid unnecessary references and lighten the load?
                 EnrolledStudents = EnrolledStudents.ToList() 
             };
 
-            await courseEndpoint.UpdateCourse(SelectedCourse.Id, course);
-            //await courseEndpoint.SubmitCourse(course);
+            if (IsEditMode)
+            {
+                await courseEndpoint.UpdateCourse(SelectedCourse.Id, course);
+            }
+            else
+            {
+                await courseEndpoint.SubmitCourse(course);
+            }
 
             LoadCourses();            
         }
