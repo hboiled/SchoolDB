@@ -13,7 +13,7 @@ namespace SchoolDBUI.ViewModels
         private readonly StudentDataViewModel studentDataViewModel;
         private readonly StudentSubmitViewModel studentSubmitViewModel;
         private readonly CourseManagementViewModel courseManagementViewModel;
-
+        private readonly StaffManagementViewModel staffManagementViewModel;
         private bool isStudentView;
         public bool IsStudentView
         {
@@ -47,15 +47,28 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
+        private bool isStaffManagement;
+        public bool IsStaffManagement
+        {
+            get { return isStaffManagement; }
+            set
+            {
+                isCourseManagement = value;
+                NotifyOfPropertyChange(() => IsStaffManagement);
+            }
+        }
+
         public ShellViewModel(IEventAggregator events, 
             StudentDataViewModel studentDataViewModel, 
             StudentSubmitViewModel studentSubmitViewModel,
-            CourseManagementViewModel courseManagementViewModel)
+            CourseManagementViewModel courseManagementViewModel,
+            StaffManagementViewModel staffManagementViewModel)
         {
             this.events = events;
             this.studentDataViewModel = studentDataViewModel;
             this.studentSubmitViewModel = studentSubmitViewModel;
             this.courseManagementViewModel = courseManagementViewModel;
+            this.staffManagementViewModel = staffManagementViewModel;
             this.events.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
@@ -81,6 +94,13 @@ namespace SchoolDBUI.ViewModels
             SetAllFlagsFalse();
             IsCourseManagement = true;
             ActivateItem(IoC.Get<CourseManagementViewModel>());            
+        }
+
+        public void StaffManagementView()
+        {
+            SetAllFlagsFalse();
+            IsStaffManagement = true;
+            ActivateItem(IoC.Get<StaffManagementViewModel>());
         }
 
         private void SetAllFlagsFalse()

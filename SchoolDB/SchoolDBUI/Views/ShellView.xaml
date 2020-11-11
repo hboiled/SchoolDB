@@ -18,6 +18,9 @@
                 <MenuItem x:Name="ViewStudentData" Header="V_iew Student"/>
                 <MenuItem x:Name="AddStudentData" Header="A_dd Student"/>
             </MenuItem>
+            <MenuItem Header="_Staff">
+                <MenuItem x:Name="StaffManagementView" Header="V_iew Staff"/>
+            </MenuItem>
             <MenuItem Header="_Courses">
                 <MenuItem x:Name="CourseManagementView" Header="V_iew Courses"/>
                 <MenuItem x:Name="AddNewCourse" InputGestureText="Ctrl + N"

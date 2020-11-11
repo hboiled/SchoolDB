@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="SchoolDBUI.Views.StaffManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolDBUI.Views"
+             mc:Ignorable="d" Background="WhiteSmoke" FontSize="18"
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Staff Management Portal" FontSize="28" Margin="5 5"></TextBlock>
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" Grid.Column="0" Margin="20,0,0,0">
+            
+
+            <Label Content="Name"/>
+            <TextBox x:Name="StaffNameTextbox" Width="200" HorizontalAlignment="Left" Margin="5,0,0,20" />
+
+            <ListBox ItemsSource="{Binding Staff}" Height="400" MaxWidth="200" Width="200"
+                     HorizontalAlignment="Left" Margin="5,0,0,0" SelectedItem="{Binding SelectedCourse}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding FullName}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <!-- Display student/graduate/teacher/principal/other staff, colour-code role -->
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Id: " FontSize="14"/>
+                                    <TextBlock Text="Insert Staff Id" FontSize="14"/>
+                                </StackPanel>
+
+                                <!-- Photo thumbnail? -->
+
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</UserControl>
