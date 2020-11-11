@@ -89,7 +89,10 @@ namespace SchoolDBAPI.Controllers
                 Teacher = new TeacherBasicDetailDTO
                 {
                     Id = e.Course.Teacher.Id,
-                    FullName = e.Course.Teacher.FullName
+                    FirstName = e.Course.Teacher.FirstName,
+                    LastName = e.Course.Teacher.LastName,
+                    Gender = e.Course.Teacher.Gender,
+                    Salary = e.Course.Teacher.Salary
                 }
             })
             .ToList();
