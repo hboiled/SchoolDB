@@ -72,7 +72,7 @@ namespace SchoolDBUI.ViewModels
             this.events.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
-            ActivateItem(IoC.Get<StudentDataViewModel>());
+            ActivateItem(IoC.Get<StaffManagementViewModel>());
         }
 
         public void ViewStudentData()

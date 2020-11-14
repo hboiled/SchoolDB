@@ -13,5 +13,6 @@ namespace SchoolDBAPI.Library.Models.People
         [ForeignKey("Teacher")]
         public int TeacherId { get; set; }
         public Subject Subject { get; set; }
+        // enum prop -- intro / middle / advanced levels
     }
 }

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="SchoolDBUI.Views.Components.EmailAddControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolDBUI.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="310" d:DesignWidth="420">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListView Height="150" ItemsSource="{Binding Emails}" SelectedItem="{Binding SelectedEmail}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=EmailAddress}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Email Address" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Path=Owner}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Contact Type"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" Margin="10 5 5 5" HorizontalAlignment="Center">
+                <Label Content="Email Address:" HorizontalAlignment="Center"></Label>
+                <TextBox x:Name="EmailAddressTextbox" Width="300" MaxHeight="30"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,10,5,10">
+                <Label Content="Owner:"></Label>
+                <ComboBox Height="30" Width="160" ItemsSource="{Binding EmailOwnerTypes}" 
+                                      SelectedItem="{Binding SelectedEmailOwner}" SelectedValue="EmailOwnerTypes[0]"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AddEmail" Content="Add Email" Margin="15,10,30,0" Height="35" Width="180" HorizontalAlignment="Left"></Button>
+                <Button x:Name="RemoveEmail" Content="Remove Email" Margin="0,10,30,0" Height="35" Width="180"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

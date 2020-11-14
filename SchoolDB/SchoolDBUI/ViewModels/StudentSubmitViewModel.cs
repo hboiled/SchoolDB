@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
 using SchoolDBUI.Library.Models.Contact;
+using SchoolDBUI.ViewModels.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,11 @@ namespace SchoolDBUI.ViewModels
     {
         private readonly IStudentEndpoint studentEndpoint;
         private readonly ICourseEndpoint courseEndpoint;
+
+        // Components
+        public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
+        public EmailAddControlViewModel EmailAddControlView { get; set; } = new EmailAddControlViewModel();
+        public PhoneAddControlViewModel PhoneAddControlView { get; set; } = new PhoneAddControlViewModel();
 
         public StudentSubmitViewModel(
             IStudentEndpoint studentEndpoint,
@@ -229,282 +235,8 @@ namespace SchoolDBUI.ViewModels
             CoursesEnrolledIn.Remove(EnrolledCourseSelection);
         }
 
-        #endregion
+        #endregion        
 
-        // 
-        #region Addresses
-        private string streetAddressTextbox;
-
-        public string StreetAddressTextbox
-        {
-            get { return streetAddressTextbox; }
-            set 
-            { 
-                streetAddressTextbox = value;
-                NotifyOfPropertyChange(() => StreetAddressTextbox);
-            }
-        }
-
-        private string postcodeTextbox;
-
-        public string PostcodeTextbox
-        {
-            get { return postcodeTextbox; }
-            set 
-            { 
-                postcodeTextbox = value;
-                NotifyOfPropertyChange(() => PostcodeTextbox);
-            }
-        }
-
-        private string suburbTextbox;
-
-        public string SuburbTextbox
-        {
-            get { return suburbTextbox; }
-            set 
-            { 
-                suburbTextbox = value;
-                NotifyOfPropertyChange(() => SuburbTextbox);
-            }
-        }
-
-        private string cityTextbox;
-
-        public string CityTextbox
-        {
-            get { return cityTextbox; }
-            set 
-            { 
-                cityTextbox = value;
-                NotifyOfPropertyChange(() => CityTextbox);
-            }
-        }
-
-        private string stateTextbox;
-
-        public string StateTextbox
-        {
-            get { return stateTextbox; }
-            set 
-            { 
-                stateTextbox = value;
-                NotifyOfPropertyChange(() => StateTextbox);
-            }
-        }
-
-        private bool primaryAddressBox;
-
-        public bool PrimaryAddressBox
-        {
-            get { return primaryAddressBox; }
-            set 
-            { 
-                primaryAddressBox = value;
-                NotifyOfPropertyChange(() => PrimaryAddressBox);
-            }
-        }
-
-        public Address SelectedAddress { get; set; }
-
-        private BindingList<Address> addresses = new BindingList<Address>();
-
-        public BindingList<Address> Addresses
-        {
-            get { return addresses; }
-            set { addresses = value; }
-        }
-
-        public void AddAddress()
-        {
-            var address = new Address
-            {
-                StreetAddress = StreetAddressTextbox,
-                Suburb = SuburbTextbox,
-                City = CityTextbox,
-                State = StateTextbox,
-                Postcode = PostcodeTextbox,
-                IsPrimary = PrimaryAddressBox
-            };
-
-            Addresses.Add(address);
-            ResetAddressTextFields();
-        }
-
-        public void RemoveAddress()
-        {
-            if (SelectedAddress != null)
-            {
-                Addresses.Remove(SelectedAddress);
-            }
-            ResetAddressTextFields();
-        }
-
-        private void ResetAddressTextFields()
-        {
-            StreetAddressTextbox = "";
-            SuburbTextbox = "";
-            CityTextbox = "";
-            StateTextbox = "";
-            PostcodeTextbox = "";
-            PrimaryAddressBox = false;
-        }
-
-        #endregion
-
-        // 
-        #region Email
-
-        private string emailAddressTextbox;
-        public string EmailAddressTextbox {
-            get { return emailAddressTextbox; }
-            set
-            {
-                emailAddressTextbox = value;
-                // must notify of prop change, using full prop to have UI update to changes
-                NotifyOfPropertyChange(() => EmailAddressTextbox);
-            }
-        }
-        public EmailOwner SelectedEmailOwner { get; set; }
-
-        public IEnumerable<EmailOwner> EmailOwnerTypes
-        {
-            get
-            {
-                return Enum.GetValues(typeof(EmailOwner))
-                    .Cast<EmailOwner>();
-            }
-        }
-
-        private BindingList<Email> emails = new BindingList<Email>();
-
-        public BindingList<Email> Emails
-        {
-            get { return emails; }
-            set { emails = value; }
-        }
-
-        public void AddEmail()
-        {
-            if (!string.IsNullOrWhiteSpace(EmailAddressTextbox))
-            {
-                Emails.Add(new Email
-                {
-                    EmailAddress = EmailAddressTextbox,
-                    Owner = SelectedEmailOwner
-                });
-            }
-
-            ClearEmailFormFields();
-        }
-
-        private void ClearEmailFormFields()
-        {
-            EmailAddressTextbox = "";
-        }
-
-        public Email SelectedEmail { get; set; }
-
-        public void RemoveEmail()
-        {
-            if (SelectedEmail != null)
-            {
-                Emails.Remove(SelectedEmail);
-            }
-        }
-
-        #endregion
-
-        // 
-        #region Phone
-
-        private string phoneNumberTextbox;
-        public string PhoneNumberTextbox
-        {
-            get { return phoneNumberTextbox; }
-            set 
-            { 
-                phoneNumberTextbox = value;
-                NotifyOfPropertyChange(() => PhoneNumberTextbox);
-            }
-        }
-
-        private bool eContactBox;
-        public bool EContactBox
-        {
-            get { return eContactBox; }
-            set
-            {
-                eContactBox = value;
-                NotifyOfPropertyChange(() => EContactBox);
-            }
-        }
-
-        private bool mobileBox;
-        public bool MobileBox 
-        {
-            get { return mobileBox; }
-            set
-            {
-                mobileBox = value;
-                NotifyOfPropertyChange(() => MobileBox);
-            }
-        }
-
-        public PhoneNumberOwner SelectedPhoneOwner { get; set; }
-
-        private BindingList<PhoneNum> phoneNums = new BindingList<PhoneNum>();
-
-        public BindingList<PhoneNum> PhoneNums
-        {
-            get { return phoneNums; }
-            set { phoneNums = value; }
-        }
-
-        public IEnumerable<PhoneNumberOwner> PhoneOwnerTypes
-        {
-            get
-            {
-                return Enum.GetValues(typeof(PhoneNumberOwner))
-                    .Cast<PhoneNumberOwner>();
-            }
-        }
-
-        public void AddPhoneNumber()
-        {
-            if (!string.IsNullOrWhiteSpace(PhoneNumberTextbox))
-            {
-                phoneNums.Add(
-                    new PhoneNum
-                    {
-                        Number = PhoneNumberTextbox,
-                        IsMobile = MobileBox,
-                        IsEmergency = EContactBox,
-                        Owner = SelectedPhoneOwner
-                    });
-            }
-            ResetPhoneNumberTextbox();
-        }
-
-        public PhoneNum SelectedPhoneNumber { get; set; }
-
-        public void RemovePhoneNumber()
-        {
-            if (SelectedPhoneNumber != null)
-            {
-                PhoneNums.Remove(SelectedPhoneNumber);
-            }
-            ResetPhoneNumberTextbox();
-        }
-
-        private void ResetPhoneNumberTextbox()
-        {
-            PhoneNumberTextbox = "";
-            EContactBox = false;
-            MobileBox = false;
-        }
-
-        #endregion
 
         public void SubmitStudent()
         {
@@ -514,13 +246,13 @@ namespace SchoolDBUI.ViewModels
                 FirstName = FirstNameTextbox,
                 LastName = LastNameTextbox,
                 Gender = SelectedGender,
-                PhotoImgPath = StudentPhoto, 
+                PhotoImgPath = StudentPhoto,
                 Grade = SelectedGrade,
                 BirthDate = StudentDOB,
                 StudentId = StudentIdTextbox,
-                Emails = Emails.ToList(),
-                PhoneNums = PhoneNums.ToList(),
-                Addresses = Addresses.ToList(),
+                Emails = EmailAddControlView.Emails.ToList(),
+                PhoneNums = PhoneAddControlView.PhoneNums.ToList(),
+                Addresses = AddressAddControlView.Addresses.ToList(),
                 CourseEnrollments = CoursesEnrolledIn.ToList(),                
             };
 

@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
+using SchoolDBUI.ViewModels.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace SchoolDBUI.ViewModels
         private readonly ITeacherEndpoint teacherEndpoint;
         private readonly ICourseEndpoint courseEndpoint;
 
+        public AddressAddControlViewModel AddressAddControlView { get; set; }
+
         public StaffManagementViewModel(
             ITeacherEndpoint teacherEndpoint,
             ICourseEndpoint courseEndpoint
@@ -21,6 +24,8 @@ namespace SchoolDBUI.ViewModels
         {
             this.teacherEndpoint = teacherEndpoint;
             this.courseEndpoint = courseEndpoint;
+
+            AddressAddControlView = new AddressAddControlViewModel();
             LoadStaff();
         }
 

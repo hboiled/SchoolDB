@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SchoolDBUI.Views.Components.PhoneAddControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolDBUI.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="310" d:DesignWidth="420">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListView Height="150" ItemsSource="{Binding PhoneNums}" SelectedItem="{Binding SelectedPhoneNumber}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="140" DisplayMemberBinding="{Binding Path=Number}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Phone Number" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Owner}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Owner"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Emergency}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Emergency"/>
+                        </GridViewColumn>
+                        <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=Mobile}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Mobile"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" Margin="10 5 5 5" HorizontalAlignment="Center">
+                <Label Content="Phone Number:" HorizontalAlignment="Center"></Label>
+                <TextBox x:Name="PhoneNumberTextbox" Width="300" MaxHeight="30"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,10,5,10">
+                <Label Content="Owner:"></Label>
+                <ComboBox Height="30" Width="160" ItemsSource="{Binding PhoneOwnerTypes}" 
+                                      SelectedItem="{Binding SelectedPhoneOwner}" SelectedValue="PhoneOwnerTypes[0]"></ComboBox>
+                <CheckBox x:Name="EContactBox" Content="Emergency" Margin="10 5 0 0"></CheckBox>
+                <CheckBox x:Name="MobileBox" Content="Mobile" Margin="10 5 0 0"></CheckBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AddPhoneNumber" Content="Add Phone Number" Margin="15,10,30,0" Height="35" Width="180" HorizontalAlignment="Left"></Button>
+                <Button x:Name="RemovePhoneNumber" Content="Remove Phone Number" Margin="0,10,30,0" Height="35" Width="180"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
