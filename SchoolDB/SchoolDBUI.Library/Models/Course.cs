@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolDBUI.Library.Models.SchoolBusiness;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +26,7 @@ namespace SchoolDBUI.Library.Models
             }
         }
         public string CourseId { get; set; }
+        public CourseLevel CourseLevel { get; set; }
         public string StudentGrade { get; set; }
         public List<Student> Students { get; set; } = new List<Student>();
     }    

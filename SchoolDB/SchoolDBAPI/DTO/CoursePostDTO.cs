@@ -14,5 +14,6 @@ namespace SchoolDBAPI.DTO
         public Subject Department { get; set; }
         public Teacher TeacherAssigned { get; set; }
         public List<Student> EnrolledStudents { get; set; } = new List<Student>();
+        public CourseLevel CourseLevel { get; set; }
     }
 }

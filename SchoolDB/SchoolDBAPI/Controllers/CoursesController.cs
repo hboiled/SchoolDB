@@ -36,31 +36,7 @@ namespace SchoolDBAPI.Controllers
 
             foreach (var course in courses)
             {
-                CourseReadDTO courseData = new CourseReadDTO
-                {
-                    Id = course.Id,
-                    Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO 
-                    {
-                        Id = course.Teacher.Id, 
-                        FirstName = course.Teacher.FirstName,
-                        LastName = course.Teacher.LastName,
-                        Gender = course.Teacher.Gender,
-                        Salary = course.Teacher.Salary
-                    },
-                    Subject = course.Subject.ToString(),
-                    CourseId = course.CourseId
-                };
-
-                courseData.Students = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
+                CourseReadDTO courseData = MapToCourseReadDTO(course);
 
                 coursesData.Add(courseData);
             }
@@ -78,35 +54,14 @@ namespace SchoolDBAPI.Controllers
 
             var coursesData = new List<CourseReadDTO>();
 
-            foreach (var course in courses)
+            if (courses.Count > 0)
             {
-                CourseReadDTO courseData = new CourseReadDTO
+                foreach (var course in courses)
                 {
-                    Id = course.Id,
-                    Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO
-                    {
-                        Id = course.Teacher.Id,
-                        FirstName = course.Teacher.FirstName,
-                        LastName = course.Teacher.LastName,
-                        Gender = course.Teacher.Gender,
-                        Salary = course.Teacher.Salary
-                    },
-                    Subject = course.Subject.ToString(),
-                    CourseId = course.CourseId
-                };
+                    CourseReadDTO courseData = MapToCourseReadDTO(course);
 
-                courseData.Students = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
-
-                coursesData.Add(courseData);
+                    coursesData.Add(courseData);
+                }
             }
 
             return coursesData;
@@ -121,33 +76,7 @@ namespace SchoolDBAPI.Controllers
                 .Include(c => c.Teacher)
                 .FirstOrDefault();
 
-            var courseData = new CourseReadDTO
-            {
-                Id = course.Id,
-                Title = course.Title,
-                Teacher = new TeacherBasicDetailDTO
-                {
-                    Id = course.Teacher.Id,
-                    FirstName = course.Teacher.FirstName,
-                    LastName = course.Teacher.LastName,
-                    Gender = course.Teacher.Gender,
-                    Salary = course.Teacher.Salary
-                },
-                Subject = course.Subject.ToString(),
-                CourseId = course.CourseId
-            };
-
-            var matchingStudents = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
-
-            courseData.Students = matchingStudents;
+            var courseData = MapToCourseReadDTO(course);
 
             return courseData;
         }
@@ -284,39 +213,50 @@ namespace SchoolDBAPI.Controllers
                 .ToList();
 
             var coursesData = new List<CourseReadDTO>();
-
-            foreach (var course in courses)
+            
+            if (courses.Count > 0)
             {
-                CourseReadDTO courseData = new CourseReadDTO
+                foreach (var course in courses)
                 {
-                    Id = course.Id,
-                    Title = course.Title,
-                    Teacher = new TeacherBasicDetailDTO
-                    {
-                        Id = course.Teacher.Id,
-                        FirstName = course.Teacher.FirstName,
-                        LastName = course.Teacher.LastName,
-                        Gender = course.Teacher.Gender,
-                        Salary = course.Teacher.Salary
-                    },
-                    Subject = course.Subject.ToString(),
-                    CourseId = course.CourseId
-                };
+                    CourseReadDTO courseData = MapToCourseReadDTO(course);
 
-                courseData.Students = context.Enrollments
-                .Where(e => e.CourseId == course.Id)
-                .Select(e => new StudentBasicDetailDTO
-                {
-                    Id = e.Student.Id,
-                    FirstName = e.Student.FirstName,
-                    LastName = e.Student.LastName
-                })
-                .ToList();
-
-                coursesData.Add(courseData);
-            }
+                    coursesData.Add(courseData);
+                }
+            }            
 
             return coursesData;
+        }
+
+        private CourseReadDTO MapToCourseReadDTO(Course course)
+        {
+            CourseReadDTO courseData = new CourseReadDTO
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Teacher = new TeacherBasicDetailDTO
+                {
+                    Id = course.Teacher.Id,
+                    FirstName = course.Teacher.FirstName,
+                    LastName = course.Teacher.LastName,
+                    Gender = course.Teacher.Gender,
+                    Salary = course.Teacher.Salary
+                },
+                Subject = course.Subject.ToString(),
+                CourseId = course.CourseId,
+                CourseLevel = course.CourseLevel.ToString()
+            };
+
+            courseData.Students = context.Enrollments
+            .Where(e => e.CourseId == course.Id)
+            .Select(e => new StudentBasicDetailDTO
+            {
+                Id = e.Student.Id,
+                FirstName = e.Student.FirstName,
+                LastName = e.Student.LastName
+            })
+            .ToList();
+
+            return courseData;
         }
 
         private bool CourseExists(int id)

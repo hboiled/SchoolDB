@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.Models;
+using SchoolDBUI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,9 +33,9 @@ namespace SchoolDBUI.ViewModels.Components
             }
         }
 
-        private Subject selectedQualification;
+        private SubjectTeachersViewModel selectedQualification;
 
-        public Subject SelectedQualification
+        public SubjectTeachersViewModel SelectedQualification
         {
             get { return selectedQualification; }
             set 
@@ -45,8 +46,8 @@ namespace SchoolDBUI.ViewModels.Components
         }
 
 
-        private BindingList<Subject> qualifications = new BindingList<Subject>();
-        public BindingList<Subject> Qualifications
+        private BindingList<SubjectTeachersViewModel> qualifications = new BindingList<SubjectTeachersViewModel>();
+        public BindingList<SubjectTeachersViewModel> Qualifications
         {
             get { return qualifications; }
             set
@@ -60,7 +61,10 @@ namespace SchoolDBUI.ViewModels.Components
         {
             if (Enum.TryParse(SelectedSubject, out Subject result))
             {
-                Qualifications.Add(result);
+                Qualifications.Add(new SubjectTeachersViewModel
+                {
+                    Subject = result
+                });
             }
             // handle error}
         }

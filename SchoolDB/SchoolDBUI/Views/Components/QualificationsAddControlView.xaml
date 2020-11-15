@@ -11,7 +11,7 @@
             <ListView Height="150" ItemsSource="{Binding Qualifications}" SelectedItem="{Binding SelectedQualification}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=Qualifications}">
+                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=Subject}">
                             <GridViewColumnHeader TextElement.FontSize="18" Content="Subject" />
                         </GridViewColumn>
                         <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=Level}">
