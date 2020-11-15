@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="SchoolDBUI.Views.Components.QualificationsAddControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolDBUI.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="310" d:DesignWidth="420">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListView Height="150" ItemsSource="{Binding Qualifications}" SelectedItem="{Binding SelectedQualification}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=Qualifications}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Subject" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=Level}">
+                            <GridViewColumnHeader TextElement.FontSize="18" Content="Level"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,15">
+                <Label Content="Subject:"></Label>
+                <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubject}"
+                          ItemsSource="{Binding Subjects}">
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
+                <Button x:Name="AddSubject" VerticalAlignment="Bottom" Width="100" Height="30">
+                    Add Subject
+                </Button>
+                <Button x:Name="RemoveSubject" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10 0 0 0">
+                    Remove Subject
+                </Button>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -15,7 +15,11 @@ namespace SchoolDBUI.ViewModels
         private readonly ITeacherEndpoint teacherEndpoint;
         private readonly ICourseEndpoint courseEndpoint;
 
-        public AddressAddControlViewModel AddressAddControlView { get; set; }
+        // Components
+        public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
+        public EmailAddControlViewModel EmailAddControlView { get; set; } = new EmailAddControlViewModel();
+        public PhoneAddControlViewModel PhoneAddControlView { get; set; } = new PhoneAddControlViewModel();
+        public QualificationsAddControlViewModel QualificationsAddControlView { get; set; } = new QualificationsAddControlViewModel();
 
         public StaffManagementViewModel(
             ITeacherEndpoint teacherEndpoint,
