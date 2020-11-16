@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
+using SchoolDBUI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,6 +216,26 @@ namespace SchoolDBUI.ViewModels
                 NotifyOfPropertyChange(() => FilteredTeachers);
             }
         }
+
+        public IEnumerable<CourseLevel> CourseLevels
+        {
+            get
+            {
+                return Enum.GetValues(typeof(CourseLevel))
+                    .Cast<CourseLevel>();
+            }
+        }
+
+        private string selectedCourseLevel;
+        public string SelectedCourseLevel
+        {
+            get { return selectedCourseLevel; }
+            set
+            {
+                selectedCourseLevel = value;                
+                NotifyOfPropertyChange(() => SelectedCourseLevel);
+            }
+        }
         #endregion
 
         #region Display error
@@ -406,6 +427,7 @@ namespace SchoolDBUI.ViewModels
         public async Task CreateCourse()
         {
             Enum.TryParse(SelectedSubjectFilter, out Subject subject);
+            Enum.TryParse(SelectedCourseLevel, out CourseLevel courseLevel);
 
             var course = new CourseSubmitDTO
             {
@@ -414,7 +436,8 @@ namespace SchoolDBUI.ViewModels
                 Department = subject,
                 TeacherAssigned = SelectedTeacher,
                 // use a different student class to avoid unnecessary references and lighten the load?
-                EnrolledStudents = EnrolledStudents.ToList() 
+                CourseLevel = courseLevel,
+                EnrolledStudents = EnrolledStudents.ToList()
             };
 
             if (IsEditMode)

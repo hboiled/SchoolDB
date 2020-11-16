@@ -67,13 +67,20 @@
                 </StackPanel>
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,20">
+                <Label Content="Course Level:" HorizontalAlignment="Center"></Label>
+                <ComboBox Height="30" Width="220" x:Name="CourseLevels"
+                          SelectedItem="{Binding SelectedCourseLevel}" SelectedValue="{Binding SelectedCourse.CourseLevel}" >
+                </ComboBox>
+            </StackPanel>
+
             <StackPanel Orientation="Vertical" Margin="0,10,0,0" >
                 <TextBlock Text="Assign Teacher" HorizontalAlignment="Center" />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,15">
                     <Label Content="Department:"></Label>
-                    <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="{Binding SelectedCourse.Subject}" 
-                          ItemsSource="{Binding Subjects}">
+                    <ComboBox Height="30" Width="200" x:Name="Subjects"
+                          SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="{Binding SelectedCourse.Subject}" >
                     </ComboBox>
                 </StackPanel>
 
