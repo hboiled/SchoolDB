@@ -100,6 +100,7 @@ namespace SchoolDBAPI.Controllers
             existingCourse.CourseId = course.CourseId;
             existingCourse.Subject = course.Department;
             existingCourse.Teacher = course.TeacherAssigned;
+            existingCourse.CourseLevel = course.CourseLevel;
 
             // get all enrollments for this course in db 
             var enrollments = await context.Enrollments
@@ -166,7 +167,8 @@ namespace SchoolDBAPI.Controllers
                 Title = course.Title,
                 CourseId = course.CourseId,
                 Subject = course.Department,
-                TeacherId = course.TeacherAssigned.Id
+                TeacherId = course.TeacherAssigned.Id,
+                CourseLevel = course.CourseLevel
             };
 
             context.Courses.Add(newCourse);

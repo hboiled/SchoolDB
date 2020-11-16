@@ -114,6 +114,10 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <Button x:Name="AddStaff" Content="test"></Button>
+        </StackPanel>
         
     </Grid>
 </UserControl>

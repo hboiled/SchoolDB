@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolDBUI.Library.Models
+namespace SchoolDBUI.Library.Models.SubmitDTOs
 {
     public class StudentSubmitDTO
     {
-        // only used with put endpoint
+        // only used with put endpoint, can be refactored to be removed
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,6 +20,6 @@ namespace SchoolDBUI.Library.Models
         public List<Email> Emails { get; set; }
         public List<PhoneNum> PhoneNums { get; set; }
         public List<Address> Addresses { get; set; }
-        
+
     }
 }

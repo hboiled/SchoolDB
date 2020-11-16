@@ -1,4 +1,5 @@
 ﻿using SchoolDBUI.Library.Models;
+using SchoolDBUI.Library.Models.SubmitDTOs;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -41,6 +42,22 @@ namespace SchoolDBUI.Library.API
                 {
                     var result = await response.Content.ReadAsAsync<List<Teacher>>();
                     return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task SubmitTeacher(TeacherSubmitDTO teacher)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient
+                .PostAsJsonAsync($"api/teachers", teacher))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var x = "Working";
                 }
                 else
                 {

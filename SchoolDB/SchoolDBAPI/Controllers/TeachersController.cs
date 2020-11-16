@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SchoolDBAPI.DTO;
 using SchoolDBAPI.Library.DataAccess;
 using SchoolDBAPI.Library.Models.People;
 using SchoolDBAPI.Library.Models.SchoolBusiness;
@@ -96,12 +97,49 @@ namespace SchoolDBAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Teacher>> PostTeacher(Teacher teacher)
+        public async Task<ActionResult<Teacher>> PostTeacher(TeacherPostDTO teacher)
         {
-            context.Teachers.Add(teacher);
+            var teacherData = new Teacher
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Gender = teacher.Gender,
+                Salary = teacher.Salary,
+            };
+
+            context.Teachers.Add(teacherData);
             await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTeacher", new { id = teacher.Id }, teacher);
+            // subjects teachable
+            var subjectsTeacherCanTeach = teacher.SubjectTeachers
+                .Select(st => new SubjectsTeachersCanTeach
+                {
+                    TeacherId = teacherData.Id,
+                    Subject = st.Subject,
+                    CourseLevel = st.CourseLevel
+                })
+                .ToList();
+
+            context.SubjectTeachers.AddRange(subjectsTeacherCanTeach);
+
+            // courses taught
+            // override previous teacher or not? display warning?
+            var teacherCoursesToTeach = teacher.CoursesTaught
+                .Select(c => c.Id)
+                .ToList();
+
+            var courses = context.Courses
+                .Where(c => teacherCoursesToTeach.Contains(c.Id))
+                .ToList();
+
+            foreach (var course in courses)
+            {
+                course.TeacherId = teacherData.Id;
+            }
+
+            await context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTeacher", new { id = teacherData.Id }, teacher);
         }
 
         // DELETE: api/Teachers/5
@@ -109,6 +147,7 @@ namespace SchoolDBAPI.Controllers
         public async Task<ActionResult<Teacher>> DeleteTeacher(int id)
         {
             var teacher = await context.Teachers.FindAsync(id);
+            
             if (teacher == null)
             {
                 return NotFound();

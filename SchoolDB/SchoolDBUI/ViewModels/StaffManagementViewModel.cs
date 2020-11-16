@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
+using SchoolDBUI.Library.Models.SchoolBusiness;
+using SchoolDBUI.Library.Models.SubmitDTOs;
 using SchoolDBUI.ViewModels.Components;
 using System;
 using System.Collections.Generic;
@@ -75,6 +77,32 @@ namespace SchoolDBUI.ViewModels
                 staff = value;
                 NotifyOfPropertyChange(() => Staff);
             } 
+        }
+
+        public void AddStaff()
+        {
+            var teacher = new TeacherSubmitDTO
+            {
+                FirstName = "faf",
+                LastName = "af",
+                SubjectTeachers = new List<SubjectTeachersViewModel>
+                {
+                    new SubjectTeachersViewModel {CourseLevel = CourseLevel.Intermediate, Subject = Subject.Biology}
+                },
+                CoursesTaught = new List<Course>
+                {
+                    new Course
+                    {
+                        Id = 1
+                    },
+                    new Course
+                    {
+                        Id = 2
+                    }
+                }                
+            };
+
+            teacherEndpoint.SubmitTeacher(teacher);
         }
     }
 }

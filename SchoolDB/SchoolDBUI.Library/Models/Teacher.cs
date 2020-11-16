@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolDBUI.Library.Models.SchoolBusiness;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,6 +18,7 @@ namespace SchoolDBUI.Library.Models
         }
         public Gender Gender { get; set; }
         public decimal Salary { get; set; }
+        public List<SubjectTeachersViewModel> SubjectTeachers { get; set; }
 
         public override bool Equals(object obj)
         {

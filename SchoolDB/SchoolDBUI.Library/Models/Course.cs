@@ -22,7 +22,7 @@ namespace SchoolDBUI.Library.Models
         {
             get
             {
-                return Teacher.FullName;
+                return Teacher?.FullName;
             }
         }
         public string CourseId { get; set; }
