@@ -113,6 +113,7 @@ namespace SchoolDBUI.ViewModels
 
         private List<Course> FilterCoursesByLevel(List<Course> courses, Subject subject)
         {
+            //var qualification = new SubjectTeachersViewModel();
             var qualification = QualificationsAddControlView.Qualifications
                 .Where(q => q.Subject == subject)
                 .FirstOrDefault();
@@ -157,12 +158,12 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        private BindingList<Course> coursesEnrolledIn = new BindingList<Course>();
+        private BindingList<Course> coursesTaught = new BindingList<Course>();
 
-        public BindingList<Course> CoursesEnrolledIn
+        public BindingList<Course> CoursesTaught
         {
-            get { return coursesEnrolledIn; }
-            set { coursesEnrolledIn = value; }
+            get { return coursesTaught; }
+            set { coursesTaught = value; }
         }
 
         private Course selectedCourse;
@@ -173,19 +174,19 @@ namespace SchoolDBUI.ViewModels
             set { selectedCourse = value; }
         }
 
-        private Course enrolledCourseSelection;
+        private Course selectedTaughtCourse;
 
-        public Course EnrolledCourseSelection
+        public Course SelectedTaughtCourse
         {
-            get { return enrolledCourseSelection; }
-            set { enrolledCourseSelection = value; }
+            get { return selectedTaughtCourse; }
+            set { selectedTaughtCourse = value; }
         }
 
-        public void EnrollInCourse()
+        public void AddCourse()
         {
-            if (SelectedCourse != null && !AlreadyEnrolledInCourse(SelectedCourse))
+            if (SelectedCourse != null && !CoursePresentInList(SelectedCourse))
             {
-                CoursesEnrolledIn.Add(SelectedCourse);
+                CoursesTaught.Add(SelectedCourse);
             }
             else
             {
@@ -193,14 +194,14 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        private bool AlreadyEnrolledInCourse(Course course)
+        private bool CoursePresentInList(Course course)
         {
-            return CoursesEnrolledIn.Contains(course);
+            return CoursesTaught.Contains(course);
         }
 
-        public void RemoveSelectedCourse()
+        public void RemoveCourse()
         {
-            CoursesEnrolledIn.Remove(EnrolledCourseSelection);
+            CoursesTaught.Remove(SelectedTaughtCourse);
         }
 
         #endregion    
