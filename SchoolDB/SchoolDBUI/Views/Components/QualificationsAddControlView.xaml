@@ -14,17 +14,24 @@
                         <GridViewColumn Width="260" DisplayMemberBinding="{Binding Path=Subject}">
                             <GridViewColumnHeader TextElement.FontSize="18" Content="Subject" />
                         </GridViewColumn>
-                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=Level}">
+                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseLevel}">
                             <GridViewColumnHeader TextElement.FontSize="18" Content="Level"/>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,15">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,5">
                 <Label Content="Subject:"></Label>
-                <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubject}"
-                          ItemsSource="{Binding Subjects}">
+                <ComboBox Height="25" Width="200" SelectedItem="{Binding SelectedSubject}"
+                          x:Name="Subjects">
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,5">
+                <Label Content="Level:"></Label>
+                <ComboBox Height="25" Width="200" SelectedItem="{Binding SelectedLevel}"
+                          x:Name="CourseLevels">
                 </ComboBox>
             </StackPanel>
 

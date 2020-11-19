@@ -11,7 +11,7 @@ namespace SchoolDBUI.ViewModels.Components
 {
     public class QualificationsAddControlViewModel : Screen
     {
-        // TODO: display subjects in listview, handle duplicate subjects
+        // TODO: handle duplicate subjects
 
         public IEnumerable<Subject> Subjects
         {
@@ -30,6 +30,26 @@ namespace SchoolDBUI.ViewModels.Components
             {
                 selectedSubject = value;
                 NotifyOfPropertyChange(() => SelectedSubject);
+            }
+        }
+
+        public IEnumerable<CourseLevel> CourseLevels
+        {
+            get
+            {
+                return Enum.GetValues(typeof(CourseLevel))
+                    .Cast<CourseLevel>();
+            }
+        }
+
+        private string selectedLevel;
+        public string SelectedLevel
+        {
+            get { return selectedLevel; }
+            set
+            {
+                selectedLevel = value;
+                NotifyOfPropertyChange(() => SelectedLevel);
             }
         }
 
@@ -59,11 +79,12 @@ namespace SchoolDBUI.ViewModels.Components
 
         public void AddSubject()
         {
-            if (Enum.TryParse(SelectedSubject, out Subject result))
+            if (Enum.TryParse(SelectedSubject, out Subject result) && Enum.TryParse(SelectedLevel, out CourseLevel level))
             {
                 Qualifications.Add(new SubjectTeachersViewModel
                 {
-                    Subject = result
+                    Subject = result,
+                    CourseLevel = level
                 });
             }
             // handle error}
