@@ -14,6 +14,7 @@ namespace SchoolDBUI.ViewModels
         private readonly StudentSubmitViewModel studentSubmitViewModel;
         private readonly CourseManagementViewModel courseManagementViewModel;
         private readonly StaffManagementViewModel staffManagementViewModel;
+
         private bool isStudentView;
         public bool IsStudentView
         {

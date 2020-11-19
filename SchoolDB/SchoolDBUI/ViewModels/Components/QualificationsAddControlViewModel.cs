@@ -9,8 +9,16 @@ using System.Text;
 
 namespace SchoolDBUI.ViewModels.Components
 {
-    public class QualificationsAddControlViewModel : Screen
+    public class QualificationsAddControlViewModel : Screen, IHandle<Subject>
     {
+        private readonly IEventAggregator eventAggregator;
+
+        public QualificationsAddControlViewModel(IEventAggregator eventAggregator)
+        {
+            this.eventAggregator = eventAggregator;
+            eventAggregator.Subscribe(this);
+        }
+
         // TODO: handle duplicate subjects
 
         public IEnumerable<Subject> Subjects
@@ -67,6 +75,7 @@ namespace SchoolDBUI.ViewModels.Components
 
 
         private BindingList<SubjectTeachersViewModel> qualifications = new BindingList<SubjectTeachersViewModel>();
+
         public BindingList<SubjectTeachersViewModel> Qualifications
         {
             get { return qualifications; }
@@ -95,6 +104,21 @@ namespace SchoolDBUI.ViewModels.Components
             if (!string.IsNullOrWhiteSpace(SelectedSubject))
             {
                 Qualifications.Remove(SelectedQualification);
+            }
+        }
+
+        public void Handle(Subject subject)
+        {
+            if (Qualifications.Count > 0)
+            {
+                var qualification = Qualifications
+                .Where(q => q.Subject == subject)
+                .FirstOrDefault();
+
+                if (qualification != null)
+                {
+                    eventAggregator.PublishOnUIThread(qualification);
+                }                
             }
         }
     }

@@ -16,21 +16,30 @@ namespace SchoolDBUI.ViewModels
     public class StaffManagementViewModel : Screen
     {
         private readonly ITeacherEndpoint teacherEndpoint;
-        private  ICourseEndpoint courseEndpoint;
+        private ICourseEndpoint courseEndpoint;
+        private IEventAggregator eventAggregator;
 
         // Components
+        
         public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
         public EmailAddControlViewModel EmailAddControlView { get; set; } = new EmailAddControlViewModel();
         public PhoneAddControlViewModel PhoneAddControlView { get; set; } = new PhoneAddControlViewModel();
-        public QualificationsAddControlViewModel QualificationsAddControlView { get; set; } = new QualificationsAddControlViewModel();
+        public QualificationsAddControlViewModel QualificationsAddControlView { get; set; }
+        public TeachersCoursesControlViewModel TeachersCoursesControlView { get; set; }
+        // experiment: test to see if DI works with the above 2
 
         public StaffManagementViewModel(
             ITeacherEndpoint teacherEndpoint,
-            ICourseEndpoint courseEndpoint
+            ICourseEndpoint courseEndpoint,
+            IEventAggregator eventAggregator
             )
         {
             this.teacherEndpoint = teacherEndpoint;
             this.courseEndpoint = courseEndpoint;
+            this.eventAggregator = eventAggregator;
+
+            TeachersCoursesControlView = new TeachersCoursesControlViewModel(courseEndpoint, eventAggregator);
+            QualificationsAddControlView = new QualificationsAddControlViewModel(eventAggregator);
 
             LoadStaff();
         }
@@ -77,134 +86,6 @@ namespace SchoolDBUI.ViewModels
                 NotifyOfPropertyChange(() => Staff);
             } 
         }
-
-        #region Course and subject filter
-
-        private string selectedSubjectFilter;
-        public string SelectedSubjectFilter
-        {
-            get { return selectedSubjectFilter; }
-            set
-            {
-                selectedSubjectFilter = value;
-                SetCourseFilter();
-                NotifyOfPropertyChange(() => SelectedSubjectFilter);
-            }
-        }
-
-        private async Task SetCourseFilter()
-        {
-            // TODO: refactor logic to be more readable 
-            if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
-            {
-                var courses = await courseEndpoint.GetCoursesBySubject(subject);
-                FilterNotSelected = courses.Count != 0;
-
-                var filteredCourses = FilterCoursesByLevel(courses, subject);
-
-                FilteredCourses = new BindingList<Course>(filteredCourses);
-            }
-            else
-            {
-                // handler error
-            }
-
-        }
-
-        private List<Course> FilterCoursesByLevel(List<Course> courses, Subject subject)
-        {
-            //var qualification = new SubjectTeachersViewModel();
-            var qualification = QualificationsAddControlView.Qualifications
-                .Where(q => q.Subject == subject)
-                .FirstOrDefault();
-
-            return courses
-                .Where(c => c.CourseLevel <= qualification.CourseLevel)
-                .ToList();
-        }
-
-        private bool filterNotSelected = false;
-        public bool FilterNotSelected
-        {
-            get
-            {
-                return filterNotSelected;
-            }
-            set
-            {
-                filterNotSelected = value;
-                NotifyOfPropertyChange(() => FilterNotSelected);
-            }
-        }
-
-        public IEnumerable<Subject> Subjects
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Subject))
-                    .Cast<Subject>();
-            }
-        }
-
-        public BindingList<Course> filteredCourses = new BindingList<Course>();
-
-        public BindingList<Course> FilteredCourses
-        {
-            get { return filteredCourses; }
-            set
-            {
-                filteredCourses = value;
-                NotifyOfPropertyChange(() => FilteredCourses);
-            }
-        }
-
-        private BindingList<Course> coursesTaught = new BindingList<Course>();
-
-        public BindingList<Course> CoursesTaught
-        {
-            get { return coursesTaught; }
-            set { coursesTaught = value; }
-        }
-
-        private Course selectedCourse;
-
-        public Course SelectedCourse
-        {
-            get { return selectedCourse; }
-            set { selectedCourse = value; }
-        }
-
-        private Course selectedTaughtCourse;
-
-        public Course SelectedTaughtCourse
-        {
-            get { return selectedTaughtCourse; }
-            set { selectedTaughtCourse = value; }
-        }
-
-        public void AddCourse()
-        {
-            if (SelectedCourse != null && !CoursePresentInList(SelectedCourse))
-            {
-                CoursesTaught.Add(SelectedCourse);
-            }
-            else
-            {
-                // handle error
-            }
-        }
-
-        private bool CoursePresentInList(Course course)
-        {
-            return CoursesTaught.Contains(course);
-        }
-
-        public void RemoveCourse()
-        {
-            CoursesTaught.Remove(SelectedTaughtCourse);
-        }
-
-        #endregion    
 
         public void AddStaff()
         {
