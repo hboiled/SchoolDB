@@ -24,7 +24,7 @@
             <TextBox x:Name="StaffNameTextbox" Width="200" HorizontalAlignment="Left" Margin="5,0,0,20" />
 
             <ListBox ItemsSource="{Binding Staff}" Height="340" MaxWidth="200" Width="200"
-                     HorizontalAlignment="Left" Margin="5,0,0,0" SelectedItem="{Binding SelectedCourse}">
+                     HorizontalAlignment="Left" Margin="5,0,0,0" SelectedItem="{Binding SelectedStaffMember}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -69,7 +69,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
                     <Label Content="D.O.B:"></Label>
-                    <DatePicker Width="180" MaxHeight="30" x:Name="StudentDOB"/>
+                    <DatePicker Width="180" MaxHeight="30" x:Name="DOBPicker"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="25,0,0,0">
                     <Label Content="Age"></Label>
@@ -84,7 +84,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
                     <Label Content="Staff Photo:"></Label>
-                    <TextBox x:Name="StaffPhoto" Width="180" MaxHeight="30"></TextBox>
+                    <TextBox x:Name="StaffPhotoTextbox" Width="180" MaxHeight="30"></TextBox>
                 </StackPanel>
             </StackPanel>
 

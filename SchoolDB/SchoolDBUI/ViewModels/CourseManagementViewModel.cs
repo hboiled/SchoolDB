@@ -79,15 +79,15 @@ namespace SchoolDBUI.ViewModels
 
         private void SetUpEditMode()
         {
-            if (selectedCourse != null)
+            if (SelectedCourse != null)
             {
                 EnableEditMode();
-                CourseTitleTextbox = selectedCourse.Title;
-                CourseIdTextbox = selectedCourse.CourseId;
+                CourseTitleTextbox = SelectedCourse.Title;
+                CourseIdTextbox = SelectedCourse.CourseId;
                 SelectedTeacher = null; // setting this to null helps trigger the combo box to change
-                SelectedTeacher = selectedCourse.Teacher;
+                SelectedTeacher = SelectedCourse.Teacher;
                 EnrolledStudents = null;
-                EnrolledStudents = new BindingList<Student>(selectedCourse.Students);
+                EnrolledStudents = new BindingList<Student>(SelectedCourse.Students);
             }
         }
 

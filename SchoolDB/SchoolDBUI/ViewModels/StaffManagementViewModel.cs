@@ -47,7 +47,7 @@ namespace SchoolDBUI.ViewModels
         private async Task LoadStaff()
         {
             List<Teacher> teachers = await teacherEndpoint.GetAll();
-
+            Staff = null;
             Staff = new BindingList<Teacher>(teachers);
         }
 
@@ -71,11 +71,33 @@ namespace SchoolDBUI.ViewModels
             set 
             {
                 selectedStaffMember = value;
+                SetUpEditMode();
                 NotifyOfPropertyChange(() => SelectedStaffMember);
             }
         }
 
-        // To be revamped into type of IStaff
+        private void SetUpEditMode()
+        {
+            // placeholder val generation
+            SelectedStaffMember.BirthDate = new DateTime(1980, 10, 11);
+            SelectedStaffMember.StaffId = "T9800C";
+            SelectedStaffMember.PhotoImgPath = "Placeholder";
+
+            if (SelectedStaffMember != null)
+            {
+                //EnableEditMode();
+                FirstNameTextbox = SelectedStaffMember.FirstName;
+                LastNameTextbox = SelectedStaffMember.LastName;
+                DOBPicker = SelectedStaffMember.BirthDate;
+                AgeTextbox = SelectedStaffMember.Age.ToString();
+                SalaryTextbox = SelectedStaffMember.Salary.ToString();
+                StaffPhotoTextbox = SelectedStaffMember.PhotoImgPath;
+                StaffIdTextbox = SelectedStaffMember.StaffId;
+                SelectedGender = SelectedStaffMember.Gender;
+            };
+        }
+
+        // To be revamped into type of IStaff?
         private BindingList<Teacher> staff;
         public BindingList<Teacher> Staff 
         { 
@@ -85,6 +107,15 @@ namespace SchoolDBUI.ViewModels
                 staff = value;
                 NotifyOfPropertyChange(() => Staff);
             } 
+        }
+
+        public IEnumerable<Gender> Genders
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Gender))
+                    .Cast<Gender>();
+            }
         }
 
         public void AddStaff()
@@ -112,5 +143,106 @@ namespace SchoolDBUI.ViewModels
 
             teacherEndpoint.SubmitTeacher(teacher);
         }
+
+        #region Staff Attributes
+
+        private string firstNameTextbox;
+
+        public string FirstNameTextbox
+        {
+            get { return firstNameTextbox; }
+            set
+            {
+                firstNameTextbox = value;
+                NotifyOfPropertyChange(() => FirstNameTextbox);
+            }
+        }
+
+        private string lastNameTextbox;
+
+        public string LastNameTextbox
+        {
+            get { return lastNameTextbox; }
+            set
+            {
+                lastNameTextbox = value;
+                NotifyOfPropertyChange(() => LastNameTextbox);
+            }
+        }
+
+        private DateTime dobPicker;
+
+        public DateTime DOBPicker
+        {
+            get { return dobPicker; }
+            set
+            {
+                dobPicker = value;
+                NotifyOfPropertyChange(() => DOBPicker);
+            }
+        }
+
+        private string ageTextbox;
+
+        public string AgeTextbox
+        {
+            get { return ageTextbox; }
+            set
+            {
+                ageTextbox = value;
+                NotifyOfPropertyChange(() => AgeTextbox);
+            }
+        }
+
+        private string salaryTextbox;
+
+        public string SalaryTextbox
+        {
+            get { return salaryTextbox; }
+            set
+            {
+                salaryTextbox = value;
+                NotifyOfPropertyChange(() => SalaryTextbox);
+            }
+        }
+
+        private string staffPhotoTextbox;
+
+        public string StaffPhotoTextbox
+        {
+            get { return staffPhotoTextbox; }
+            set
+            {
+                staffPhotoTextbox = value;
+                NotifyOfPropertyChange(() => StaffPhotoTextbox);
+            }
+        }
+
+        private string staffIdTextbox;
+
+        public string StaffIdTextbox
+        {
+            get { return staffIdTextbox; }
+            set
+            {
+                staffIdTextbox = value;
+                NotifyOfPropertyChange(() => StaffIdTextbox);
+            }
+        }
+
+        private Gender selectedGender;
+
+        public Gender SelectedGender
+        {
+            get { return selectedGender; }
+            set
+            {
+                selectedGender = value;
+                NotifyOfPropertyChange(() => SelectedGender);
+            }
+        }
+
+
+        #endregion
     }
 }
