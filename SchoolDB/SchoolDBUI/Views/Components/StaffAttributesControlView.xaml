@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="SchoolDBUI.ViewModels.Components.StaffAttributesControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolDBUI.ViewModels.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="450">
+    <Grid>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" HorizontalAlignment="Left">
+            
+        
+        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                <Label Content="First Name:"></Label>
+                <TextBox x:Name="FirstNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                <Label Content="Last Name:"></Label>
+                <TextBox x:Name="LastNameTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                <Label Content="D.O.B:"></Label>
+                <DatePicker Width="180" MaxHeight="30" x:Name="DOBPicker"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="25,0,0,0">
+                <Label Content="Age"></Label>
+                <TextBox IsEnabled="False" x:Name="AgeTextbox" MaxLength="30" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                <Label Content="Salary:"></Label>
+                <TextBox x:Name="SalaryTextbox" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                <Label Content="Staff Photo:"></Label>
+                <TextBox x:Name="StaffPhotoTextbox" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                <Label Content="Staff Id:"></Label>
+                <TextBox x:Name="StaffIdTextbox" Width="180" MaxHeight="30"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="25,0,0,0">
+                <Label Content="Gender:"></Label>
+                <ComboBox SelectedItem="{Binding SelectedGender}" Width="180" MaxHeight="30"
+                          ItemsSource="{Binding Genders}" >
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

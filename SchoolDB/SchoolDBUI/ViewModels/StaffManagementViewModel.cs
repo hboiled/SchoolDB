@@ -21,13 +21,12 @@ namespace SchoolDBUI.ViewModels
         private IEventAggregator eventAggregator;
 
         // Components
-        
+        public StaffAttributesControlViewModel StaffAttributesControlView { get; set; } = new StaffAttributesControlViewModel();
         public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
         public EmailAddControlViewModel EmailAddControlView { get; set; } = new EmailAddControlViewModel();
         public PhoneAddControlViewModel PhoneAddControlView { get; set; } = new PhoneAddControlViewModel();
         public QualificationsAddControlViewModel QualificationsAddControlView { get; set; }
         public TeachersCoursesControlViewModel TeachersCoursesControlView { get; set; }
-        // experiment: test to see if DI works with the above 2
 
         public StaffManagementViewModel(
             ITeacherEndpoint teacherEndpoint,
@@ -95,18 +94,19 @@ namespace SchoolDBUI.ViewModels
             {
                 // NULL CHECK!!
                 //EnableEditMode();
-                FirstNameTextbox = SelectedStaffMember.FirstName;
-                LastNameTextbox = SelectedStaffMember.LastName;
-                DOBPicker = SelectedStaffMember.BirthDate;
-                AgeTextbox = SelectedStaffMember.Age.ToString();
-                SalaryTextbox = SelectedStaffMember.Salary.ToString();
-                StaffPhotoTextbox = SelectedStaffMember.PhotoImgPath;
-                StaffIdTextbox = SelectedStaffMember.StaffId;
-                SelectedGender = SelectedStaffMember.Gender;
+                StaffAttributesControlView.FirstNameTextbox = SelectedStaffMember.FirstName;
+                StaffAttributesControlView.LastNameTextbox = SelectedStaffMember.LastName;
+                StaffAttributesControlView.DOBPicker = SelectedStaffMember.BirthDate;
+                StaffAttributesControlView.AgeTextbox = SelectedStaffMember.Age.ToString();
+                StaffAttributesControlView.SalaryTextbox = SelectedStaffMember.Salary.ToString();
+                StaffAttributesControlView.StaffPhotoTextbox = SelectedStaffMember.PhotoImgPath;
+                StaffAttributesControlView.StaffIdTextbox = SelectedStaffMember.StaffId;
+                StaffAttributesControlView.SelectedGender = SelectedStaffMember.Gender;
                 QualificationsAddControlView.Qualifications = new BindingList<SubjectTeachersViewModel>(SelectedStaffMember.SubjectTeachers);
                 AddressAddControlView.Addresses = new BindingList<Address>(SelectedStaffMember.Addresses);
                 EmailAddControlView.Emails = new BindingList<Email>(SelectedStaffMember.Emails);
                 PhoneAddControlView.PhoneNums = new BindingList<PhoneNum>(SelectedStaffMember.PhoneNumbers);
+                TeachersCoursesControlView.CoursesTaught = new BindingList<Course>(SelectedStaffMember.CoursesTaught);
             };
         }
 
@@ -121,16 +121,7 @@ namespace SchoolDBUI.ViewModels
                 NotifyOfPropertyChange(() => Staff);
             } 
         }
-
-        public IEnumerable<Gender> Genders
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Gender))
-                    .Cast<Gender>();
-            }
-        }
-
+        
         public void AddStaff()
         {
             var teacher = new TeacherSubmitDTO
@@ -157,105 +148,6 @@ namespace SchoolDBUI.ViewModels
             teacherEndpoint.SubmitTeacher(teacher);
         }
 
-        #region Staff Attributes
-
-        private string firstNameTextbox;
-
-        public string FirstNameTextbox
-        {
-            get { return firstNameTextbox; }
-            set
-            {
-                firstNameTextbox = value;
-                NotifyOfPropertyChange(() => FirstNameTextbox);
-            }
-        }
-
-        private string lastNameTextbox;
-
-        public string LastNameTextbox
-        {
-            get { return lastNameTextbox; }
-            set
-            {
-                lastNameTextbox = value;
-                NotifyOfPropertyChange(() => LastNameTextbox);
-            }
-        }
-
-        private DateTime dobPicker;
-
-        public DateTime DOBPicker
-        {
-            get { return dobPicker; }
-            set
-            {
-                dobPicker = value;
-                NotifyOfPropertyChange(() => DOBPicker);
-            }
-        }
-
-        private string ageTextbox;
-
-        public string AgeTextbox
-        {
-            get { return ageTextbox; }
-            set
-            {
-                ageTextbox = value;
-                NotifyOfPropertyChange(() => AgeTextbox);
-            }
-        }
-
-        private string salaryTextbox;
-
-        public string SalaryTextbox
-        {
-            get { return salaryTextbox; }
-            set
-            {
-                salaryTextbox = value;
-                NotifyOfPropertyChange(() => SalaryTextbox);
-            }
-        }
-
-        private string staffPhotoTextbox;
-
-        public string StaffPhotoTextbox
-        {
-            get { return staffPhotoTextbox; }
-            set
-            {
-                staffPhotoTextbox = value;
-                NotifyOfPropertyChange(() => StaffPhotoTextbox);
-            }
-        }
-
-        private string staffIdTextbox;
-
-        public string StaffIdTextbox
-        {
-            get { return staffIdTextbox; }
-            set
-            {
-                staffIdTextbox = value;
-                NotifyOfPropertyChange(() => StaffIdTextbox);
-            }
-        }
-
-        private Gender selectedGender;
-
-        public Gender SelectedGender
-        {
-            get { return selectedGender; }
-            set
-            {
-                selectedGender = value;
-                NotifyOfPropertyChange(() => SelectedGender);
-            }
-        }
-
-
-        #endregion
+        
     }
 }

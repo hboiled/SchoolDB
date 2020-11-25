@@ -108,7 +108,10 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Course> CoursesTaught
         {
             get { return coursesTaught; }
-            set { coursesTaught = value; }
+            set { 
+                coursesTaught = value;
+                NotifyOfPropertyChange(() => CoursesTaught);
+            }
         }
 
         private Course selectedCourse;

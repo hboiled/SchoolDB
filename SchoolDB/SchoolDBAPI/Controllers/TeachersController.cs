@@ -27,7 +27,9 @@ namespace SchoolDBAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachers()
         {
-            return await context.Teachers.ToListAsync();
+            return await context.Teachers
+                .Include(t => t.CoursesTaught)
+                .ToListAsync();
         }
 
         // GET: api/Teachers/5
