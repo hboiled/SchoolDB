@@ -89,7 +89,11 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Address> Addresses
         {
             get { return addresses; }
-            set { addresses = value; }
+            set 
+            {
+                addresses = value;
+                NotifyOfPropertyChange(() => Addresses);
+            }
         }
 
         public void AddAddress()

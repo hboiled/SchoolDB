@@ -52,7 +52,11 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<PhoneNum> PhoneNums
         {
             get { return phoneNums; }
-            set { phoneNums = value; }
+            set 
+            { 
+                phoneNums = value;
+                NotifyOfPropertyChange(() => PhoneNums);
+            }
         }
 
         public IEnumerable<PhoneNumberOwner> PhoneOwnerTypes

@@ -1,4 +1,5 @@
-﻿using SchoolDBUI.Library.Models.SchoolBusiness;
+﻿using SchoolDBUI.Library.Models.Contact;
+using SchoolDBUI.Library.Models.SchoolBusiness;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,6 +46,10 @@ namespace SchoolDBUI.Library.Models
             }
         }
         public List<SubjectTeachersViewModel> SubjectTeachers { get; set; }
+        public List<Email> Emails { get; set; }
+        public List<Address> Addresses { get; set; }
+        public List<PhoneNum> PhoneNumbers { get; set; }
+        public List<Course> CoursesTaught { get; set; } // use simplified model to avoid circular references?
 
         public override bool Equals(object obj)
         {

@@ -39,7 +39,11 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Email> Emails
         {
             get { return emails; }
-            set { emails = value; }
+            set 
+            {
+                emails = value;
+                NotifyOfPropertyChange(() => Emails);
+            }
         }
 
         public void AddEmail()
