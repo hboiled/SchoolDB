@@ -71,7 +71,7 @@ namespace SchoolDBUI.ViewModels.Components
             }
         }
 
-        private string staffPhotoTextbox;
+        private string staffPhotoTextbox = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
 
         public string StaffPhotoTextbox
         {
@@ -115,6 +115,7 @@ namespace SchoolDBUI.ViewModels.Components
                     .Cast<Gender>();
             }
         }
+
         #endregion
     }
 }
