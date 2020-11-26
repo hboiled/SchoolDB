@@ -79,16 +79,11 @@ namespace SchoolDBUI.ViewModels
         private void SetUpEditMode()
         {
             // placeholder val generation
-            SelectedStaffMember.BirthDate = new DateTime(1980, 10, 11);
-            SelectedStaffMember.StaffId = "T9800C";
-            SelectedStaffMember.PhotoImgPath = "Placeholder";
-            SelectedStaffMember.SubjectTeachers = new List<SubjectTeachersViewModel> 
-                { new SubjectTeachersViewModel { CourseLevel = CourseLevel.Beginner, Subject = Subject.Maths } };
-            SelectedStaffMember.Addresses = new List<Address> {
-                new Address { City="abc",Postcode="12",State="a",Suburb="vc",IsPrimary=true,StreetAddress="asv" } };
-            SelectedStaffMember.Emails = new List<Email> { new Email { EmailAddress = "af", IsSchoolEmail = true, Owner = EmailOwner.Guardian } };
-            SelectedStaffMember.PhoneNumbers = new List<PhoneNum> { 
-                new PhoneNum { IsEmergency = true, Number = "a", IsMobile = false, Owner = PhoneNumberOwner.Home } };
+            //SelectedStaffMember.BirthDate = new DateTime(1980, 10, 11);
+            //SelectedStaffMember.StaffId = "T9800C";
+            //SelectedStaffMember.PhotoImgPath = "Placeholder";
+            //SelectedStaffMember.SubjectTeachers = new List<SubjectTeachersViewModel> 
+            //    { new SubjectTeachersViewModel { CourseLevel = CourseLevel.Beginner, Subject = Subject.Maths } };            
 
             if (SelectedStaffMember != null)
             {

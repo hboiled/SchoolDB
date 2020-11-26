@@ -11,7 +11,9 @@ namespace SchoolDBAPI.Library.Models.People
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int StaffId { get; set; }
+        public string PhotoImgPath { get; set; }
         public string FullName
         {
             get

@@ -12,9 +12,9 @@ namespace SchoolDBAPI.Library.Models.People
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public Gender Gender { get; set; }        
-        public int StudentId { get; set; }
+        public Gender Gender { get; set; }                
         public int Grade { get; set; }
+        public int StudentId { get; set; }
         public string PhotoImgPath { get; set; } // temporary solution, find out how to store images
         public string FullName
         {

@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolDBAPI.DTO;
+using SchoolDBAPI.DTO.BasicDetailDTO;
 using SchoolDBAPI.Library.DataAccess;
+using SchoolDBAPI.Library.Models;
 using SchoolDBAPI.Library.Models.People;
 using SchoolDBAPI.Library.Models.SchoolBusiness;
 
@@ -25,11 +27,47 @@ namespace SchoolDBAPI.Controllers
 
         // GET: api/Teachers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachers()
+        public async Task<ActionResult<IEnumerable<TeacherReadDTO>>> GetTeachers()
         {
-            return await context.Teachers
+            var teacherData = new List<TeacherReadDTO>();
+
+            var teachers = await context.Teachers
                 .Include(t => t.CoursesTaught)
                 .ToListAsync();
+
+            var qualifications = await context.SubjectTeachers
+                .ToListAsync();
+
+            var addresses = new List<Address> {
+                new Address { City="abc",Postcode="12",State="a",Suburb="vc",IsPrimary=true,StreetAddress="asv" } };
+            var emails = new List<Email> { new Email { EmailAddress = "af", IsSchoolEmail = true, Owner = EmailOwner.Guardian } };
+            var phoneNumbers = new List<PhoneNum> {
+                new PhoneNum { IsEmergency = true, Number = "afasasda", IsMobile = false, Owner = PhoneNumberOwner.Home } };
+
+            foreach (var teacher in teachers)
+            {
+                teacherData.Add(new TeacherReadDTO
+                {
+                    Id = teacher.Id,
+                    FirstName = teacher.FirstName,
+                    LastName = teacher.LastName,
+                    BirthDate = new DateTime(1997,12,11), // placeholder value
+                    Gender = teacher.Gender,
+                    Salary = teacher.Salary,
+                    SubjectTeachers = qualifications.Where(q => q.TeacherId == teacher.Id).ToList(),
+                    Addresses = addresses, // placeholder
+                    Emails = emails, // placeholder
+                    PhoneNumbers = phoneNumbers, // placeholder
+                    CoursesTaught = teacher.CoursesTaught.Select(c => new CourseBasicDetailDTO 
+                    { 
+                        CourseId = c.CourseId,
+                        Subject = c.Subject.ToString(),
+                        Title = c.Title
+                    }).ToList()
+                });
+            }
+
+            return teacherData;
         }
 
         // GET: api/Teachers/5
@@ -59,8 +97,7 @@ namespace SchoolDBAPI.Controllers
                 .Where(t => subjectTeachers.Contains(t.Id))
                 .ToListAsync();
 
-            return teachers;
-            
+            return teachers;            
         }
 
         // PUT: api/Teachers/5

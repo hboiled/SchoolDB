@@ -192,14 +192,13 @@ namespace SchoolDBAPI.Controllers
                 FirstName = teacher.FirstName,
                 LastName = teacher.LastName,
                 Salary = teacher.Salary,
-                CoursesTaught = new List<string>()
+                CoursesTaught = teacher.CoursesTaught.Select(c => new CourseBasicDetailDTO
+                {
+                    CourseId = c.CourseId,
+                    Subject = c.Subject.ToString(),
+                    Title = c.Title
+                }).ToList()
             };
-
-            var matchingCourses = context.Courses
-                .Where(c => c.TeacherId == id)
-                .Select(c => c.Title).ToList();
-
-            teacherData.CoursesTaught = matchingCourses;
 
             return teacherData;
         }
