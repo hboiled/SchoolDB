@@ -114,6 +114,8 @@ namespace SchoolDBUI.ViewModels
 
         public void CourseKeyEvent(KeyEventArgs keyArgs)
         {
+            // find way to stop firing the event if not command
+
             if (IsCourseManagement == false)
             {
                 return;

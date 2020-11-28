@@ -31,7 +31,7 @@
                                 <!-- Display student/graduate/teacher/principal/other staff, colour-code role -->
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Id: " FontSize="14"/>
-                                    <TextBlock Text="Insert Staff Id" FontSize="14"/>
+                                    <TextBlock Text="{Binding StaffId}" FontSize="14"/>
                                 </StackPanel>
 
                                 <!-- Photo thumbnail? -->

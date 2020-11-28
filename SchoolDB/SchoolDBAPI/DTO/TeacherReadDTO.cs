@@ -12,6 +12,8 @@ namespace SchoolDBAPI.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Salary { get; set; }
+        public string StaffId { get; set; }
+        public string PhotoImgPath { get; set; }
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public List<SubjectsTeachersCanTeach> SubjectTeachers { get; set; }

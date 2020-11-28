@@ -23,8 +23,17 @@ namespace SchoolDBUI.Library.API
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsAsync<List<Teacher>>();
-                    return result;
+                    try
+                    {
+                        var result = await response.Content.ReadAsAsync<List<Teacher>>();
+                        return result;
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                    
                 }
                 else
                 {

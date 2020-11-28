@@ -78,13 +78,7 @@ namespace SchoolDBUI.ViewModels
 
         private void SetUpEditMode()
         {
-            // placeholder val generation
-            //SelectedStaffMember.BirthDate = new DateTime(1980, 10, 11);
-            //SelectedStaffMember.StaffId = "T9800C";
-            //SelectedStaffMember.PhotoImgPath = "Placeholder";
-            //SelectedStaffMember.SubjectTeachers = new List<SubjectTeachersViewModel> 
-            //    { new SubjectTeachersViewModel { CourseLevel = CourseLevel.Beginner, Subject = Subject.Maths } };            
-
+            
             if (SelectedStaffMember != null)
             {
                 // NULL CHECK!!

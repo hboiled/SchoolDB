@@ -7,7 +7,8 @@ namespace SchoolDBUI.Library.Models.Contact
     public class PhoneNum
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
+        public int? StaffId { get; set; }
         public string Number { get; set; }
         public PhoneNumberOwner Owner { get; set; }
         public bool IsMobile { get; set; }

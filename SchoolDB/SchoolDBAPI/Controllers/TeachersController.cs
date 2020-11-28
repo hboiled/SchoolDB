@@ -51,9 +51,11 @@ namespace SchoolDBAPI.Controllers
                     Id = teacher.Id,
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
-                    BirthDate = new DateTime(1997,12,11), // placeholder value
+                    BirthDate = teacher.BirthDate,
                     Gender = teacher.Gender,
                     Salary = teacher.Salary,
+                    StaffId = teacher.StaffId,
+                    PhotoImgPath = teacher.PhotoImgPath,
                     SubjectTeachers = qualifications.Where(q => q.TeacherId == teacher.Id).ToList(),
                     Addresses = addresses, // placeholder
                     Emails = emails, // placeholder

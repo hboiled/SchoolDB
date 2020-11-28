@@ -7,7 +7,8 @@ namespace SchoolDBUI.Library.Models.Contact
     public class Address
     {
         public int Id { get; set; }
-        public int StudentId { get; set; } // person id!
+        public int? StudentId { get; set; }
+        public int? StaffId { get; set; }
         public string StreetAddress { get; set; }
         public string Suburb { get; set; }
         public string City { get; set; }
