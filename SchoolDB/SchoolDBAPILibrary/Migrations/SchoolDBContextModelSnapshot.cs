@@ -35,13 +35,16 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<string>("Postcode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("StaffId")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Suburb")
@@ -49,9 +52,11 @@ namespace SchoolDBAPI.Library.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StaffId");
+
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentAddresses");
+                    b.ToTable("Addresses");
 
                     b.HasData(
                         new
@@ -114,11 +119,55 @@ namespace SchoolDBAPI.Library.Migrations
                             Id = 6,
                             City = "Merth",
                             IsPrimary = true,
-                            Postcode = "4123",
+                            Postcode = "4153",
                             State = "FWca",
-                            StreetAddress = "124 fake st",
+                            StreetAddress = "123124 fake st",
                             StudentId = 6,
-                            Suburb = "Gweq"
+                            Suburb = "Newg"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            City = "Merth",
+                            IsPrimary = true,
+                            Postcode = "4100",
+                            StaffId = 1,
+                            State = "Utjrt",
+                            StreetAddress = "12344 fake st",
+                            Suburb = "Grwh"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            City = "Merth",
+                            IsPrimary = true,
+                            Postcode = "4993",
+                            StaffId = 2,
+                            State = "GEGQ",
+                            StreetAddress = "6124 fake st",
+                            Suburb = "Bewe"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            City = "Merth",
+                            IsPrimary = true,
+                            Postcode = "4163",
+                            StaffId = 3,
+                            State = "Nher",
+                            StreetAddress = "1224 fake st",
+                            Suburb = "Acsg"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            City = "Merth",
+                            IsPrimary = true,
+                            Postcode = "4423",
+                            StaffId = 4,
+                            State = "FWjieg",
+                            StreetAddress = "125 fake st",
+                            Suburb = "Pofe"
                         });
                 });
 
@@ -138,14 +187,19 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<int>("Owner")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StaffId");
+
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentEmails");
+                    b.ToTable("Emails");
 
                     b.HasData(
                         new
@@ -160,7 +214,7 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 2,
                             EmailAddress = "keira54@yahoo.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
                             StudentId = 2
                         },
@@ -168,7 +222,7 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 3,
                             EmailAddress = "wilmer02@hane.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
                             StudentId = 3
                         },
@@ -176,7 +230,7 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 4,
                             EmailAddress = "vesta.leffler@stracke.info",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
                             StudentId = 4
                         },
@@ -184,15 +238,15 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 5,
                             EmailAddress = "kelsie.lueilwitz@gmail.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
-                            StudentId = 5
+                            StudentId = 3
                         },
                         new
                         {
                             Id = 6,
                             EmailAddress = "ressie49@bernier.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
                             StudentId = 2
                         },
@@ -200,7 +254,7 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 7,
                             EmailAddress = "dkuhlman@yahoo.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
                             StudentId = 1
                         },
@@ -208,9 +262,41 @@ namespace SchoolDBAPI.Library.Migrations
                         {
                             Id = 8,
                             EmailAddress = "rhoppe@gmail.com",
-                            IsSchoolEmail = false,
+                            IsSchoolEmail = true,
                             Owner = 2,
-                            StudentId = 6
+                            StudentId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EmailAddress = "sdfsdf.ew23t@gmail.com",
+                            IsSchoolEmail = true,
+                            Owner = 2,
+                            StaffId = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EmailAddress = "wgegweg@bernier.com",
+                            IsSchoolEmail = true,
+                            Owner = 2,
+                            StaffId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EmailAddress = "sdfdsfs@yahoo.com",
+                            IsSchoolEmail = true,
+                            Owner = 2,
+                            StaffId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EmailAddress = "wegewg@gmail.com",
+                            IsSchoolEmail = true,
+                            Owner = 2,
+                            StaffId = 1
                         });
                 });
 
@@ -396,6 +482,9 @@ namespace SchoolDBAPI.Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -405,8 +494,14 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhotoImgPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Salary")
                         .HasColumnType("money");
+
+                    b.Property<string>("StaffId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -416,34 +511,42 @@ namespace SchoolDBAPI.Library.Migrations
                         new
                         {
                             Id = 1,
+                            BirthDate = new DateTime(1977, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Crowler",
                             Gender = 0,
                             LastName = "Starks",
-                            Salary = 44000m
+                            Salary = 44000m,
+                            StaffId = "812JKQ"
                         },
                         new
                         {
                             Id = 2,
+                            BirthDate = new DateTime(1959, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Rima",
                             Gender = 1,
                             LastName = "Irving",
-                            Salary = 42000m
+                            Salary = 42000m,
+                            StaffId = "7Y14IJ"
                         },
                         new
                         {
                             Id = 3,
+                            BirthDate = new DateTime(1980, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Jack",
                             Gender = 0,
                             LastName = "Bonilla",
-                            Salary = 43000m
+                            Salary = 43000m,
+                            StaffId = "M728QQ"
                         },
                         new
                         {
                             Id = 4,
+                            BirthDate = new DateTime(1982, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Keisha",
                             Gender = 1,
                             LastName = "Higgins",
-                            Salary = 41200m
+                            Salary = 41200m,
+                            StaffId = "LM7J10"
                         });
                 });
 
@@ -466,14 +569,19 @@ namespace SchoolDBAPI.Library.Migrations
                     b.Property<int>("Owner")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StaffId");
+
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentPhoneNumbers");
+                    b.ToTable("PhoneNumbers");
 
                     b.HasData(
                         new
@@ -547,6 +655,42 @@ namespace SchoolDBAPI.Library.Migrations
                             Number = "0466138120",
                             Owner = 0,
                             StudentId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsEmergency = true,
+                            IsMobile = true,
+                            Number = "0457203861",
+                            Owner = 0,
+                            StaffId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsEmergency = true,
+                            IsMobile = true,
+                            Number = "0401357239",
+                            Owner = 0,
+                            StaffId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsEmergency = true,
+                            IsMobile = true,
+                            Number = "0485106172",
+                            Owner = 0,
+                            StaffId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            IsEmergency = true,
+                            IsMobile = true,
+                            Number = "0401967284",
+                            Owner = 0,
+                            StaffId = 4
                         });
                 });
 
@@ -721,20 +865,24 @@ namespace SchoolDBAPI.Library.Migrations
 
             modelBuilder.Entity("SchoolDBAPI.Library.Models.Address", b =>
                 {
-                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", null)
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Teacher", "Teacher")
                         .WithMany("Addresses")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StaffId");
+
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", "Student")
+                        .WithMany("Addresses")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("SchoolDBAPI.Library.Models.Email", b =>
                 {
-                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", null)
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Teacher", "Teacher")
                         .WithMany("Emails")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StaffId");
+
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", "Student")
+                        .WithMany("Emails")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("SchoolDBAPI.Library.Models.People.SubjectsTeachersCanTeach", b =>
@@ -748,11 +896,13 @@ namespace SchoolDBAPI.Library.Migrations
 
             modelBuilder.Entity("SchoolDBAPI.Library.Models.PhoneNum", b =>
                 {
-                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", null)
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Teacher", "Teacher")
                         .WithMany("PhoneNums")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StaffId");
+
+                    b.HasOne("SchoolDBAPI.Library.Models.People.Student", "Student")
+                        .WithMany("PhoneNums")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("SchoolDBAPI.Library.Models.SchoolBusiness.Course", b =>

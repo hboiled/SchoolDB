@@ -19,11 +19,29 @@
     <Compile Remove="Migrations\20201025071700_test.Designer.cs" />
     <Compile Remove="Migrations\20201107002635_StudentCasecadeDelete.cs" />
     <Compile Remove="Migrations\20201107002635_StudentCasecadeDelete.Designer.cs" />
+    <Compile Remove="Migrations\20201128093001_addressTeacher.cs" />
+    <Compile Remove="Migrations\20201128093001_addressTeacher.Designer.cs" />
+    <Compile Remove="Migrations\20201128094754_Contacts.cs" />
+    <Compile Remove="Migrations\20201128094754_Contacts.Designer.cs" />
+    <Compile Remove="Migrations\20201128094935_Contacts.cs" />
+    <Compile Remove="Migrations\20201128094935_Contacts.Designer.cs" />
+    <Compile Remove="Migrations\20201128102627_contacts.cs" />
+    <Compile Remove="Migrations\20201128102627_contacts.Designer.cs" />
+    <Compile Remove="Migrations\20201128103801_Contacts.cs" />
+    <Compile Remove="Migrations\20201128103801_Contacts.Designer.cs" />
+    <Compile Remove="Migrations\20201128104311_test.cs" />
+    <Compile Remove="Migrations\20201128104311_test.Designer.cs" />
+    <Compile Remove="Migrations\20201128104705_Contacts.cs" />
+    <Compile Remove="Migrations\20201128104705_Contacts.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

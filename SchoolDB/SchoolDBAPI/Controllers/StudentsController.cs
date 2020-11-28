@@ -97,7 +97,7 @@ namespace SchoolDBAPI.Controllers
             })
             .ToList();
 
-            var matchingEmails = context.StudentEmails
+            var matchingEmails = context.Emails
                 .Where(e => e.StudentId == student.Id)
                 .Select(e => new EmailBasicDetailDTO
                 {
@@ -108,7 +108,7 @@ namespace SchoolDBAPI.Controllers
                 .ToList();
 
             //var enumType = typeof(PhoneNumberOwner); // alternative way of getting name 
-            var matchingPhoneNums = context.StudentPhoneNumbers
+            var matchingPhoneNums = context.PhoneNumbers
                 .Where(p => p.StudentId == student.Id)
                 .Select(p => new PhoneNumBasicDetailDTO
                 {
@@ -119,7 +119,7 @@ namespace SchoolDBAPI.Controllers
                 })
                 .ToList();
 
-            var matchingAddresses = context.StudentAddresses
+            var matchingAddresses = context.Addresses
                 .Where(a => a.StudentId == student.Id)
                 .Select(a => new AddressBasicDetailDTO
                 {
@@ -293,9 +293,9 @@ namespace SchoolDBAPI.Controllers
                 address.StudentId = studentsId;
             }
 
-            context.StudentAddresses.AddRange(addresses);
-            context.StudentEmails.AddRange(emails);
-            context.StudentPhoneNumbers.AddRange(phoneNums);
+            context.Addresses.AddRange(addresses);
+            context.Emails.AddRange(emails);
+            context.PhoneNumbers.AddRange(phoneNums);
             context.Enrollments.AddRange(enrollments);            
             await context.SaveChangesAsync();
 

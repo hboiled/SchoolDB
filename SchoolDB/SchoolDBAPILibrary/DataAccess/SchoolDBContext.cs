@@ -22,15 +22,30 @@ namespace SchoolDBAPI.Library.DataAccess
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
-        public DbSet<Address> StudentAddresses { get; set; }
-        public DbSet<Email> StudentEmails { get; set; }
-        public DbSet<PhoneNum> StudentPhoneNumbers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<PhoneNum> PhoneNumbers { get; set; }
 
         public DbSet<SubjectsTeachersCanTeach> SubjectTeachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            //modelBuilder.Entity<Address>().
+            //    HasOne<Teacher>(a => a.Teacher)
+            //    .WithMany(t => t.Addresses)
+            //    .HasForeignKey(a => a.StaffId);
+
+            //modelBuilder.Entity<Email>().
+            //    HasOne<Teacher>(a => a.Teacher)
+            //    .WithMany(t => t.Emails)
+            //    .HasForeignKey(a => a.StaffId);
+
+            //modelBuilder.Entity<PhoneNum>().
+            //    HasOne<Teacher>(a => a.Teacher)
+            //    .WithMany(t => t.PhoneNums)
+            //    .HasForeignKey(a => a.StaffId);
+
+
             SeedData(modelBuilder);   
         }
 
@@ -108,10 +123,10 @@ namespace SchoolDBAPI.Library.DataAccess
 
             modelBuilder.Entity<Teacher>()
                 .HasData(
-                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000, Gender = Gender.Male },
-                new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000, Gender = Gender.Female },
-                new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000, Gender = Gender.Male },
-                new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200, Gender = Gender.Female }
+                new Teacher { Id = 1, FirstName = "Crowler", LastName = "Starks", Salary = 44000, Gender = Gender.Male, BirthDate = new DateTime(1977,10,3), StaffId = "812JKQ" },
+                new Teacher { Id = 2, FirstName = "Rima", LastName = "Irving", Salary = 42000, Gender = Gender.Female, BirthDate = new DateTime(1959, 12, 12), StaffId = "7Y14IJ" },
+                new Teacher { Id = 3, FirstName = "Jack", LastName = "Bonilla", Salary = 43000, Gender = Gender.Male, BirthDate = new DateTime(1980, 6, 13), StaffId = "M728QQ" },
+                new Teacher { Id = 4, FirstName = "Keisha", LastName = "Higgins", Salary = 41200, Gender = Gender.Female, BirthDate = new DateTime(1982, 1, 5), StaffId = "LM7J10" }
                 );
 
             modelBuilder.Entity<SubjectsTeachersCanTeach>()
@@ -151,13 +166,17 @@ namespace SchoolDBAPI.Library.DataAccess
             modelBuilder.Entity<Email>()
                 .HasData(
                 new Email { Id = 1, EmailAddress = "203948@school.org", StudentId = 1, IsSchoolEmail = true, Owner = EmailOwner.School },
-                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", StudentId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", StudentId = 3, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", StudentId = 4, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", StudentId = 5, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", StudentId = 2, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", StudentId = 1, IsSchoolEmail = false, Owner = EmailOwner.School },
-                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", StudentId = 6, IsSchoolEmail = false, Owner = EmailOwner.School }
+                new Email { Id = 2, EmailAddress = "keira54@yahoo.com", StudentId = 2, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 3, EmailAddress = "wilmer02@hane.com", StudentId = 3, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 4, EmailAddress = "vesta.leffler@stracke.info", StudentId = 4, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 5, EmailAddress = "kelsie.lueilwitz@gmail.com", StudentId = 3, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 6, EmailAddress = "ressie49@bernier.com", StudentId = 2, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 7, EmailAddress = "dkuhlman@yahoo.com", StudentId = 1, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 8, EmailAddress = "rhoppe@gmail.com", StudentId = 2, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 9, EmailAddress = "sdfsdf.ew23t@gmail.com", StaffId = 4, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 10, EmailAddress = "wgegweg@bernier.com", StaffId = 3, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 11, EmailAddress = "sdfdsfs@yahoo.com", StaffId = 2, IsSchoolEmail = true, Owner = EmailOwner.School },
+                new Email { Id = 12, EmailAddress = "wegewg@gmail.com", StaffId = 1, IsSchoolEmail = true, Owner = EmailOwner.School }
                 );
 
             modelBuilder.Entity<PhoneNum>()
@@ -169,7 +188,11 @@ namespace SchoolDBAPI.Library.DataAccess
                 new PhoneNum { Id = 5, Owner = PhoneNumberOwner.Work, StudentId = 5, IsMobile = true, Number = "0406936119", IsEmergency = true },
                 new PhoneNum { Id = 6, Owner = PhoneNumberOwner.Home, StudentId = 1, IsMobile = false, Number = "94104280", IsEmergency = true },
                 new PhoneNum { Id = 7, Owner = PhoneNumberOwner.Guardian, StudentId = 6, IsMobile = true, Number = "0416928190", IsEmergency = true },
-                new PhoneNum { Id = 8, Owner = PhoneNumberOwner.Self, StudentId = 3, IsMobile = true, Number = "0466138120", IsEmergency = true }
+                new PhoneNum { Id = 8, Owner = PhoneNumberOwner.Self, StudentId = 3, IsMobile = true, Number = "0466138120", IsEmergency = true },
+                new PhoneNum { Id = 9, Owner = PhoneNumberOwner.Self, StaffId = 1, IsMobile = true, Number = "0457203861", IsEmergency = true },
+                new PhoneNum { Id = 10, Owner = PhoneNumberOwner.Self, StaffId = 2, IsMobile = true, Number = "0401357239", IsEmergency = true },
+                new PhoneNum { Id = 11, Owner = PhoneNumberOwner.Self, StaffId = 3, IsMobile = true, Number = "0485106172", IsEmergency = true },
+                new PhoneNum { Id = 12, Owner = PhoneNumberOwner.Self, StaffId = 4, IsMobile = true, Number = "0401967284", IsEmergency = true }
                 );
 
             modelBuilder.Entity<Address>()
@@ -234,11 +257,55 @@ namespace SchoolDBAPI.Library.DataAccess
                     Id = 6,
                     IsPrimary = true,
                     City = "Merth",
-                    StreetAddress = "124 fake st",
-                    Postcode = "4123",
-                    Suburb = "Gweq",
+                    StreetAddress = "123124 fake st",
+                    Postcode = "4153",
+                    Suburb = "Newg",
                     State = "FWca",
                     StudentId = 6
+                },
+                new Address
+                {
+                    Id = 7,
+                    IsPrimary = true,
+                    City = "Merth",
+                    StreetAddress = "12344 fake st",
+                    Postcode = "4100",
+                    Suburb = "Grwh",
+                    State = "Utjrt",
+                    StaffId = 1
+                },
+                new Address
+                {
+                    Id = 8,
+                    IsPrimary = true,
+                    City = "Merth",
+                    StreetAddress = "6124 fake st",
+                    Postcode = "4993",
+                    Suburb = "Bewe",
+                    State = "GEGQ",
+                    StaffId = 2
+                },
+                new Address
+                {
+                    Id = 9,
+                    IsPrimary = true,
+                    City = "Merth",
+                    StreetAddress = "1224 fake st",
+                    Postcode = "4163",
+                    Suburb = "Acsg",
+                    State = "Nher",
+                    StaffId = 3
+                },
+                new Address
+                {
+                    Id = 10,
+                    IsPrimary = true,
+                    City = "Merth",
+                    StreetAddress = "125 fake st",
+                    Postcode = "4423",
+                    Suburb = "Pofe",
+                    State = "FWjieg",
+                    StaffId = 4
                 }
                 );
         }

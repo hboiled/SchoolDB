@@ -12,7 +12,7 @@ namespace SchoolDBAPI.Library.Models.People
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int StaffId { get; set; }
+        public string StaffId { get; set; }
         public string PhotoImgPath { get; set; }
         public string FullName
         {
@@ -23,9 +23,9 @@ namespace SchoolDBAPI.Library.Models.People
         }
         /// disable contacts until we create dbsets for teachercontacts
         /// currently by leaving these fields active, EF will wire the teacher table to studentcontacts
-        //public List<Email> Emails { get; set; }
-        //public List<PhoneNum> PhoneNums { get; set; }
-        //public List<Address> Addresses { get; set; }
+        public List<Email> Emails { get; set; }
+        public List<PhoneNum> PhoneNums { get; set; }
+        public List<Address> Addresses { get; set; }
         public Gender Gender { get; set; }
         [Column(TypeName = "money")]
         public decimal Salary { get; set; }
