@@ -20,6 +20,8 @@ namespace SchoolDBUI.ViewModels
         private ICourseEndpoint courseEndpoint;
         private IEventAggregator eventAggregator;
 
+        private bool IsEditMode = false;
+
         // Components
         public StaffAttributesControlViewModel StaffAttributesControlView { get; set; } = new StaffAttributesControlViewModel();
         public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
@@ -42,6 +44,32 @@ namespace SchoolDBUI.ViewModels
             QualificationsAddControlView = new QualificationsAddControlViewModel(eventAggregator);
 
             LoadStaff();
+        }
+
+        private string modeMsg;
+
+        public string ModeMsg // upon submit, clear msg
+        {
+            get { return modeMsg; }
+            set
+            {
+                modeMsg = value;
+                NotifyOfPropertyChange(() => ModeMsg);
+            }
+        }
+
+        public void Handle(string message)
+        {
+            if (message.Equals("NewStaff"))
+            {
+                ModeMsg = "Add New Staff";
+                IsEditMode = false;
+            }
+
+            if (message.Equals("SaveStaff"))
+            {
+                AddStaff();
+            }
         }
 
         private async Task LoadStaff()
@@ -82,7 +110,7 @@ namespace SchoolDBUI.ViewModels
             if (SelectedStaffMember != null)
             {
                 // NULL CHECK!!
-                //EnableEditMode();
+                EnableEditMode();
                 StaffAttributesControlView.FirstNameTextbox = SelectedStaffMember.FirstName;
                 StaffAttributesControlView.LastNameTextbox = SelectedStaffMember.LastName;
                 StaffAttributesControlView.DOBPicker = SelectedStaffMember.BirthDate;
@@ -97,6 +125,12 @@ namespace SchoolDBUI.ViewModels
                 PhoneAddControlView.PhoneNums = new BindingList<PhoneNum>(SelectedStaffMember.PhoneNumbers);
                 TeachersCoursesControlView.CoursesTaught = new BindingList<Course>(SelectedStaffMember.CoursesTaught);
             };
+        }
+
+        private void EnableEditMode()
+        {
+            ModeMsg = "Edit Staff";
+            IsEditMode = true;
         }
 
         // To be revamped into type of IStaff?

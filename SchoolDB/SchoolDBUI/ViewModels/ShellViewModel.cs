@@ -54,7 +54,7 @@ namespace SchoolDBUI.ViewModels
             get { return isStaffManagement; }
             set
             {
-                isCourseManagement = value;
+                isStaffManagement = value;
                 NotifyOfPropertyChange(() => IsStaffManagement);
             }
         }
@@ -109,10 +109,11 @@ namespace SchoolDBUI.ViewModels
             IsStudentView = false;
             IsStudentSubmit = false;
             IsCourseManagement = false;
+            IsStaffManagement = false;
         }
 
 
-        public void CourseKeyEvent(KeyEventArgs keyArgs)
+        public void KeyEvent(KeyEventArgs keyArgs)
         {
             // find way to stop firing the event if not command
 
@@ -134,14 +135,25 @@ namespace SchoolDBUI.ViewModels
 
         private void SaveCourse()
         {
-            events.PublishOnUIThread("Save");
+            events.PublishOnUIThread("SaveCourse");
         }
 
         public void AddNewCourse()
         {
             // order matters, otherwise event will be handled first then a new instance of the view will be created
             CourseManagementView();
-            events.PublishOnUIThread("New");            
+            events.PublishOnUIThread("NewCourse");            
+        }
+
+        private void SaveStaff()
+        {
+            events.PublishOnUIThread("SaveStaff");
+        }
+
+        public void AddNewStaff()
+        {            
+            StaffManagementView();
+            events.PublishOnUIThread("NewStaff");
         }
 
         public void ExitApplication()

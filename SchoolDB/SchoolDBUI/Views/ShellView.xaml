@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolDBUI.Views"        
         xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             cal:Message.Attach="[Event KeyDown] = [Action CourseKeyEvent($eventArgs)]"
+             cal:Message.Attach="[Event KeyDown] = [Action KeyEvent($eventArgs)]"            
         mc:Ignorable="d"
         Title="School Management System" Height="800" Width="1200"
         WindowState="Maximized">
@@ -20,6 +20,8 @@
             </MenuItem>
             <MenuItem Header="_Staff">
                 <MenuItem x:Name="StaffManagementView" Header="V_iew Staff"/>
+                <MenuItem x:Name="AddNewStaff" InputGestureText="Ctrl + N"
+                          Header="A_dd Staff" IsEnabled="{Binding IsStaffManagement}"/>
             </MenuItem>
             <MenuItem Header="_Courses">
                 <MenuItem x:Name="CourseManagementView" Header="V_iew Courses"/>

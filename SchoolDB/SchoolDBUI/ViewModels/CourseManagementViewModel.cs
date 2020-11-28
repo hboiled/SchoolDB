@@ -51,13 +51,13 @@ namespace SchoolDBUI.ViewModels
 
         public void Handle(string message)
         {
-            if (message.Equals("New"))
+            if (message.Equals("NewCourse"))
             {
                 ModeMsg = "Add New Course";
                 IsEditMode = false;
             }
 
-            if (message.Equals("Save"))
+            if (message.Equals("SaveCourse"))
             {
                 CreateCourse();
             }
