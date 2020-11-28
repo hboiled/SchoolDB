@@ -113,24 +113,21 @@ namespace SchoolDBUI.ViewModels
         }
 
 
-        public void KeyEvent(KeyEventArgs keyArgs)
+        public void CourseKeyEvent(KeyEventArgs keyArgs)
         {
             // find way to stop firing the event if not command
+            if (IsCourseManagement)
+            {
+                if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.N)
+                {
+                    AddNewCourse();
+                }
 
-            if (IsCourseManagement == false)
-            {
-                return;
-            }
-            
-            if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.N)
-            {
-                AddNewCourse();
-            }
-
-            if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.S)
-            {
-                SaveCourse();
-            }
+                if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.S)
+                {
+                    SaveCourse();
+                }
+            }            
         }
 
         private void SaveCourse()
@@ -143,6 +140,22 @@ namespace SchoolDBUI.ViewModels
             // order matters, otherwise event will be handled first then a new instance of the view will be created
             CourseManagementView();
             events.PublishOnUIThread("NewCourse");            
+        }
+
+        public void StaffKeyEvent(KeyEventArgs keyArgs)
+        {
+            if (IsStaffManagement)
+            {
+                if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.N)
+                {
+                    AddNewStaff();
+                }
+
+                if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.S)
+                {
+                    SaveStaff();
+                }
+            }
         }
 
         private void SaveStaff()

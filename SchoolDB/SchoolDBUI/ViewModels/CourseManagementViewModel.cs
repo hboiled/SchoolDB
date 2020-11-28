@@ -18,7 +18,7 @@ namespace SchoolDBUI.ViewModels
         private readonly ICourseEndpoint courseEndpoint;
         private readonly ITeacherEndpoint teacherEndpoint;
         private readonly IStudentEndpoint studentEndpoint;
-        private readonly IEventAggregator events;
+        private readonly IEventAggregator eventAggregator;
 
         private bool IsEditMode = false;
 
@@ -31,7 +31,7 @@ namespace SchoolDBUI.ViewModels
             this.courseEndpoint = courseEndpoint;
             this.teacherEndpoint = teacherEndpoint;
             this.studentEndpoint = studentEndpoint;
-            this.events = events;
+            this.eventAggregator = events;
             events.Subscribe(this);
             LoadCourses();
         }

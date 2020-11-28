@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace SchoolDBUI.ViewModels
 {
-    public class StaffManagementViewModel : Screen
+    public class StaffManagementViewModel : Screen, IHandle<string>
     {
         private readonly ITeacherEndpoint teacherEndpoint;
         private ICourseEndpoint courseEndpoint;
@@ -39,6 +39,8 @@ namespace SchoolDBUI.ViewModels
             this.teacherEndpoint = teacherEndpoint;
             this.courseEndpoint = courseEndpoint;
             this.eventAggregator = eventAggregator;
+
+            this.eventAggregator.Subscribe(this);
 
             TeachersCoursesControlView = new TeachersCoursesControlViewModel(courseEndpoint, eventAggregator);
             QualificationsAddControlView = new QualificationsAddControlViewModel(eventAggregator);
