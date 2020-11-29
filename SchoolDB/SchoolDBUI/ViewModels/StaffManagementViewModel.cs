@@ -45,9 +45,12 @@ namespace SchoolDBUI.ViewModels
             TeachersCoursesControlView = new TeachersCoursesControlViewModel(courseEndpoint, eventAggregator);
             QualificationsAddControlView = new QualificationsAddControlViewModel(eventAggregator);
 
+            SetUpNewStaffMode();
+
             LoadStaff();
         }
 
+        #region Mode Change
         private string modeMsg;
 
         public string ModeMsg // upon submit, clear msg
@@ -64,8 +67,7 @@ namespace SchoolDBUI.ViewModels
         {
             if (message.Equals("NewStaff"))
             {
-                ModeMsg = "Add New Staff";
-                IsEditMode = false;
+                SetUpNewStaffMode();
             }
 
             if (message.Equals("SaveStaff"))
@@ -73,6 +75,17 @@ namespace SchoolDBUI.ViewModels
                 AddStaff();
             }
         }
+
+        private void SetUpNewStaffMode()
+        {
+            ModeMsg = "Add New Staff";
+            IsEditMode = false;
+
+            // wire up attributes control with current model
+            // new instance is initialised from shell view, so selected teacher resets
+            StaffAttributesControlView.SelectedStaffMember = SelectedStaffMember;
+        }
+        #endregion
 
         private async Task LoadStaff()
         {
@@ -93,7 +106,7 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        private Teacher selectedStaffMember;
+        private Teacher selectedStaffMember = new Teacher();
 
         public Teacher SelectedStaffMember
         {
@@ -107,20 +120,15 @@ namespace SchoolDBUI.ViewModels
         }
 
         private void SetUpEditMode()
-        {
-            
+        {            
             if (SelectedStaffMember != null)
             {
                 // NULL CHECK!!
                 EnableEditMode();
-                StaffAttributesControlView.FirstNameTextbox = SelectedStaffMember.FirstName;
-                StaffAttributesControlView.LastNameTextbox = SelectedStaffMember.LastName;
-                StaffAttributesControlView.DOBPicker = SelectedStaffMember.BirthDate;
-                StaffAttributesControlView.AgeTextbox = SelectedStaffMember.Age.ToString();
-                StaffAttributesControlView.SalaryTextbox = SelectedStaffMember.Salary.ToString();
-                StaffAttributesControlView.StaffPhotoTextbox = SelectedStaffMember.PhotoImgPath;
-                StaffAttributesControlView.StaffIdTextbox = SelectedStaffMember.StaffId;
-                StaffAttributesControlView.SelectedGender = SelectedStaffMember.Gender;
+
+                // binding is set up in control
+                StaffAttributesControlView.SelectedStaffMember = SelectedStaffMember; 
+               
                 QualificationsAddControlView.Qualifications = new BindingList<SubjectTeachersViewModel>(SelectedStaffMember.SubjectTeachers);
                 AddressAddControlView.Addresses = new BindingList<Address>(SelectedStaffMember.Addresses);
                 EmailAddControlView.Emails = new BindingList<Email>(SelectedStaffMember.Emails);
@@ -149,10 +157,13 @@ namespace SchoolDBUI.ViewModels
         
         public void AddStaff()
         {
+            /// * Need to make SelectedStaffMember compatible with create teacher
             var teacher = new TeacherSubmitDTO
             {
-                FirstName = "faf",
-                LastName = "af",
+                FirstName = StaffAttributesControlView.SelectedStaffMember.FirstName,
+                LastName = StaffAttributesControlView.SelectedStaffMember.LastName,
+                Gender = StaffAttributesControlView.SelectedStaffMember.Gender,
+                Salary = StaffAttributesControlView.SelectedStaffMember.Salary,
                 SubjectTeachers = new List<SubjectTeachersViewModel>
                 {
                     new SubjectTeachersViewModel {CourseLevel = CourseLevel.Intermediate, Subject = Subject.Biology}

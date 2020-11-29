@@ -9,43 +9,20 @@ namespace SchoolDBUI.ViewModels.Components
 {
     public class StaffAttributesControlViewModel : Screen
     {
+        private Teacher selectedStaffMember;
+
+        public Teacher SelectedStaffMember
+        {
+            get { return selectedStaffMember; }
+            set
+            {
+                selectedStaffMember = value;
+                NotifyOfPropertyChange(() => SelectedStaffMember);
+            }
+        }
+
+
         #region Staff Attributes
-
-        private string firstNameTextbox;
-
-        public string FirstNameTextbox
-        {
-            get { return firstNameTextbox; }
-            set
-            {
-                firstNameTextbox = value;
-                NotifyOfPropertyChange(() => FirstNameTextbox);
-            }
-        }
-
-        private string lastNameTextbox;
-
-        public string LastNameTextbox
-        {
-            get { return lastNameTextbox; }
-            set
-            {
-                lastNameTextbox = value;
-                NotifyOfPropertyChange(() => LastNameTextbox);
-            }
-        }
-
-        private DateTime dobPicker;
-
-        public DateTime DOBPicker
-        {
-            get { return dobPicker; }
-            set
-            {
-                dobPicker = value;
-                NotifyOfPropertyChange(() => DOBPicker);
-            }
-        }
 
         private string ageTextbox;
 
@@ -56,18 +33,6 @@ namespace SchoolDBUI.ViewModels.Components
             {
                 ageTextbox = value;
                 NotifyOfPropertyChange(() => AgeTextbox);
-            }
-        }
-
-        private string salaryTextbox;
-
-        public string SalaryTextbox
-        {
-            get { return salaryTextbox; }
-            set
-            {
-                salaryTextbox = value;
-                NotifyOfPropertyChange(() => SalaryTextbox);
             }
         }
 
@@ -83,17 +48,6 @@ namespace SchoolDBUI.ViewModels.Components
             }
         }
 
-        private string staffIdTextbox;
-
-        public string StaffIdTextbox
-        {
-            get { return staffIdTextbox; }
-            set
-            {
-                staffIdTextbox = value;
-                NotifyOfPropertyChange(() => StaffIdTextbox);
-            }
-        }
 
         private Gender selectedGender;
 
