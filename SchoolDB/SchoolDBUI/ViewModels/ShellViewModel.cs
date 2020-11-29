@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using System.Windows;
+using SchoolDBUI.EventCommands;
 
 namespace SchoolDBUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        private IEventAggregator events;
+        private IEventAggregator eventAggregator;
         private readonly StudentDataViewModel studentDataViewModel;
         private readonly StudentSubmitViewModel studentSubmitViewModel;
         private readonly CourseManagementViewModel courseManagementViewModel;
@@ -65,16 +66,15 @@ namespace SchoolDBUI.ViewModels
             CourseManagementViewModel courseManagementViewModel,
             StaffManagementViewModel staffManagementViewModel)
         {
-            this.events = events;
+            this.eventAggregator = events;
             this.studentDataViewModel = studentDataViewModel;
             this.studentSubmitViewModel = studentSubmitViewModel;
             this.courseManagementViewModel = courseManagementViewModel;
             this.staffManagementViewModel = staffManagementViewModel;
-            this.events.Subscribe(this);
+            this.eventAggregator.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
-            IsStaffManagement = true;
-            ActivateItem(IoC.Get<StaffManagementViewModel>());
+            StaffManagementView();
         }
 
         public void ViewStudentData()
@@ -133,14 +133,14 @@ namespace SchoolDBUI.ViewModels
 
         private void SaveCourse()
         {
-            events.PublishOnUIThread("SaveCourse");
+            eventAggregator.PublishOnUIThread(CourseCommand.SaveCourse);
         }
 
         public void AddNewCourse()
         {
             // order matters, otherwise event will be handled first then a new instance of the view will be created
             CourseManagementView();
-            events.PublishOnUIThread("NewCourse");            
+            eventAggregator.PublishOnUIThread(CourseCommand.NewCourse);            
         }
 
         public void StaffKeyEvent(KeyEventArgs keyArgs)
@@ -161,18 +161,30 @@ namespace SchoolDBUI.ViewModels
 
         private void SaveStaff()
         {
-            events.PublishOnUIThread("SaveStaff");
+            eventAggregator.PublishOnUIThread(StaffCommand.SaveStaff);
         }
 
         public void AddNewStaff()
         {            
             StaffManagementView();
-            events.PublishOnUIThread("NewStaff");
+            eventAggregator.PublishOnUIThread(StaffCommand.NewStaff);
         }
 
         public void ExitApplication()
         {
             TryClose();
         }
+
+        //protected override void OnActivate()
+        //{
+        //    eventAggregator.Subscribe(this);
+        //    base.OnActivate();
+        //}
+
+        //protected override void OnDeactivate(bool close)
+        //{
+        //    eventAggregator.Unsubscribe(this);
+        //    base.OnDeactivate(close);
+        //}
     }
 }

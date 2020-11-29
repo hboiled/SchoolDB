@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SchoolDBUI.EventCommands;
 
 namespace SchoolDBUI.ViewModels
 {
-    public class CourseManagementViewModel : Screen, IHandle<string>
+    public class CourseManagementViewModel : Screen, IHandle<CourseCommand>
     {
         private readonly ICourseEndpoint courseEndpoint;
         private readonly ITeacherEndpoint teacherEndpoint;
@@ -32,7 +33,7 @@ namespace SchoolDBUI.ViewModels
             this.teacherEndpoint = teacherEndpoint;
             this.studentEndpoint = studentEndpoint;
             this.eventAggregator = events;
-            events.Subscribe(this);
+            //events.Subscribe(this);
             LoadCourses();
         }
 
@@ -49,15 +50,15 @@ namespace SchoolDBUI.ViewModels
         }
 
 
-        public void Handle(string message)
+        public void Handle(CourseCommand cmd)
         {
-            if (message.Equals("NewCourse"))
+            if (cmd == CourseCommand.NewCourse)
             {
                 ModeMsg = "Add New Course";
-                IsEditMode = false;
+                IsEditMode = false;                
             }
 
-            if (message.Equals("SaveCourse"))
+            if (cmd == CourseCommand.SaveCourse)
             {
                 CreateCourse();
             }
@@ -459,6 +460,18 @@ namespace SchoolDBUI.ViewModels
             await courseEndpoint.DeleteCourse(selectedCourse.Id);
             
             LoadCourses();
+        }
+
+        protected override void OnActivate()
+        {
+            eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
         }
     }
 }

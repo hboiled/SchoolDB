@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SchoolDBUI.EventCommands;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
 using SchoolDBUI.Library.Models.Contact;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SchoolDBUI.ViewModels
 {
-    public class StaffManagementViewModel : Screen, IHandle<string>
+    public class StaffManagementViewModel : Screen, IHandle<StaffCommand>
     {
         private readonly ITeacherEndpoint teacherEndpoint;
         private ICourseEndpoint courseEndpoint;
@@ -40,8 +41,6 @@ namespace SchoolDBUI.ViewModels
             this.courseEndpoint = courseEndpoint;
             this.eventAggregator = eventAggregator;
 
-            this.eventAggregator.Subscribe(this);
-
             TeachersCoursesControlView = new TeachersCoursesControlViewModel(courseEndpoint, eventAggregator);
             QualificationsAddControlView = new QualificationsAddControlViewModel(eventAggregator);
 
@@ -63,14 +62,14 @@ namespace SchoolDBUI.ViewModels
             }
         }
 
-        public void Handle(string message)
+        public void Handle(StaffCommand cmd)
         {
-            if (message.Equals("NewStaff"))
+            if (cmd == StaffCommand.NewStaff)
             {
                 SetUpNewStaffMode();
             }
 
-            if (message.Equals("SaveStaff"))
+            if (cmd == StaffCommand.SaveStaff)
             {
                 AddStaff();
             }
@@ -184,6 +183,16 @@ namespace SchoolDBUI.ViewModels
             teacherEndpoint.SubmitTeacher(teacher);
         }
 
-        
+        protected override void OnActivate()
+        {
+            eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
     }
 }
