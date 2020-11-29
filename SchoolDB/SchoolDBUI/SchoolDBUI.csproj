@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Components\AddressAddControl.xaml.cs" />
+    <Compile Remove="Views\SharedComponents\AddressAddControl.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Views\Components\AddressAddControl.xaml" />
+    <Page Remove="Views\SharedComponents\AddressAddControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>

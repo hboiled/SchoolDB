@@ -73,6 +73,7 @@ namespace SchoolDBUI.ViewModels
             this.events.Subscribe(this);
 
             // IoC inversion of control container can be accessed without the simple container for DI
+            IsStaffManagement = true;
             ActivateItem(IoC.Get<StaffManagementViewModel>());
         }
 
@@ -115,7 +116,7 @@ namespace SchoolDBUI.ViewModels
 
         public void CourseKeyEvent(KeyEventArgs keyArgs)
         {
-            // find way to stop firing the event if not command
+            // find way to stop firing the event if not command?
             if (IsCourseManagement)
             {
                 if (Keyboard.Modifiers == ModifierKeys.Control && keyArgs.Key == Key.N)
@@ -127,7 +128,7 @@ namespace SchoolDBUI.ViewModels
                 {
                     SaveCourse();
                 }
-            }            
+            }
         }
 
         private void SaveCourse()
