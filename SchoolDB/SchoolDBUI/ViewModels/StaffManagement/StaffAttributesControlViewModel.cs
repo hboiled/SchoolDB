@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SchoolDBUI.ViewModels.Components
+namespace SchoolDBUI.ViewModels.StaffManagement
 {
     public class StaffAttributesControlViewModel : Screen
     {

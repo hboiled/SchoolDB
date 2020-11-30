@@ -2,7 +2,6 @@
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
 using SchoolDBUI.Library.Models.SchoolBusiness;
-using SchoolDBUI.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolDBUI.ViewModels.Components
+namespace SchoolDBUI.ViewModels.StaffManagement
 {
     public class TeachersCoursesControlViewModel : Screen, IHandle<SubjectTeachersViewModel>
     {
@@ -41,7 +40,7 @@ namespace SchoolDBUI.ViewModels.Components
 
         private async Task SetCourseFilter()
         {
-// TODO: refactor logic to be more readable 
+            // TODO: refactor logic to be more readable 
             if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
             {
                 var courses = await courseEndpoint.GetCoursesBySubject(subject);
@@ -62,7 +61,7 @@ namespace SchoolDBUI.ViewModels.Components
         private List<Course> FilterCoursesByLevel(List<Course> courses, Subject subject)
         {
             //var qualification = new SubjectTeachersViewModel();
-            
+
             return courses
                 .Where(c => c.CourseLevel <= receivedQualification.CourseLevel)
                 .ToList();
@@ -108,7 +107,8 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Course> CoursesTaught
         {
             get { return coursesTaught; }
-            set { 
+            set
+            {
                 coursesTaught = value;
                 NotifyOfPropertyChange(() => CoursesTaught);
             }
@@ -123,7 +123,7 @@ namespace SchoolDBUI.ViewModels.Components
         }
 
         private Course selectedTaughtCourse;
-        
+
 
         public Course SelectedTaughtCourse
         {

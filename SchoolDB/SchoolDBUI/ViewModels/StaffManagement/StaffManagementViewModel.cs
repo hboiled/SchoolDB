@@ -5,7 +5,7 @@ using SchoolDBUI.Library.Models;
 using SchoolDBUI.Library.Models.Contact;
 using SchoolDBUI.Library.Models.SchoolBusiness;
 using SchoolDBUI.Library.Models.SubmitDTOs;
-using SchoolDBUI.ViewModels.Components;
+using SchoolDBUI.ViewModels.SharedComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolDBUI.ViewModels
+namespace SchoolDBUI.ViewModels.StaffManagement
 {
     public class StaffManagementViewModel : Screen, IHandle<StaffCommand>
     {
@@ -98,8 +98,8 @@ namespace SchoolDBUI.ViewModels
         public string StaffNameTextbox
         {
             get { return staffNameTextbox; }
-            set 
-            { 
+            set
+            {
                 staffNameTextbox = value;
                 NotifyOfPropertyChange(() => StaffNameTextbox);
             }
@@ -110,7 +110,7 @@ namespace SchoolDBUI.ViewModels
         public Teacher SelectedStaffMember
         {
             get { return selectedStaffMember; }
-            set 
+            set
             {
                 selectedStaffMember = value;
                 SetUpEditMode();
@@ -119,15 +119,15 @@ namespace SchoolDBUI.ViewModels
         }
 
         private void SetUpEditMode()
-        {            
+        {
             if (SelectedStaffMember != null)
             {
                 // NULL CHECK!!
                 EnableEditMode();
 
                 // binding is set up in control
-                StaffAttributesControlView.SelectedStaffMember = SelectedStaffMember; 
-               
+                StaffAttributesControlView.SelectedStaffMember = SelectedStaffMember;
+
                 QualificationsAddControlView.Qualifications = new BindingList<SubjectTeachersViewModel>(SelectedStaffMember.SubjectTeachers);
                 AddressAddControlView.Addresses = new BindingList<Address>(SelectedStaffMember.Addresses);
                 EmailAddControlView.Emails = new BindingList<Email>(SelectedStaffMember.Emails);
@@ -144,16 +144,16 @@ namespace SchoolDBUI.ViewModels
 
         // To be revamped into type of IStaff?
         private BindingList<Teacher> staff;
-        public BindingList<Teacher> Staff 
-        { 
-            get { return staff; } 
+        public BindingList<Teacher> Staff
+        {
+            get { return staff; }
             set
             {
                 staff = value;
                 NotifyOfPropertyChange(() => Staff);
-            } 
+            }
         }
-        
+
         public void AddStaff()
         {
             /// * Need to make SelectedStaffMember compatible with create teacher
@@ -177,7 +177,7 @@ namespace SchoolDBUI.ViewModels
                     {
                         Id = 2
                     }
-                }                
+                }
             };
 
             teacherEndpoint.SubmitTeacher(teacher);

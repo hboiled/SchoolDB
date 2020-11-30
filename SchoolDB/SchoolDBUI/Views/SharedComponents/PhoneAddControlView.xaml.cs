@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolDBUI.Views.Components
+namespace SchoolDBUI.Views.SharedComponents
 {
     /// <summary>
     /// Interaction logic for PhoneAddControlView.xaml

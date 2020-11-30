@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolDBUI.Views
+namespace SchoolDBUI.Views.StudentManagement
 {
     /// <summary>
     /// Interaction logic for StudentDataView.xaml

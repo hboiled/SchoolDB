@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace SchoolDBUI.ViewModels.Components
+namespace SchoolDBUI.ViewModels.SharedComponents
 {
     public class EmailAddControlViewModel : Screen
     {
@@ -39,7 +39,7 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Email> Emails
         {
             get { return emails; }
-            set 
+            set
             {
                 emails = value;
                 NotifyOfPropertyChange(() => Emails);

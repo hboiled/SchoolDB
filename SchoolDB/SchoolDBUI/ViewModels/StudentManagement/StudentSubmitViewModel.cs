@@ -2,20 +2,15 @@
 using Microsoft.Win32;
 using SchoolDBUI.Library.API;
 using SchoolDBUI.Library.Models;
-using SchoolDBUI.Library.Models.Contact;
 using SchoolDBUI.Library.Models.SubmitDTOs;
-using SchoolDBUI.ViewModels.Components;
+using SchoolDBUI.ViewModels.SharedComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
-namespace SchoolDBUI.ViewModels
+namespace SchoolDBUI.ViewModels.StudentManagement
 {
     public class StudentSubmitViewModel : Screen
     {
@@ -36,8 +31,8 @@ namespace SchoolDBUI.ViewModels
             StudentPhoto = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
         }
 
-        public string FullName 
-        { 
+        public string FullName
+        {
             get
             {
                 return $"{FirstNameTextbox} {LastNameTextbox}";
@@ -45,7 +40,7 @@ namespace SchoolDBUI.ViewModels
         }
 
         private string firstName;
-        public string FirstNameTextbox 
+        public string FirstNameTextbox
         {
             get { return firstName; }
             set
@@ -134,8 +129,8 @@ namespace SchoolDBUI.ViewModels
             set
             {
                 selectedSubjectFilter = value;
-                SetCourseFilter();                
-                NotifyOfPropertyChange(() => SelectedSubjectFilter);                
+                SetCourseFilter();
+                NotifyOfPropertyChange(() => SelectedSubjectFilter);
             }
         }
 
@@ -152,7 +147,7 @@ namespace SchoolDBUI.ViewModels
             {
                 // handler error
             }
-            
+
         }
 
         private bool filterNotSelected = false;
@@ -184,7 +179,7 @@ namespace SchoolDBUI.ViewModels
         {
             get { return filteredCourses; }
             set
-            { 
+            {
                 filteredCourses = value;
                 NotifyOfPropertyChange(() => FilteredCourses);
             }
@@ -254,7 +249,7 @@ namespace SchoolDBUI.ViewModels
                 Emails = EmailAddControlView.Emails.ToList(),
                 PhoneNums = PhoneAddControlView.PhoneNums.ToList(),
                 Addresses = AddressAddControlView.Addresses.ToList(),
-                CourseEnrollments = CoursesEnrolledIn.ToList(),                
+                CourseEnrollments = CoursesEnrolledIn.ToList(),
             };
 
             // hack to remove circular references, must be reworked

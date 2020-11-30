@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SchoolDBUI.Views"        
         xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
             cal:Message.Attach="[Event KeyDown] = [Action CourseKeyEvent($eventArgs)];
                                 [Event KeyDown] = [Action StaffKeyEvent($eventArgs)]"            

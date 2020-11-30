@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using SchoolDBUI.EventCommands;
 
-namespace SchoolDBUI.ViewModels
+namespace SchoolDBUI.ViewModels.CourseManagement
 {
     public class CourseManagementViewModel : Screen, IHandle<CourseCommand>
     {
@@ -32,7 +32,7 @@ namespace SchoolDBUI.ViewModels
             this.courseEndpoint = courseEndpoint;
             this.teacherEndpoint = teacherEndpoint;
             this.studentEndpoint = studentEndpoint;
-            this.eventAggregator = events;
+            eventAggregator = events;
             //events.Subscribe(this);
             LoadCourses();
         }
@@ -42,8 +42,8 @@ namespace SchoolDBUI.ViewModels
         public string ModeMsg // upon submit, clear msg
         {
             get { return modeMsg; }
-            set 
-            { 
+            set
+            {
                 modeMsg = value;
                 NotifyOfPropertyChange(() => ModeMsg);
             }
@@ -55,7 +55,7 @@ namespace SchoolDBUI.ViewModels
             if (cmd == CourseCommand.NewCourse)
             {
                 ModeMsg = "Add New Course";
-                IsEditMode = false;                
+                IsEditMode = false;
             }
 
             if (cmd == CourseCommand.SaveCourse)
@@ -103,7 +103,7 @@ namespace SchoolDBUI.ViewModels
         public string CourseTitleTextbox
         {
             get { return courseTitleTextbox; }
-            set 
+            set
             {
                 courseTitleTextbox = value;
                 NotifyOfPropertyChange(() => CourseTitleTextbox);
@@ -115,7 +115,7 @@ namespace SchoolDBUI.ViewModels
         public string CourseIdTextbox
         {
             get { return courseIdTextbox; }
-            set 
+            set
             {
                 courseIdTextbox = value;
                 NotifyOfPropertyChange(() => CourseIdTextbox);
@@ -126,13 +126,13 @@ namespace SchoolDBUI.ViewModels
         #region Teacher Assignment
 
         private Teacher selectedTeacher;
-        public Teacher SelectedTeacher 
+        public Teacher SelectedTeacher
         {
             get { return selectedTeacher; }
             set
             {
                 selectedTeacher = value;
-                NotifyOfPropertyChange(() => SelectedTeacher);                
+                NotifyOfPropertyChange(() => SelectedTeacher);
             }
         }
 
@@ -158,7 +158,7 @@ namespace SchoolDBUI.ViewModels
             {
                 try
                 {
-                    var teachers = await teacherEndpoint.GetTeachersBySubject(subject);                    
+                    var teachers = await teacherEndpoint.GetTeachersBySubject(subject);
 
                     FilterNotSelected = teachers.Count != 0;
                     FilteredTeachers = new BindingList<Teacher>(teachers);
@@ -166,8 +166,8 @@ namespace SchoolDBUI.ViewModels
                 catch (Exception e)
                 {
                     ErrorMessage = e.Message;
-                }                
-                
+                }
+
             }
             else
             {
@@ -180,7 +180,7 @@ namespace SchoolDBUI.ViewModels
         {
             get
             {
-                return SelectedCourse != null;                
+                return SelectedCourse != null;
             }
         }
 
@@ -234,7 +234,7 @@ namespace SchoolDBUI.ViewModels
             get { return selectedCourseLevel; }
             set
             {
-                selectedCourseLevel = value;                
+                selectedCourseLevel = value;
                 NotifyOfPropertyChange(() => SelectedCourseLevel);
             }
         }
@@ -275,7 +275,7 @@ namespace SchoolDBUI.ViewModels
 
         async Task LoadCourses()
         {
-            var courseList = await this.courseEndpoint.GetAll();
+            var courseList = await courseEndpoint.GetAll();
             Courses = null;
             Courses = new BindingList<Course>(courseList);
         }
@@ -317,7 +317,7 @@ namespace SchoolDBUI.ViewModels
 
         private async Task LoadStudents()
         {
-            var studentList = await this.studentEndpoint.GetAll();
+            var studentList = await studentEndpoint.GetAll();
 
             Students = new BindingList<Student>(studentList);
         }
@@ -382,7 +382,7 @@ namespace SchoolDBUI.ViewModels
         public BindingList<Student> EnrolledStudents
         {
             get { return enrolledStudents; }
-            set 
+            set
             {
                 enrolledStudents = value;
                 NotifyOfPropertyChange(() => EnrolledStudents);
@@ -451,14 +451,14 @@ namespace SchoolDBUI.ViewModels
                 await courseEndpoint.SubmitCourse(course);
             }
 
-            LoadCourses();            
+            LoadCourses();
         }
 
         public async Task DeleteCourse()
         {
             // TODO: add warning
             await courseEndpoint.DeleteCourse(selectedCourse.Id);
-            
+
             LoadCourses();
         }
 

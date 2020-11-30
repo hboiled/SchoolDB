@@ -5,6 +5,9 @@ using System.Text;
 using System.Windows.Input;
 using System.Windows;
 using SchoolDBUI.EventCommands;
+using SchoolDBUI.ViewModels.StudentManagement;
+using SchoolDBUI.ViewModels.CourseManagement;
+using SchoolDBUI.ViewModels.StaffManagement;
 
 namespace SchoolDBUI.ViewModels
 {

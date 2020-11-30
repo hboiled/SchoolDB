@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace SchoolDBUI.ViewModels.Components
+namespace SchoolDBUI.ViewModels.SharedComponents
 {
     public class AddressAddControlViewModel : Screen
     {
@@ -89,7 +89,7 @@ namespace SchoolDBUI.ViewModels.Components
         public BindingList<Address> Addresses
         {
             get { return addresses; }
-            set 
+            set
             {
                 addresses = value;
                 NotifyOfPropertyChange(() => Addresses);

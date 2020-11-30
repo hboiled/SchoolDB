@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace SchoolDBUI.ViewModels.Components
+namespace SchoolDBUI.ViewModels.StaffManagement
 {
     public class QualificationsAddControlViewModel : Screen, IHandle<Subject>
     {
@@ -66,7 +66,7 @@ namespace SchoolDBUI.ViewModels.Components
         public SubjectTeachersViewModel SelectedQualification
         {
             get { return selectedQualification; }
-            set 
+            set
             {
                 selectedQualification = value;
                 NotifyOfPropertyChange(() => SelectedQualification);
@@ -118,7 +118,7 @@ namespace SchoolDBUI.ViewModels.Components
                 if (qualification != null)
                 {
                     eventAggregator.PublishOnUIThread(qualification);
-                }                
+                }
             }
         }
     }

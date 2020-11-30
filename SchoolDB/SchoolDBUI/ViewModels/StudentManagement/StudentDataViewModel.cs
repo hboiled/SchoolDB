@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolDBUI.ViewModels
+namespace SchoolDBUI.ViewModels.StudentManagement
 {
     public class StudentDataViewModel : Screen
     {
@@ -21,7 +21,7 @@ namespace SchoolDBUI.ViewModels
 
         private async Task LoadStudents()
         {
-            var studentList = await this.studentEndpoint.GetAll();
+            var studentList = await studentEndpoint.GetAll();
 
             Students = new BindingList<Student>(studentList);
         }
@@ -55,8 +55,8 @@ namespace SchoolDBUI.ViewModels
         public string StudentNameTextbox
         {
             get { return studentNameTextBox; }
-            set 
-            { 
+            set
+            {
                 studentNameTextBox = value;
                 SearchStudents();
             }

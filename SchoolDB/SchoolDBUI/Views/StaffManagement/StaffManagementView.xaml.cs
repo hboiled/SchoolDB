@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolDBUI.Views
+namespace SchoolDBUI.Views.StaffManagement
 {
     /// <summary>
     /// Interaction logic for StaffManagementView.xaml
