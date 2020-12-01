@@ -121,5 +121,17 @@ namespace SchoolDBUI.ViewModels.StaffManagement
                 }
             }
         }
+
+        protected override void OnActivate()
+        {
+            eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
     }
 }

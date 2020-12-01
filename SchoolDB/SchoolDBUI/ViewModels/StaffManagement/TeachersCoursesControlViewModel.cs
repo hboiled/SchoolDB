@@ -21,7 +21,7 @@ namespace SchoolDBUI.ViewModels.StaffManagement
         {
             this.courseEndpoint = courseEndpoint;
             this.eventAggregator = eventAggregator;
-            this.eventAggregator.Subscribe(this);
+            eventAggregator.Subscribe(this);
         }
 
         #region Course and subject filter
@@ -161,5 +161,17 @@ namespace SchoolDBUI.ViewModels.StaffManagement
         }
 
         #endregion
+
+        protected override void OnActivate()
+        {
+            eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            eventAggregator.Unsubscribe(this);
+            base.OnDeactivate(close);
+        }
     }
 }
