@@ -21,6 +21,7 @@ namespace SchoolDBUI.ViewModels.StudentManagement
         public AddressAddControlViewModel AddressAddControlView { get; set; } = new AddressAddControlViewModel();
         public EmailAddControlViewModel EmailAddControlView { get; set; } = new EmailAddControlViewModel();
         public PhoneAddControlViewModel PhoneAddControlView { get; set; } = new PhoneAddControlViewModel();
+        public StudentCourseEnrollViewModel StudentCourseEnrollView { get; set; }
 
         public StudentSubmitViewModel(
             IStudentEndpoint studentEndpoint,
@@ -28,6 +29,9 @@ namespace SchoolDBUI.ViewModels.StudentManagement
         {
             this.studentEndpoint = studentEndpoint;
             this.courseEndpoint = courseEndpoint;
+
+            StudentCourseEnrollView = new StudentCourseEnrollViewModel(courseEndpoint);
+
             StudentPhoto = @"http://web.engr.oregonstate.edu/~johnstom/img/people/placeholder.png";
         }
 
@@ -120,120 +124,6 @@ namespace SchoolDBUI.ViewModels.StudentManagement
 
         public int StudentIdTextbox { get; set; }
 
-        #region Course and subject filter
-
-        private string selectedSubjectFilter;
-        public string SelectedSubjectFilter
-        {
-            get { return selectedSubjectFilter; }
-            set
-            {
-                selectedSubjectFilter = value;
-                SetCourseFilter();
-                NotifyOfPropertyChange(() => SelectedSubjectFilter);
-            }
-        }
-
-        private async Task SetCourseFilter()
-        {
-            // TODO: refactor logic to be more readable 
-            if (Enum.TryParse(SelectedSubjectFilter, out Subject subject))
-            {
-                var courses = await courseEndpoint.GetCoursesBySubject(subject);
-                FilterNotSelected = courses.Count != 0;
-                FilteredCourses = new BindingList<Course>(courses);
-            }
-            else
-            {
-                // handler error
-            }
-
-        }
-
-        private bool filterNotSelected = false;
-        public bool FilterNotSelected
-        {
-            get
-            {
-                return filterNotSelected;
-            }
-            set
-            {
-                filterNotSelected = value;
-                NotifyOfPropertyChange(() => FilterNotSelected);
-            }
-        }
-
-        public IEnumerable<Subject> Subjects
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Subject))
-                    .Cast<Subject>();
-            }
-        }
-
-        public BindingList<Course> filteredCourses = new BindingList<Course>();
-
-        public BindingList<Course> FilteredCourses
-        {
-            get { return filteredCourses; }
-            set
-            {
-                filteredCourses = value;
-                NotifyOfPropertyChange(() => FilteredCourses);
-            }
-        }
-
-        private BindingList<Course> coursesEnrolledIn = new BindingList<Course>();
-
-        public BindingList<Course> CoursesEnrolledIn
-        {
-            get { return coursesEnrolledIn; }
-            set { coursesEnrolledIn = value; }
-        }
-
-        private Course selectedCourse;
-
-        public Course SelectedCourse
-        {
-            get { return selectedCourse; }
-            set { selectedCourse = value; }
-        }
-
-        private Course enrolledCourseSelection;
-
-        public Course EnrolledCourseSelection
-        {
-            get { return enrolledCourseSelection; }
-            set { enrolledCourseSelection = value; }
-        }
-
-        public void EnrollInCourse()
-        {
-            if (SelectedCourse != null && !AlreadyEnrolledInCourse(SelectedCourse))
-            {
-                CoursesEnrolledIn.Add(SelectedCourse);
-            }
-            else
-            {
-                // handle error
-            }
-        }
-
-        private bool AlreadyEnrolledInCourse(Course course)
-        {
-            return CoursesEnrolledIn.Contains(course);
-        }
-
-        public void RemoveSelectedCourse()
-        {
-            CoursesEnrolledIn.Remove(EnrolledCourseSelection);
-        }
-
-        #endregion        
-
-
         public void SubmitStudent()
         {
             // CREATE
@@ -249,7 +139,7 @@ namespace SchoolDBUI.ViewModels.StudentManagement
                 Emails = EmailAddControlView.Emails.ToList(),
                 PhoneNums = PhoneAddControlView.PhoneNums.ToList(),
                 Addresses = AddressAddControlView.Addresses.ToList(),
-                CourseEnrollments = CoursesEnrolledIn.ToList(),
+                CourseEnrollments = StudentCourseEnrollView.CoursesEnrolledIn.ToList(),
             };
 
             // hack to remove circular references, must be reworked

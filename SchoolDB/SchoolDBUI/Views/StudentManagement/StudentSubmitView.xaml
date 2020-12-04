@@ -103,43 +103,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="2" Margin="20,0,5,0">
-
-            <TextBlock Text="Course Selection" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0"></TextBlock>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,15,5,15">
-                <Label Content="Department:"></Label>
-                <ComboBox Height="35" Width="200" SelectedItem="{Binding SelectedSubjectFilter}" SelectedValue="Subjects[0]" 
-                          ItemsSource="{Binding Subjects}">
-                </ComboBox>
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5,5,5,10">
-                <Label Content="Select Course:" HorizontalAlignment="Center"></Label>
-                <ComboBox Height="30" Width="330" ItemsSource="{Binding FilteredCourses}" IsEnabled="{Binding FilterNotSelected}"
-                          SelectedItem="{Binding SelectedCourse}" DisplayMemberPath="Title"></ComboBox>
-            </StackPanel>
-
-            <Button x:Name="EnrollInCourse" MaxWidth="330" Content="Add Enrollment" Margin="5,5,5,5"></Button>
-            <Button x:Name="RemoveSelectedCourse" MaxWidth="330" Content="Remove Enrollment" Margin="5,5,5,20"></Button>
-
-
-            <Label Content="Enrollments"></Label>
-            <ListView Height="275" ItemsSource="{Binding CoursesEnrolledIn}" DisplayMemberPath="Title"
-                      SelectedItem="{Binding EnrolledCourseSelection}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="160" DisplayMemberBinding="{Binding Path=CourseId}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Course Id</GridViewColumnHeader>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=Title}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Title</GridViewColumnHeader>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180" DisplayMemberBinding="{Binding Path=AssignedTeacher}">
-                            <GridViewColumnHeader TextElement.FontSize="18">Teacher</GridViewColumnHeader>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <ContentControl x:Name="StudentCourseEnrollView"/>
         </StackPanel>
 
     </Grid>

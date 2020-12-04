@@ -33,7 +33,7 @@ namespace SchoolDBUI.ViewModels.CourseManagement
             this.teacherEndpoint = teacherEndpoint;
             this.studentEndpoint = studentEndpoint;
             eventAggregator = events;
-            //events.Subscribe(this);
+
             LoadCourses();
         }
 
