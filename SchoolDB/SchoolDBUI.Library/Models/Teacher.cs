@@ -58,9 +58,10 @@ namespace SchoolDBUI.Library.Models
                    FirstName == teacher.FirstName &&
                    LastName == teacher.LastName &&
                    Gender == teacher.Gender &&
+                   StaffId == teacher.StaffId &&
                    Salary == teacher.Salary;
         }
-
+        //MUST ALL BE SET
         public override int GetHashCode()
         {
             int hashCode = 821027007;
@@ -68,6 +69,7 @@ namespace SchoolDBUI.Library.Models
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
             hashCode = hashCode * -1521134295 + Gender.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(StaffId);
             hashCode = hashCode * -1521134295 + Salary.GetHashCode();
             return hashCode;
         }

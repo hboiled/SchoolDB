@@ -87,7 +87,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,20">
                     <Label Content="Available Teachers:" HorizontalAlignment="Center"></Label>
                     <ComboBox Height="30" Width="220" x:Name="FilteredTeachers" IsEnabled="{Binding FilterNotSelected}" DisplayMemberPath="FullName"
-                          SelectedItem="{Binding SelectedTeacher}" SelectedValue="{Binding SelectedCourse.Teacher}" >
+                          SelectedItem="{Binding SelectedTeacher}" SelectedValue="{Binding SelectedCourse_Teacher}" >
                     </ComboBox>
                 </StackPanel>
 

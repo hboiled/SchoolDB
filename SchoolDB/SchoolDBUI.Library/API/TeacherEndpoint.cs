@@ -66,7 +66,6 @@ namespace SchoolDBUI.Library.API
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var x = "Working";
                 }
                 else
                 {

@@ -14,5 +14,7 @@ namespace SchoolDBAPI.DTO.BasicDetailDTO
         public string FullName { get; set; }
         public Gender Gender { get; set; }
         public decimal Salary { get; set; }
+        public string StaffId { get; set; }
+        // TODO: photo img path etc
     }
 }

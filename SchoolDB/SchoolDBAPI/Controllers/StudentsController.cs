@@ -175,34 +175,6 @@ namespace SchoolDBAPI.Controllers
             return enrollmentData;
         }
 
-        // GET: api/Students/5
-        [HttpGet("teachers/{id}")]
-        public async Task<ActionResult<TeacherReadDTO>> GetTeacher(int id)
-        {
-            var teacher = await context.Teachers.FindAsync(id);
-
-            if (teacher == null)
-            {
-                return NotFound();
-            }
-
-            TeacherReadDTO teacherData = new TeacherReadDTO
-            {
-                Id = teacher.Id,
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                Salary = teacher.Salary,
-                CoursesTaught = teacher.CoursesTaught.Select(c => new CourseBasicDetailDTO
-                {
-                    CourseId = c.CourseId,
-                    Subject = c.Subject.ToString(),
-                    Title = c.Title
-                }).ToList()
-            };
-
-            return teacherData;
-        }
-
         // PUT: api/Students/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

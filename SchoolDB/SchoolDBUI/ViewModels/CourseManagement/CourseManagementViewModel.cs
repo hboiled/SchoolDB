@@ -399,6 +399,7 @@ namespace SchoolDBUI.ViewModels.CourseManagement
             if (!IsStudentAlreadyEnrolled())
             {
                 EnrolledStudents.Add(SelectedStudent);
+                NotifyOfPropertyChange(() => EnrolledStudents);
             }
         }
 

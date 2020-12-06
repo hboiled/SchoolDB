@@ -241,7 +241,8 @@ namespace SchoolDBAPI.Controllers
                     FirstName = course.Teacher.FirstName,
                     LastName = course.Teacher.LastName,
                     Gender = course.Teacher.Gender,
-                    Salary = course.Teacher.Salary
+                    Salary = course.Teacher.Salary,
+                    StaffId = course.Teacher.StaffId
                 },
                 Subject = course.Subject.ToString(),
                 CourseId = course.CourseId,
